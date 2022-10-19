@@ -1,0 +1,93 @@
+.top-head {
+  text-align: justify;
+  font-size: 0;
+}
+.mar-5 {
+  margin-left: -5px;
+  margin-right: -5px;
+}
+.ct {
+  display: inline-block;
+  line-height: 35px;
+  margin-left: 5px;
+  font-size: 15px;
+}
+.main-nav {
+  float: left;
+}
+nav ul {
+  list-style: none;
+}
+.main-nav > ul > li {
+  display: inline-block;
+  margin-right: 40px;
+}
+.main-nav li {
+  position: relative;
+}
+.main-nav li a {
+  font-size: 17px;
+  color: #111;
+  text-transform: uppercase;
+  font-weight: 300;
+  display: block;
+  padding: 15px 5px;
+  position: relative;
+  text-decoration: none;
+}
+.show-cart {
+    display: block !important;
+    float: right;
+    width: 120px;
+    background: #23527c;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.top-item {
+    display: inline-flex;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 300;
+    color: #23527c;
+    line-height: 35px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.md-title {
+  text-transform: uppercase;
+  font-size: 34px;
+  font-weight: 300;
+  color: #009bff;
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 5px;
+}
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+.news-info {
+  margin-bottom: 25px;
+}
+.title-news {
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 15px;
+}
+.text-news {
+  text-align: justify;
+  margin: 5px 0;
+}
+.readmore {
+  float: right;
+  border: solid 1px #ccc;
+  padding: 5px 10px;
+}
