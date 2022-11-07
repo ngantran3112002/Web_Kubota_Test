@@ -3,9 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone } from "@fortawesome/free-solid-svg-icons";
 import { faMapMarked } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap-grid.css";
-import "./homePage.css";
+import "../css/homePage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Carousel from "react-bootstrap/Carousel";
+import Product from "./product";
+import { Outlet, Link } from "react-router-dom";
+
 
 const HomePage = () => {
   return (
@@ -31,7 +34,7 @@ const HomePage = () => {
                   verticalAlign: "baseline",
                   background: "transparent",
                 }}
-                href="/"
+                href="/src/client/pages"
               >
                 <img
                   alt="logo"
@@ -80,23 +83,26 @@ const HomePage = () => {
                   <nav className="main-nav">
                     <ul>
                       <li>
-                        <a className="smooth" href="/">
+                        <a className="smooth" href="/src/client/pages">
                           TRANG CHỦ
                         </a>
                       </li>
                       <li>
-                        <a className="smooth" href="/">
-                          TRANG CHỦ
+                        <a className="smooth" href="/src/client/pages">
+                          SẢN PHẤM
+                        </a>
+                      </li>
+                      {/*<li>*/}
+                      {/*  <Link to="/san-pham">Sản Phẩm</Link>*/}
+                      {/*</li>*/}
+                      <li>
+                        <a className="smooth" href="/src/client/pages">
+                          GIỚI THIỆU
                         </a>
                       </li>
                       <li>
-                        <a className="smooth" href="/">
-                          TRANG CHỦ
-                        </a>
-                      </li>
-                      <li>
-                        <a className="smooth" href="/">
-                          TRANG CHỦ
+                        <a className="smooth" href="/src/client/pages">
+                          KỸ THUẬT
                         </a>
                       </li>
                     </ul>
@@ -105,7 +111,7 @@ const HomePage = () => {
                     <div className="ct">
                       <a
                         id="cart"
-                        href="/"
+                        href="/src/client/pages"
                         style={{ color: "#fff", textDecoration: "none" }}
                       >
                         Giỏ hàng
@@ -116,7 +122,7 @@ const HomePage = () => {
                     <div className="ct">
                       <a
                         id="cart"
-                        href="/"
+                        href="/src/client/pages"
                         style={{ color: "#fff", textDecoration: "none" }}
                       >
                         Đăng nhập
@@ -220,6 +226,42 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+        <div>
+          {/*<Product></Product>*/}
+
+        </div>
+
+      <footer>
+        <div className="container text-center wow fadeInUp">
+
+          <h3>PHỤ TÙNG MÁY NÔNG NGHIỆP CHÍNH HÃNG</h3>
+          <div className="single-content">
+            <p>
+              Tổng kho số 1: Khu phố Phú Nghị, Phường Hòa Lợi, thị xã Bến Cát, tỉnh Bình Dương<br/>
+              Tổng kho số 2: 558 Phố Mới, Phường Từ Sơn, Tỉnh Bắc Ninh
+            </p>
+            <p>
+              Hotline: 0398.490.986 - 0949.265.919 &nbsp; - &nbsp;
+              Email:phutungkubota.vn@gmail.com
+            </p>
+
+          </div>
+        </div>
+        <div className="foot">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-4">
+              </div>
+              <div className="col-md-6 text-right">
+                CÔNG TY TNHH KỸ THUẬT MÁY KTM<br/>
+                Giấy phép kinh doanh số 2802799630 do Sở KHĐT T. Thanh Hóa cấp ngày 02/10/2019
+              </div>
+              <div className="col-md-2 text-right">
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };

@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import HeadHomePage from './client/HomePage/homePagetest';
-import HomePage from './client/HomePage/homePage';
+// import HeadHomePage from './client/css/homePagetest';
+//import css from './client/css/homePage';
 import reportWebVitals from './reportWebVitals';
+
+import Product from "./client/pages/product";
+import HomePage from "./client/pages/homePage";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomePage />
+    <BrowserRouter>
+        <Routes>
+            <Route path={'/'} element={<HomePage></HomePage>}></Route>
+            <Route path={'/san-pham'} element={<Product></Product>}></Route>
+        </Routes>
+    </BrowserRouter>
+      <HomePage/>
+
   </React.StrictMode>,
   document.getElementById('root')
 );
