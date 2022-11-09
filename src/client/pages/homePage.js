@@ -5,10 +5,8 @@ import { faMapMarked } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "../css/homePage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Carousel from "react-bootstrap/Carousel";
-import Product from "./product";
-import { Outlet, Link } from "react-router-dom";
-
+import Product from './product.js';
+import {Routes, Route} from 'react-router-dom'
 
 const HomePage = () => {
   return (
@@ -83,18 +81,15 @@ const HomePage = () => {
                   <nav className="main-nav">
                     <ul>
                       <li>
-                        <a className="smooth" href="/src/client/pages">
+                        <a className="smooth" href="/">
                           TRANG CHỦ
                         </a>
                       </li>
                       <li>
-                        <a className="smooth" href="/src/client/pages">
+                        <a className="smooth" href="/product">
                           SẢN PHẤM
                         </a>
                       </li>
-                      {/*<li>*/}
-                      {/*  <Link to="/san-pham">Sản Phẩm</Link>*/}
-                      {/*</li>*/}
                       <li>
                         <a className="smooth" href="/src/client/pages">
                           GIỚI THIỆU
@@ -135,101 +130,104 @@ const HomePage = () => {
           </div>
         </div>
       </header>
-      <Carousel>
-        <Carousel.Item interval={1000}>
-          <img
-            className="d-block w-100"
-            alt="FirstSlide"
-            src="https://www.kubota.vn/UploadImages/home-page-banner.jpg"
-          />
-        </Carousel.Item>
-        <Carousel.Item interval={1000}>
-          <img
-            className="d-block w-100"
-            alt="secondSlide"
-            src="https://www.kubota.vn/UploadImages/home-page-banner.jpg"
-          />
-        </Carousel.Item>
-      </Carousel>
-      <div className="container">
-        <div row hotnews>
-          <h2
-            className="md-title wow fadeInDown"
-            style={{ visibility: "visible", animationOnName: "fadeInDown" }}
-          >
-            Tin Tức Mới
-          </h2>
-          <div className="row">
-            <div
-              className="col-sm-6 wow fadeInUp"
-              style={{ visibility: "visible", animationOnName: "fadeInUp" }}
-            >
-              <div className="news-info">
-                <a href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html">
-                  <img
-                    className="entry-thumbnail"
-                    src="http://phutungkubota.vn/Uploads/c%E1%BA%A7u%20chi%20b%C6%A1m%20nhi%C3%AAn%20li%E1%BB%87u%20nho.jpg"
-                    alt="Kiểm tra cầu trì"
-                  />
-                </a>
-                <h3 className="title-news">
-                  <a
-                    href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html"
-                    className="logo"
-                  >
-                    Cách kiểm tra cầu chì để biết dây điện còn tốt hay không
-                  </a>
-                </h3>
-                <p className="text-news">
-                  Thông số tiêu chuẩn cầu chì! Khi kiểm tra hệ thống dây điện
-                  của máy gặt kubota...
-                </p>
-                <a
-                  className="readMore"
-                  href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html"
-                >
-                  Xem thêm
-                </a>
-              </div>
-            </div>
-            <div
-              className="col-sm-6 wow fadeInUp"
-              style={{ visibility: "visible", animationOnName: "fadeInUp" }}
-            >
-              <div className="news-info">
-                <a href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html">
-                  <img
-                    className="entry-thumbnail"
-                    src="http://phutungkubota.vn/Uploads/dien%2070%201.jpg"
-                    alt="Kiểm tra cầu trì"
-                    style={{ width: "100%" }}
-                  />
-                </a>
-                <h3 className="title-news">
-                  <a href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html">
-                    Cách kiểm tra cầu chì để biết dây điện còn tốt hay không
-                  </a>
-                </h3>
-                <p className="text-news">
-                  {" "}
-                  Thông số tiêu chuẩn cầu chì! Khi kiểm tra hệ thống dây điện
-                  của máy gặt kubota...{" "}
-                </p>
-                <a
-                  className="readMore"
-                  href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html"
-                >
-                  Xem thêm
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-        <div>
-          {/*<Product></Product>*/}
 
-        </div>
+      {/*<Carousel>*/}
+      {/*  <Carousel.Item interval={1000}>*/}
+      {/*    <img*/}
+      {/*      className="d-block w-100"*/}
+      {/*      alt="FirstSlide"*/}
+      {/*      src="https://www.kubota.vn/UploadImages/home-page-banner.jpg"*/}
+      {/*    />*/}
+      {/*  </Carousel.Item>*/}
+      {/*  <Carousel.Item interval={1000}>*/}
+      {/*    <img*/}
+      {/*      className="d-block w-100"*/}
+      {/*      alt="secondSlide"*/}
+      {/*      src="https://www.kubota.vn/UploadImages/home-page-banner.jpg"*/}
+      {/*    />*/}
+      {/*  </Carousel.Item>*/}
+      {/*</Carousel>*/}
+      {/*<div className="container">*/}
+      {/*  <div row hotnews>*/}
+      {/*    <h2*/}
+      {/*      className="md-title wow fadeInDown"*/}
+      {/*      style={{ visibility: "visible", animationOnName: "fadeInDown" }}*/}
+      {/*    >*/}
+      {/*      Tin Tức Mới*/}
+      {/*    </h2>*/}
+      {/*    <div className="row">*/}
+      {/*      <div*/}
+      {/*        className="col-sm-6 wow fadeInUp"*/}
+      {/*        style={{ visibility: "visible", animationOnName: "fadeInUp" }}*/}
+      {/*      >*/}
+      {/*        <div className="news-info">*/}
+      {/*          <a href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html">*/}
+      {/*            <img*/}
+      {/*              className="entry-thumbnail"*/}
+      {/*              src="http://phutungkubota.vn/Uploads/c%E1%BA%A7u%20chi%20b%C6%A1m%20nhi%C3%AAn%20li%E1%BB%87u%20nho.jpg"*/}
+      {/*              alt="Kiểm tra cầu trì"*/}
+      {/*            />*/}
+      {/*          </a>*/}
+      {/*          <h3 className="title-news">*/}
+      {/*            <a*/}
+      {/*              href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html"*/}
+      {/*              className="logo"*/}
+      {/*            >*/}
+      {/*              Cách kiểm tra cầu chì để biết dây điện còn tốt hay không*/}
+      {/*            </a>*/}
+      {/*          </h3>*/}
+      {/*          <p className="text-news">*/}
+      {/*            Thông số tiêu chuẩn cầu chì! Khi kiểm tra hệ thống dây điện*/}
+      {/*            của máy gặt kubota...*/}
+      {/*          </p>*/}
+      {/*          <a*/}
+      {/*            className="readMore"*/}
+      {/*            href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html"*/}
+      {/*          >*/}
+      {/*            Xem thêm*/}
+      {/*          </a>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*      <div*/}
+      {/*        className="col-sm-6 wow fadeInUp"*/}
+      {/*        style={{ visibility: "visible", animationOnName: "fadeInUp" }}*/}
+      {/*      >*/}
+      {/*        <div className="news-info">*/}
+      {/*          <a href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html">*/}
+      {/*            <img*/}
+      {/*              className="entry-thumbnail"*/}
+      {/*              src="http://phutungkubota.vn/Uploads/dien%2070%201.jpg"*/}
+      {/*              alt="Kiểm tra cầu trì"*/}
+      {/*              style={{ width: "100%" }}*/}
+      {/*            />*/}
+      {/*          </a>*/}
+      {/*          <h3 className="title-news">*/}
+      {/*            <a href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html">*/}
+      {/*              Cách kiểm tra cầu chì để biết dây điện còn tốt hay không*/}
+      {/*            </a>*/}
+      {/*          </h3>*/}
+      {/*          <p className="text-news">*/}
+      {/*            {" "}*/}
+      {/*            Thông số tiêu chuẩn cầu chì! Khi kiểm tra hệ thống dây điện*/}
+      {/*            của máy gặt kubota...{" "}*/}
+      {/*          </p>*/}
+      {/*          <a*/}
+      {/*            className="readMore"*/}
+      {/*            href="http://phutungkubota.vn/cach-kiem-tra-cau-chi-de-biet-day-dien-con-tot-hay-om-thoi.html"*/}
+      {/*          >*/}
+      {/*            Xem thêm*/}
+      {/*          </a>*/}
+      {/*        </div>*/}
+      {/*      </div>*/}
+      {/*    </div>*/}
+      {/*  </div>*/}
+      {/*</div>*/}
+      {/*  <div>*/}
+          <Routes>
+            <Route path="/product" element={<Product/>}/>
+          </Routes>
+
+
 
       <footer>
         <div className="container text-center wow fadeInUp">

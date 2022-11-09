@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {BrowserRouter } from 'react-router-dom'
 // import HeadHomePage from './client/css/homePagetest';
 //import css from './client/css/homePage';
 import reportWebVitals from './reportWebVitals';
-
-import Product from "./client/pages/product";
+import 'bootstrap/dist/css/bootstrap-grid.min.css'
 import HomePage from "./client/pages/homePage";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-        <Routes>
-            <Route path={'/'} element={<HomePage></HomePage>}></Route>
-            <Route path={'/san-pham'} element={<Product></Product>}></Route>
-        </Routes>
+        <HomePage/>
+
     </BrowserRouter>
-      <HomePage/>
 
   </React.StrictMode>,
   document.getElementById('root')
