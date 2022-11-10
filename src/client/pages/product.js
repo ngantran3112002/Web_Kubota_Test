@@ -1,194 +1,47 @@
-<<<<<<< HEAD
 import React from "react";
-=======
->>>>>>> 545e33efb4f12e8b70fcde1dec149f263a832212
 import "bootstrap/dist/css/bootstrap-grid.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
 import "../css/product.css";
-//import Carousel from "react-bootstrap/Carousel";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import {Link} from "react-router-dom";
 const Product = () => {
-  return (
-    <>
-      <section className="h-product">
-        <div className="container">
-          <div className="row h-pt-cas">
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
+    const product = [
+        {id: 1, name: 'CẦU CHÌ BỘ, ĐỒNG HỒ ĐO NHIỆT' , src: "http://phutungkubota.vn/Uploads/z2062341839222_7f383a061337fa0ed39598bbcb16300c-1.jpg"},
+        {id: 2, name: 'THIẾT BỊ THỦY LỰC KTM' , src: "http://phutungkubota.vn/Uploads/z3778620933474_0b064b11de725b5aa5bc4850688619b8.jpg"},
+        {id: 3, name: 'CẦU CHI - CẢO HƯỚNG - BÀN ÉP PHANH HƯỚNG' , src: "http://phutungkubota.vn/Uploads/123.jpg"},
+        {id: 4, name: 'PHỤ TÙNG MÁY GẶT' , src: "http://phutungkubota.vn/Uploads/May-gat-dap-lien-hop-DC-70-Plus_1-2.jpg"},
+        {id: 5, name: 'LỌC - NHỚT - MỠ - NƯỚC LÀM MÁT' , src: "http://phutungkubota.vn/Uploads/Kubota_Parts_English.jpg"},
+        {id: 6, name: 'PHỤ TÙNG MÁY KÉO NÔNG CỤ' , src: "http://phutungkubota.vn/Uploads/20160830080604_QYJQ-6.png"},
+        {id: 7, name: 'PHỤ TÙNG MÁY CẤY - MÁY GIEO HẠT' , src: "http://phutungkubota.vn/Uploads/20160830080604_QYJQ-5.png"},
+        {id: 3, name: 'DÂY ĐAI' , src: "http://phutungkubota.vn/Uploads/Hf20bf190a16b421395492ba00cc23412c.jpg"},
+    ]
+    const productDisplay = product.map(item => <div className="col-md-4 col-sm-6 wow fadeInUp "
+                                 style={{visibility: "visible", animationOnName: "fadeInUp", width: "345", height: "331",paddingtop:"20"}}>
+            <a href="/product/:" className="item smooth">
                 <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/z3778620933474_0b064b11de725b5aa5bc4850688619b8.jpg"
-                  style={{ width: "100%" }}
+                    className="img-responsive"
+                    alt="FirstSlide"
+                    src = {item.src}
+                    style={{width: "100%",height:"100%"}}
                 />
                 <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">/</a>
+                    <Link to= {item.name}> {item.name}</Link>
                 </div>
-              </a>
+            </a>
+        </div>)
+    console.log(productDisplay)
+    return (
+        <>
+            <div className="container">
             </div>
-
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
-                <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/123.jpg"
-                  style={{ width: "100%" }}
-                />
-                <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">
-                    CẦU CHI - CẢO HƯỚNG - BÀN ÉP PHANH HƯỚNG
-                  </a>
+            <section className="h-product">
+                <div className="container">
+                    <div className="row h-pt-cas">
+                        <div className="clearfix"></div>
+                    </div>
+                    {productDisplay}
                 </div>
-              </a>
-            </div>
-
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
-                <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/Kubota_Parts_English.jpg"
-                  style={{ width: "100%" }}
-                />
-                <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">
-                    LỌC - NHỚT - MỠ - NƯỚC LÀM MÁT
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
-                <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/May-gat-dap-lien-hop-DC-70-Plus_1-2.jpg"
-                  style={{ width: "100%" }}
-                />
-                <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">PHỤ TÙNG MÁY GẶT</a>
-                </div>
-              </a>
-            </div>
-
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
-                <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/Hf20bf190a16b421395492ba00cc23412c.jpg"
-                  style={{ width: "100%" }}
-                />
-                <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">DÂY ĐAI</a>
-                </div>
-              </a>
-            </div>
-
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
-                <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/20160830080604_QYJQ-6.png"
-                  style={{ width: "100%" }}
-                />
-                <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">
-                    PHỤ TÙNG MÁY KÉO NÔNG CỤ
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div
-              className="col-md-4 col-sm-6 wow fadeInUp "
-              style={{
-                visibility: "visible",
-                animationOnName: "fadeInUp",
-                width: "345",
-                height: "331",
-                paddingtop: "20",
-              }}
-            >
-              <a href="src/client/pages/product" className="item smooth">
-                <img
-                  className="img-responsive"
-                  alt="FirstSlide"
-                  src="http://phutungkubota.vn/Uploads/20160830080604_QYJQ-6.png"
-                  style={{ width: "100%" }}
-                />
-                <div className="single-content text-center hiii">
-                  <a href="src/client/pages/product">
-                    PHỤ TÙNG MÁY KÉO NÔNG CỤ
-                  </a>
-                </div>
-              </a>
-            </div>
-
-            <div className="clearfix"></div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+            </section>
+        </>
+    );
 };
-
-export default HomePage;
+export default Product;
