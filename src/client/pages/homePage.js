@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "../css/homePage.css";
+import ProductList from "./ProductList";
 
 const HomePage = () => {
   return (
@@ -98,7 +99,7 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div>{/*<Product></Product>*/}</div>
+      <div><ProductList></ProductList></div>
 
       <footer>
         <div className="container text-center wow fadeInUp">

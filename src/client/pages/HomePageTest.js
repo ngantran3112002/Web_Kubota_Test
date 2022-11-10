@@ -6,7 +6,8 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Nav from "./Nav";
-import Product from "./Product";
+import Product from "./ProductList";
+import ProductList from "./ProductList";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -91,7 +92,7 @@ const HomePageTest = () => {
       <div className={classes.content}>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/product" element={<Product />} />
+          <Route exact path="/product" element={<ProductList />} />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Product />} />
           <Route exact path="/cart" element={<HomePage />} />

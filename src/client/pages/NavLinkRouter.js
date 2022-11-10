@@ -19,7 +19,7 @@ const NavLinkRouter = () => {
         </li>
         <li>
           <NavLink
-            to="./product.js"
+            to="./ProductList.js"
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
             }
