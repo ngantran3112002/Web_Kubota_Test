@@ -92,7 +92,9 @@ const HomePageTest = () => {
       <div className={classes.content}>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
+
           <Route exact path="/product" element={<ProductList></ProductList>} />
+
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<HomePage />} />

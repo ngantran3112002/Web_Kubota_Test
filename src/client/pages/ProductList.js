@@ -2,10 +2,17 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "../css/product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Product from "./Product";
+
+import Product from "./Product/Product";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import {Link} from "react-router-dom";
+
 //import Carousel from "react-bootstrap/Carousel";
 
 const ProductList = () => {
+
         const product = [
             {
                 id: 1,
@@ -36,6 +43,7 @@ const ProductList = () => {
             },
         ];
         const productDisplay = () => {
+
             const res = product.map(item =>
                 <div className = "col-md-4 col-sm-6 wow fadeInUp">
                     <Product id={item.id} src={item.src} name={item.name}></Product>
@@ -43,17 +51,20 @@ const ProductList = () => {
 
             )
             return res
+
         }
         // const test = productDisplay()
         // console.log(test)
         return (
             <>
+
                 <div className="container">
                     <div className="row h-pt-cas">
                     {productDisplay()}
                     {/*{product.map(item => <li>2</li>)}*/}
                     </div>
                 </div>
+
 
 
             </>
