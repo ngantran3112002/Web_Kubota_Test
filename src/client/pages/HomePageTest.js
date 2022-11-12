@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles } from "@mui/styles";
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import {useState} from "react";
 import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Nav from "./Nav";
 import ProductList from "./ProductList";
+import ProductDetail from "./ProductDetail/ProductDetail"
 import Login from "./Login";
 
 const useStyles = makeStyles(() => ({
@@ -46,6 +48,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const HomePageTest = () => {
+
+
   const navigate = useNavigate();
   const classes = useStyles();
   const handleLoginButton = (event) => {
@@ -93,8 +97,8 @@ const HomePageTest = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
 
-          <Route exact path="/product" element={<ProductList></ProductList>} />
-
+          <Route exact path="/product" element={<ProductList  ></ProductList>} />
+          <Route exact path="/product/:id" element={<ProductDetail></ProductDetail>} />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<HomePage />} />

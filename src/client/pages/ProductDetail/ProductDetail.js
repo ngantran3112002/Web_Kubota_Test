@@ -1,13 +1,15 @@
 import React from "react";
-import "../../css/ProductDetail.css";
+import "./ProductDetail.css";
 import  {useState} from "react";
-function ProductDetail() {
+
+const ProductDetail = () => {
     const [cardItem, setcardItem] = useState(0)
     const handleIncrease = () => {
         setcardItem(cardItem+1)
     }
-}
-const ProductDetail = () => {
+    const Increase = () => {
+        setcardItem(cardItem-1)
+    }
     return (
         <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
@@ -24,14 +26,15 @@ const ProductDetail = () => {
                 <hr/>
                 <p id="product_price">10000000</p>
                 <div className="stockCounter d-inline">
-                    <span className="btn bg-danger minus">-</span>
-                    <input type="number" className="form-control count d-inline" value="1" readOnly={}/>
-                    <span className="btn btn-primary plus">+</span>
+                    <span className="btn bg-danger minus" onClick={Increase}>-</span>
+                    <input type="number" className="form-control count d-inline" value={cardItem} />
+                    <span className="btn btn-primary plus" onClick={handleIncrease}>+</span>
 
                 </div>
-                <button onClick={handleIncrease} type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Them gio hang</button>
+                <button  type="button" id="cart_btn" className="btn btn-primary d-inline ml-4">Them gio hang</button>
             </div>
 
         </div>
     )
 }
+export default ProductDetail

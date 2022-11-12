@@ -99,7 +99,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      <div><ProductList></ProductList></div>
 
       <footer>
         <div className="container text-center wow fadeInUp">

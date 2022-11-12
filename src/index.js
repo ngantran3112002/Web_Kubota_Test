@@ -18,8 +18,8 @@ ReactDOM.render(
       </Routes>
     </BrowserRouter> */}
     <BrowserRouter>
-      {/*<HomePageTest />*/}
-        <ProductList></ProductList>
+      <HomePageTest />
+      {/*  <ProductList></ProductList>*/}
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

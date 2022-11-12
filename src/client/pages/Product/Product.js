@@ -9,7 +9,7 @@ const Product = ({id,name,src}) => {
             <div
                  style={{visibility: "visible", animationOnName: "fadeInUp", width: "345", height: "331",paddingtop:"20"}}>
 
-                <a href="/product/:id" className="item smooth">
+                <a link to ={`/product/${id}`} className="item smooth">
                     <img
                         className="img-responsive"
                         alt="FirstSlide"
@@ -17,7 +17,7 @@ const Product = ({id,name,src}) => {
                         style={{width: "100%",height:"100%"}}
                     />
                     <div className="single-content text-center hiii">
-                        <Link to= {name}> {name}</Link>
+                        <Link to= {name}> {name}> </Link>
                     </div>
                 </a>
 
