@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 const Product = ({id,name,src}) => {
     return (
         <>
-            <div className="col-md-4 col-sm-6 wow fadeInUp "
+            <div
                  style={{visibility: "visible", animationOnName: "fadeInUp", width: "345", height: "331",paddingtop:"20"}}>
                 <a href="/product/:id" className="item smooth">
                     <img
@@ -18,6 +18,7 @@ const Product = ({id,name,src}) => {
                         <Link to= {name}> {name}</Link>
                     </div>
                 </a>
+
             </div>
         </>
     )

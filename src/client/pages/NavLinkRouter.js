@@ -1,4 +1,5 @@
 import React from "react";
+import ProductList from "./ProductList";
 import { NavLink } from "react-router-dom";
 
 const NavLinkRouter = () => {
@@ -19,7 +20,7 @@ const NavLinkRouter = () => {
         </li>
         <li>
           <NavLink
-            to="./ProductList.js"
+            to="ProductList"
             className={({ isActive }) =>
               isActive ? activeClassName : undefined
             }

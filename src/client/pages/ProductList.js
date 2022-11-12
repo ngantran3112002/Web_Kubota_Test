@@ -1,12 +1,8 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone } from "@fortawesome/free-solid-svg-icons";
-import { faMapMarked } from "@fortawesome/free-solid-svg-icons";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "../css/product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Product from "./Product";
-import {Link} from "react-router-dom";
 //import Carousel from "react-bootstrap/Carousel";
 
 const ProductList = () => {
@@ -38,37 +34,26 @@ const ProductList = () => {
                 name: 'PHỤ TÙNG MÁY CẤY - MÁY GIEO HẠT',
                 src: "http://phutungkubota.vn/Uploads/20160830080604_QYJQ-5.png"
             },
-        ]
+        ];
         const productDisplay = () => {
-            let res = product.map((item) => {
-                <div>
-                    <Product
-                        id={item.id}
-                        name={item.name}
-                        src={item.src}
-                    ></Product>
+            const res = product.map(item =>
+                <div className = "col-md-4 col-sm-6 wow fadeInUp">
+                    <Product id={item.id} src={item.src} name={item.name}></Product>
                 </div>
-            })
-            return res;
+
+            )
+            return res
         }
+        // const test = productDisplay()
+        // console.log(test)
         return (
             <>
-
-
                 <div className="container">
-                </div>
-                <section className="h-product">
-                    <div className="container">
-                        <div className="row h-pt-cas">
-
-
-                            <div className="clearfix"></div>
-
-
-                        </div>
-                        {productDisplay()}
+                    <div className="row h-pt-cas">
+                    {productDisplay()}
+                    {/*{product.map(item => <li>2</li>)}*/}
                     </div>
-                </section>
+                </div>
 
 
             </>
