@@ -12,14 +12,16 @@ const HomePage = () => {
           <img
             className="d-block w-100"
             alt="FirstSlide"
-            src="https://www.kubota.vn/UploadImages/home-page-banner.jpg"
+            src="https://wallpapercave.com/wp/wp7079153.jpg"
+            style={{ height: '500px' }}
           />
         </Carousel.Item>
         <Carousel.Item interval={1000}>
           <img
             className="d-block w-100"
             alt="secondSlide"
-            src="https://www.kubota.vn/UploadImages/home-page-banner.jpg"
+            src="https://www.americafem.com/wp-content/uploads/2022/03/L02Lanuch.jpg"
+            style={{ height: '500px' }}
           />
         </Carousel.Item>
       </Carousel>
