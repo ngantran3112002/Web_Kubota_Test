@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap-grid.css";
-import "../css/product.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import Product from "./Product/Product";
+import "./index.css"
+import Product from "../Product/Product.js";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Link} from "react-router-dom";
-import Pagination from "./Pagination";
-
+import Pagination from "../pagination/Pagination";
+import reactRouterPagination from "react-router-pagination";
+import { useParams } from "react-router-dom";
 //import Carousel from "react-bootstrap/Carousel";
 
 const ProductList = () => {
@@ -44,13 +44,13 @@ const ProductList = () => {
     ];
     const [postsPerPage] = useState(2);
     const [currentPage, setCurrentPage] = useState(1);
-
-    const indexOfLastPost = currentPage * postsPerPage;
+    const {currentPageUrl}= useParams()
+    const indexOfLastPost = currentPageUrl * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = product.slice(indexOfFirstPost, indexOfLastPost);
 
     //changepage
-    const paginate = pageNumber => setCurrentPage(pageNumber);
+    // const paginate = pageNumber => setCurrentPage(pageNumber);
 
         const productDisplay = (cur) => {
 
@@ -63,23 +63,23 @@ const ProductList = () => {
             return res
 
         }
-        // const test = productDisplay()
-        // console.log(test)
-        return (
+                return (
             <>
-
                 <div className="container">
                     <div className="row h-pt-cas" >
                     {productDisplay(currentPosts)}
                     {/*{product.map(item => <li>2</li>)}*/}
                     </div>
                 </div>
-                <Pagination
-                    postsPerPage={postsPerPage}
-                    totalPosts={product.length}
-                    paginate={paginate}
-                    current={currentPage}
-                ></Pagination>
+                <div id = "pagination">
+                    <Pagination
+                        postsPerPage={postsPerPage}
+                        totalPosts={product.length}
+                        paginate={setCurrentPage}
+                        currentPage={currentPageUrl}
+                        // currentPageUrl={`/products/${currentPage}`}
+                    ></Pagination>
+                </div>
             </>
         );
     };

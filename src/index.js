@@ -7,8 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
 import HomePageTest from "./client/pages/HomePageTest";
-import ProductList from "./client/pages/ProductList";
-
+// import ProductList from "./client/pages/productList/ProductList"
 ReactDOM.render(
   <React.StrictMode>
     {/* <BrowserRouter>

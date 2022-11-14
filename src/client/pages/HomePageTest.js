@@ -2,14 +2,15 @@ import { faLocation, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useHistory} from "react-router-dom";
 import {useState} from "react";
 import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Nav from "./Nav";
-import ProductList from "./ProductList";
+import ProductList from "./productList/ProductList";
 import ProductDetail from "./ProductDetail/ProductDetail"
 import Login from "./Login";
+
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -97,8 +98,8 @@ const HomePageTest = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
 
-          <Route exact path="/product" element={<ProductList  ></ProductList>} />
-          <Route exact path="/product/:id" element={<ProductDetail></ProductDetail>} />
+          <Route exact path="/products/:currentPageUrl" element={<ProductList  ></ProductList>} />
+          <Route path="/products/details/:id" element={<ProductDetail></ProductDetail>} />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<HomePage />} />

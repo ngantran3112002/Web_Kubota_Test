@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Pagination = ({ postsPerPage, totalPosts, paginate, current }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage}) => {
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -11,9 +12,8 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, current }) => {
             <ul className='pagination'>
                 {pageNumbers.map(number => (
                     <li key={number} className='page-item'>
-                        <a onClick={() => paginate(number)} href={`/product/pages/${current}`} className='page-link'>
-                            {number}
-                        </a>
+                        <Link  onClick={ () =>{ paginate(number)}} to= {`/products/${number}`} className='page-link'>{number}</Link>
+                            {/* {number} */}
                     </li>
                 ))}
             </ul>
