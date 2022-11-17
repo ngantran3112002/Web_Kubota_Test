@@ -1,8 +1,28 @@
-.container {
+/* .container {
     width: 100%;
     margin: 0px;
+} */
+#pagination {
+    text-align-last: center;
+} 
+
+.ant-card-meta-title {
+    white-space: pre-line !important;
+    font-size: small !important;
+}
+.ant-list {
+    width: 100% !important;
+}
+.row {
+    /* width: 110% !important; */
+    height: 90%;
 }
 
-#prodList-footer {
-    color: red;
+#category {
+    /* border: 1px;
+    border-radius: 4px;
+    border-style: solid;
+    margin: 24px;
+    display: inline-block; */
+    width: 40%;
 }
