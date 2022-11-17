@@ -2,13 +2,13 @@ import React, {useEffect, useState} from "react";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.css"
-import Product from "../Product/Product.js";
-import {Link} from "react-router-dom";
 import { useParams } from "react-router-dom";
 import "antd/dist/antd.css"
-import { Pagination, Card, Row, Col, List, Layout, Cont, Divider, BackTop} from "antd";
+import { Pagination, Card, Row, Col, List, Layout, Cont, Divider, BackTop, Button} from "antd";
 import axios from "axios";
+import {BsChevronDoubleUp} from "react-icons/bs"
 import { useNavigate } from "react-router-dom";
+
 //import Carousel from "react-bootstrap/Carousel";
 
 const {Meta} = Card
@@ -43,70 +43,68 @@ const ProductList = () => {
     //         src: "http://phutungkubota.vn/Uploads/20160830080604_QYJQ-5.png"
     //     },
     // ];
-
-    let cateGory = [
-        {id: 1, title: "category 1"},
-        {id: 2, title: "category 1"},
-        {id: 3, title: "category 1"},
-        {id: 4, title: "category 1"}
-    ]
-
-
-    let navigate = useNavigate();
     const [product, setProduct] = useState([{}])
+    const [category, setCategory] = useState([{}])
+    let navigate = useNavigate();
+
     const [postsPerPage, setPostPerPage] = useState(12);
-    // const [currentPage, setCurrentPage] = useState(1);
     const {currentPageUrl}= useParams()
     const indexOfLastPost = currentPageUrl * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = product.slice(indexOfFirstPost, indexOfLastPost);
  
+    let endPoint = [
+        "http://localhost:5000/category/alltest",
+        "http://localhost:5000/product/alltest"
+    ]
+
+    const fetchData = () => {
+        Promise.all(endPoint.map((endPoint) => axios.get(endPoint))).then(
+            axios.spread((...allData) => {
+                const allCategory = allData[0];
+                const allProd = allData[1];
+
+                setCategory(allCategory.data.rows);
+                setProduct(allProd.data)
+            })
+        )
+    }
+
     useEffect(() => {
-        let mounted = true;
-        axios.get("http://localhost:5000/product/alltest")
-          .then(items => {
-            if(mounted) {
-                console.log(items)
-              setProduct(items.data)
-            }
-          })
-        return () => mounted = false;
+        fetchData()
       }, [])
-    //changepage
-    // const paginate = pageNumber => setCurrentPage(pageNumber);
-    //   console.log(product)
+
+      console.log(product)
+      console.log(category)
         const productDisplay = (cur) => {
 
             const res = cur.map(item =>
-                <Card
-                    id = {item.productId}
-                    hoverable
-                    style={{ width: "20%", borderRadius: 12, margin: 24, }}
-                    cover={<img alt="example" src="https://via.placeholder.com/50/"/>}>
-                <Meta title={item.name} />
-                </Card>
-                // <div className = "col-md-4 col-sm-6 wow fadeInUp">
-                //     <Product id={item.productId} src="https://via.placeholder.com/50/" name={item.name}></Product>
-                // </div>
+                    <Card
+                        id = {item.productId}
+                        hoverable
+                        style={{ width: "20%", borderRadius: 12, margin: 24, display:"inline-block"}}
+                        cover={<img alt="example" src="https://via.placeholder.com/50/"/>}>
+                    <Meta title={item.name} />
+                    </Card>
             )
             return res;
         }
-        // console.log({currentPage})
+
         return (
             <>
                 <Row>
-                    <Col flex={1}>
+                    <Col flex="250px">
                         <Row>
-                        <div id = "category">
                         <List style={{margin: 24}}
-                        dataSource = {cateGory} 
+                        dataSource = {category}
+                        header={<div><strong>Category</strong></div>}
                         renderItem={item => (
                             <List.Item>
-                                <p> {item.title} </p>
+                                {item.name}
                             </List.Item>
                           )}
                         />
-                        </div>
+        
                         </Row>
                         <Row style={{margin: 24}}>
                             <List>
@@ -117,21 +115,24 @@ const ProductList = () => {
                             </List>
                         </Row>
                     </Col>
-                    <Divider type="vertical"></Divider>
-                    <Col flex={4}>
-                    <div className="container">
-                    <div className="row h-pt-cas" >
-                    {productDisplay(currentPosts)}
-                    </div>
-                
-                    <Divider></Divider>
-                    
-                </div>
+                    <Col flex= "auto" style = {{width: "80%"}}> 
+                        {productDisplay(currentPosts)}    
+                        <Divider></Divider>
+                        <Pagination 
+                        style={{    "text-align-last": "center", borderColor: "green"}}
+                        total={product.length}  
+                        pageSize = {postsPerPage} 
+                        defaultCurrent = {1} 
+                        responsive={true}
+                        onChange={(page, newPageSize) => {
+                            navigate(`/products/${page}`)
+                        }}>
+                        </Pagination>
                     </Col>
                 </Row>
                                 
 
-                <div id = "pagination">
+                {/* <div id = "pagination">
                         <Pagination 
                         total={product.length}  
                         pageSize = {postsPerPage} 
@@ -141,9 +142,11 @@ const ProductList = () => {
                             navigate(`/products/${page}`)
                         }}>
                         </Pagination>
-                    </div>
+                    </div> */}
                     <BackTop>
-                        <div >UP</div>
+                        <Button type="primary" style={{borderRadius: "50%", height: 50, width: 50, backgroundColor: "green"}}>
+                            <BsChevronDoubleUp></BsChevronDoubleUp>
+                        </Button>
                     </BackTop>
             </>
         );

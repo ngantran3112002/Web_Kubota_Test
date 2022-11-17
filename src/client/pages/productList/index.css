@@ -13,6 +13,9 @@
 .ant-list {
     width: 100% !important;
 }
+.ant-pagination-item-active {
+    border-color: green !important;
+}
 .row {
     /* width: 110% !important; */
     height: 90%;
