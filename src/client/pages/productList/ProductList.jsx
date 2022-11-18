@@ -46,43 +46,68 @@ const ProductList = () => {
     // ];
     const [product, setProduct] = useState([{}])
     const [category, setCategory] = useState([{}])
-    const [params, setParams] = useSearchParams()
+    const [params, setParams] = useSearchParams();
+    const [totalPage, setTotalPage] = useState(1)
+    const [currentPage, setCurrentPage] = useState(1)
+
     let navigate = useNavigate();
+    const {categoryId} = useParams()
+    // const currentPageUrl = params.get('page')
+    // const categoryUrl = params.get('category')
     
-    const currentPageUrl = params.get('page')
-    const categoryUrl = params.get('category')
-    
-    const postsPerPage = 9;
-    const indexOfLastPost = currentPageUrl * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-    const postByPage = product.slice(indexOfFirstPost, indexOfLastPost);
-    
-
-    let endPoint = [
-        "http://localhost:5000/category/alltest",
-        "http://localhost:5000/product/alltest"
-    ]
-
+    // const postsPerPage = 9;
+    // const indexOfLastPost = currentPageUrl * postsPerPage;
+    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
     useEffect(() => {
+        let endPoint = [
+            "http://localhost:5000/category/alltest",
+            "http://localhost:5000/product/pagetest"
+        ]
         const fetchData = () => {
             Promise.all(endPoint.map((endPoint) => axios.get(endPoint))).then(
                 axios.spread((...allData) => {
                     const allCategory = allData[0];
                     const allProd = allData[1];
-    
                     setCategory(allCategory.data.rows);
-                    setProduct(allProd.data)
+                    setProduct(allProd.data.data)
+                    setTotalPage(allProd.data.total)
                 })
             )
         }
+        console.log("fetchData")
+        console.log(product)
         fetchData()
       }, [])
+    
+    
+    
+      useEffect( () => {
+        const page = (params.get("page") === null)?  1 : params.get("page");
+        console.log(page)
+        setCurrentPage(page)
+        const fetchChange = async (page, categoryId) => {
+            await axios.get(`http://localhost:5000/product/pagetest?page=${page}&category=${categoryId}`)
+            .then((res) => {
+                setProduct(res.data.data);
+                setTotalPage(res.data.total)
+            })
+        }
+        console.log("params")
+        console.log(product)
+        console.log(categoryId)
 
-      console.log(product)
-      console.log(category)
-    const productDisplay = 
+        fetchChange(page, categoryId)
+    },[params, categoryId])
+
+    
+    
+    //console.log(product)
+    
+    // const postByPage = product.slice(indexOfFirstPost, indexOfLastPost);
+    
+
+    const productList = 
         <List   
                 size = {"large"}
                 grid={{ gutter: 0, column: 3 , xs: 1,
@@ -91,29 +116,27 @@ const ProductList = () => {
                     lg: 2,
                     xl: 3,
                     xxl: 3,}}
-                dataSource={postByPage}
+                dataSource={product}
                 footer={
                     <Pagination 
-                        style={{textAlignLast: "center", borderColor: "green"}}
-                        pageSize = {postsPerPage} 
-                        defaultCurrent = {1} 
-                        responsive={true}
-                        total={product.length}  
-                        onChange={(page, newPageSize) => {
-                            setParams({page: page})
-                            // navigate(`/products/${page}`)
-                        }}>
-                    </Pagination>
+                    style={{textAlignLast: "center", borderColor: "green"}}
+                    pageSize = {9} 
+                    defaultCurrent = {1}
+                    current ={currentPage}
+                    responsive={true}
+                    total={totalPage}  
+                    onChange={(page, newPageSize) => {
+                        setParams({page: page})
+                        // navigate({pathname: '/products', search:{...params, page: page}})
+                        // goToCategory("")
+                    }}>
+                </Pagination>
                 }
                 // pagination = {true}
                 renderItem={item => (
                     <List.Item>
                         <Card
-                        // id = {item.productId}
-                        // loading
-                            
                             hoverable
-                            // style={{ width: "85%", borderRadius: 12, margin: 24}}
                             cover={<img alt="example" src="https://via.placeholder.com/1000"/>}>
                             <Link to = {`/products/details/${item.productId}`}>{item.name}</Link>
                         </Card>
@@ -122,15 +145,7 @@ const ProductList = () => {
             />
         
 
-    const goToCategory = (categoryId) => {
-        navigate({
-            pathname: "/products",
-            search: `?${createSearchParams({
-                page: 1,
-                category: categoryId
-            })}`
-        })
-    }
+   
         return (
             <>
                 <Row>
@@ -143,8 +158,9 @@ const ProductList = () => {
                             dataSource = {category}
                             header={<div><strong>DANH MỤC</strong></div>}
                             renderItem={item => (
-                                <List.Item  onClick={goToCategory(item.id)}>
-                                    <Link >{item.name}</Link>
+                                <List.Item 
+                                >
+                                    <Link to={`/products/${item.id}`} onClick= {() => {}} >{item.name}</Link>
                                 </List.Item>
                             )}
                         />
@@ -164,7 +180,7 @@ const ProductList = () => {
                         </Row>
                     </Col>
                     <Col flex= "auto" style = {{width: "80%"}}> 
-                        {productDisplay}
+                        {productList}
                     </Col>
                 </Row>
                     <BackTop>

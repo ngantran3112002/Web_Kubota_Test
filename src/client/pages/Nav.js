@@ -25,7 +25,7 @@ const Nav = () => {
       </NavLink>
 
       <NavLink
-        to="/product"
+        to="/products?page=1"
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
         className={classes.link}
       >

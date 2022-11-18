@@ -37,4 +37,4 @@ const ProductDetail = () => {
         </div>
     )
 }
-export default ProductDetail
+export default ProductDetail;
