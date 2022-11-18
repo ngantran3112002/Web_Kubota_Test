@@ -98,7 +98,7 @@ const HomePageTest = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
 
-          <Route exact path="/products/:currentPageUrl" element={<ProductList  ></ProductList>} />
+          <Route exact path="/products" element={<ProductList  ></ProductList>} />
           <Route path="/products/details/:id" element={<ProductDetail></ProductDetail>} />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />

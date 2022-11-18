@@ -18,7 +18,7 @@ const Nav = () => {
       </NavLink>
 
       <NavLink
-        to="/products/1" params
+        to="/products?page=1" params
         className={({ isActive }) => (isActive ? activeClassName : undefined)}
       >
         SẢN PHẨM
