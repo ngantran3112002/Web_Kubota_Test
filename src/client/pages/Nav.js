@@ -1,7 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
+import { makeStyles } from "@mui/styles";
+const useStyles = makeStyles(() => ({
+  link: {
+    textDecoration: "none",
+  },
+}));
 const Nav = () => {
+  const classes = useStyles();
   let activeStyle = {
     textDecoration: "underline",
   };
@@ -13,23 +19,33 @@ const Nav = () => {
       <NavLink
         to="/"
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        className={classes.link}
       >
         TRANG CHỦ
       </NavLink>
 
       <NavLink
-        to="/products?page=1" params
-        className={({ isActive }) => (isActive ? activeClassName : undefined)}
+        to="/product"
+        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        className={classes.link}
       >
         SẢN PHẨM
       </NavLink>
 
-      <NavLink to="/introduction">
-        {({ isActive }) => (
-          <span className={isActive ? activeClassName : undefined}>
-            GIỚI THIỆU
-          </span>
-        )}
+      <NavLink
+        to="/introduction"
+        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        className={classes.link}
+      >
+        GIỚI THIỆU
+      </NavLink>
+
+      <NavLink
+        to="/machine"
+        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        className={classes.link}
+      >
+        KỸ THUẬT MÁY
       </NavLink>
     </>
   );

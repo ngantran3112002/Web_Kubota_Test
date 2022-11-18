@@ -6,11 +6,11 @@ import { Route, Routes, useNavigate, useHistory} from "react-router-dom";
 import {useState} from "react";
 import logo from "../../image/logo.png";
 import HomePage from "./homePage";
-import Nav from "./Nav";
-import ProductList from "./productList/ProductList";
-import ProductDetail from "./ProductDetail/ProductDetail"
 import Login from "./Login";
-
+import Nav from "./Nav";
+import Product from "./Product";
+import MachineEngineering from "./machine";
+import { ForgotPassword } from "./ForgotPassword";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -19,6 +19,8 @@ const useStyles = makeStyles(() => ({
   },
   header: {
     display: "flex",
+    borderBottomStyle: "double",
+    padding: "0 150px 20px",
   },
   content: {},
   logo: {},
@@ -34,6 +36,7 @@ const useStyles = makeStyles(() => ({
   taskbar: {
     display: "flex",
     justifyContent: "space-around",
+    marginTop: 20,
   },
   leftTaskbar: {
     display: "flex",
@@ -46,6 +49,13 @@ const useStyles = makeStyles(() => ({
   },
   rightTaskbar: {
     display: "flex",
+    gap: 20,
+  },
+  btn: {
+    padding: "0 10px",
+    backgroundColor: "#267fff",
+    color: "#fff",
+    border: "none",
   },
 }));
 const HomePageTest = () => {
@@ -87,8 +97,12 @@ const HomePageTest = () => {
               <Nav />
             </div>
             <div className={classes.rightTaskbar}>
-              <button onClick={handleCartButton}>GIỎ HÀNG</button>
-              <button onClick={handleLoginButton}>ĐĂNG NHẬP</button>
+              <button className={classes.btn} onClick={handleCartButton}>
+                GIỎ HÀNG
+              </button>
+              <button className={classes.btn} onClick={handleLoginButton}>
+                ĐĂNG NHẬP
+              </button>
             </div>
           </div>
         </div>
@@ -103,6 +117,9 @@ const HomePageTest = () => {
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<HomePage />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route exact path="/machine" element={<MachineEngineering />} />
+
         </Routes>
       </div>
     </div>
