@@ -12,8 +12,6 @@ const Nav = () => {
     textDecoration: "underline",
   };
 
-  let activeClassName = "underline";
-
   return (
     <>
       <NavLink
