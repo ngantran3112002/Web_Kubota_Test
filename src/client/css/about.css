@@ -1,0 +1,10 @@
+.container {
+    position: relative;
+    border-collapse:collapse;
+}
+
+.bio {
+    text-justify: auto;
+    color: rgb(63, 63, 63);
+    background-color: rgb(255, 252, 249);
+}
