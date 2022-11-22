@@ -115,7 +115,7 @@ const HomePageTest = () => {
           <Route exact path="/cart" element={<HomePage />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
-          <Route exact path="about" element={<About />} />
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </div>
     </div>

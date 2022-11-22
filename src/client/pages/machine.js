@@ -29,7 +29,7 @@ const MachineEngineering = () => {
               </a>
               <div className="single-content text-center hiii">
                   <a href="src/client/pages/machine">
-                  Sơ đồ mạch điện máy gặt DC60
+                  Sơ đồ mạch điện máy gặt Kubota DC60
                   </a>
               </div>
             </div>
@@ -110,7 +110,7 @@ const MachineEngineering = () => {
               </a>
               <div className="single-content text-center hiii">
                   <a href="src/client/pages/machine">
-                  Sơ đồ mạch điện máy gieo hạt tự động SR-K800 Kubota              
+                  Sơ đồ mạch điện máy gieo hạt tự động Kubota SR-K800               
                   </a>
               </div>
             </div>
