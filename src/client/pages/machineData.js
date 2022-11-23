@@ -1,6 +1,6 @@
 const machineData = [
     {
-        id: 'kubota-dc60-reaper-circuit-diagram',
+        id: 'Kubota-dc60-reaper-circuit-diagram',
         name: 'Sơ đồ mạch điện máy gặt Kubota DC60',
         description1: 'Sơ đồ Mạch điện máy gặt kubota DC60 ... Hữu ích với anh sử dụng đồng hồ đo điện! hãy lưu ý cầu chì phải đúng thông số để đảm bảo không om thối cháy dây khi xảy ra sự cố!',
         image1: 'http://phutungkubota.vn/Uploads/dc60-4.jpg',
@@ -22,7 +22,7 @@ const machineData = [
     },
 
     {
-        id: 'kubota-dc70-reaper-circuit-diagram',
+        id: 'Kubota-dc70-reaper-circuit-diagram',
         name: 'Sơ đồ mạch điện máy gặt Kubota DC70',
         description1: 'Sơ đồ nguyên lý mạch điện máy gặt Kubota DC70 H',
         description2: 'Sơ đồ dây điện',
