@@ -1,0 +1,28 @@
+.single .btn-primary {
+	font-weight: 600;
+}
+
+.breadcrumb {
+	margin-bottom: 0;
+	font-size: 13px;
+}
+
+.pg-header {
+	background: #9fc1ce;
+	text-transform: capitalize;
+	font-weight: 800;
+	color: rgb(0, 20, 74);
+	text-shadow: 2px 0 #fff, -2px 0 #fff, 0 2px #fff, 0 -2px #fff, 1px 1px #fff, -1px -1px #fff, 1px -1px #fff, -1px 1px #fff;
+}
+
+.content {
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+.header-content {
+	padding-bottom: 15px;
+	padding-top: 15px;
+	color: rgb(28, 60, 148);
+	font-style: italic;
+}

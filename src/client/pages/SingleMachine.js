@@ -14,7 +14,7 @@ const SingleMachine = () => {
   
   // console.log(typeof(machineId))
 
-  const { id, name, desciption1, desciption2, desciption3, image1, image2, image3, image4, image5, details1 } = singleMachine;
+  const { id, name, description1, description2, description3, image1, image2, image3, image4, image5, details1 } = singleMachine;
 
   // console.log("machine id ", machineId)
   // console.log("machine ", SingleMachine)
@@ -34,11 +34,11 @@ const SingleMachine = () => {
         <div className="container content">
             <div className="row">
                 <div>
-                    <h5>{desciption1}</h5>
+                    <h5 className="header-content">{description1}</h5>
                     <img src={image2} alt="" className="img-fluid" />
-                    <h5>{desciption2}</h5>
+                    <h5 className="header-content">{description2}</h5>
                     <img src={image3} alt="" className="img-fluid" />
-                    <h5>{desciption3}</h5>
+                    <h5 className="header-content">{description3}</h5>
                     <img src={image4} alt="" className="img-fluid" />
                     <img src={image5} alt="" className="img-fluid" />
                 </div>

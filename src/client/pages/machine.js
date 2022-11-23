@@ -1,12 +1,38 @@
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
+import { Link } from "react-router-dom";
 import "../css/machine.css";
+import machineData from "./machineData";
 
 const MachineEngineering = () => {
   return (
     <>
     <section>
+      <div className="container overflow-hidden">
+        <div className="row g-3 machine-row">
+          {machineData.map( (machine) => {
+            return (
+              <div className="col-6" key={machine.id}>
+                <div className="card">
+                  <div className="img-wrap">
+                    <img src={machine.image1} alt="" />
+                  </div>
+                  <div className="card-body">
+                    <h5 className="card-title">{machine.name}</h5>
+                    <p className="card-text">{machine.details1}</p>
+                  </div>
+                  <div className="d-flex justify-content-between align-items-center">
+                    <Link to = {`/machine/${machine.id}`} className="btn btn-primary btn-sm"> Xem thêm &rarr; </Link>
+                  </div>
+                </div>
+              </div>
+            )
+          } )}
+        </div>
+      </div>
+    </section> 
+    {/* <section>  
       <div className="container">
           <div 
             className='col-sm-6 wow fadeInUp'
@@ -170,8 +196,8 @@ const MachineEngineering = () => {
             </div>
           </div>
       </div>
- 
-    </section>
+    </section> */}
+    
     </>
   )
 }
