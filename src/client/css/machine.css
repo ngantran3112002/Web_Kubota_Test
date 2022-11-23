@@ -1,5 +1,6 @@
 .machine-row .card .card-body {
-	background: #f5f5f5;
+    background: linear-gradient(0.25turn, #daf4ff, #ebf8e1, #ffeedc);
+    border-radius: 3px;
 }
 
 .machine-row .col-lg-6 {
@@ -7,14 +8,14 @@
 }
 
 .machine-row .card-text {
-	color: #666;
+	color: rgb(105, 105, 105);
 	font-size: 16px;
 	text-align: justify;
 }
 
 .card {
-	border-radius: 0;
-	box-shadow: 0px 10px 10px #eee;
+	border-radius: 5px;
+	box-shadow: 0px 10px 10px rgb(217, 217, 217);
 }
 
 .card .card-title {
@@ -27,10 +28,13 @@
 .card .img-wrap {
 	height: 180px;
 	text-align: center;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 	display: flex;
 	align-items: center;
 	background-color: rgba(250, 243, 213, 0.125);
+    border-bottom: 2px solid black;
+    min-height: 3em;
+    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23cffffe' /%3E%3Cstop offset='25%25' stop-color='%23f9f7d9' /%3E%3Cstop offset='50%25' stop-color='%23fce2ce' /%3E%3Cstop offset='100%25' stop-color='%23ffc1f3' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3'/%3E %3C/svg%3E") 1;
+    background: linear-gradient(0.25turn, #daf4ff, #ebf8e1, #ffeedc);
 }
 
 .card .img-wrap img {
@@ -41,20 +45,32 @@
 	object-fit: cover;
 }
 
+.btn-primary {
+	border-radius: 3px;
+}
+
 .card .btn-primary {
 	font-weight: 600;
+    
 }
 
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
+.container-machine {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin-right: 230px;
+    margin-left: 225px;
+    padding-top: 10px;
+    padding-left: 150px;
+    padding-bottom: 10px;
+    padding-right: 50px;
+    min-height: 3em;
 }
 
-.container > div {
+.container-machine > div {
     flex: 50%; 
-    margin-bottom: 15px;
-    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 /*.news-info {

@@ -9,11 +9,11 @@ const MachineEngineering = () => {
   return (
     <>
     <section>
-      <div className="container overflow-hidden">
+      <div className="container-machine overflow-hidden">
         <div className="row g-3 machine-row">
           {machineData.map( (machine) => {
             return (
-              <div className="col-6" key={machine.id}>
+              <div className="col-lg-6" key={machine.id}>
                 <div className="card">
                   <div className="img-wrap">
                     <img src={machine.image1} alt="" />
