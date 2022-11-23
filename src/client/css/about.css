@@ -1,6 +1,5 @@
 .container {
     position: relative;
-    text-align: justify;
 }
 
 .bio {
@@ -18,15 +17,16 @@
 	margin-bottom: 20px;
     font-style: italic;
     color: rgb(18, 33, 75);
-    text-shadow: 5px 5px 10px blue;
+    text-shadow: 5px 5px 10px rgb(28, 60, 148);
+    text-decoration: rgb(98, 76, 164) solid underline;
+    text-underline-position: under;
 }
 
-.header-style::after {
-	position: absolute;
+.p-style {
+    color: rgb(4, 13, 38);
+    font-size: 18px;
+    text-align: justify;
+    font-weight: 600;
 	content: '';
-	width: 50px;
-	bottom: -6px;
-	height: 2px;
-	background-color: #666;
 	left: 0;
 }
