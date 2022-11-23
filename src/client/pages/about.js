@@ -10,7 +10,7 @@ const About = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4">
-                            <h2>Về Kubota</h2>
+                            <h2 className="header-style">Về Kubota</h2>
                             <p><strong> &nbsp; Th&aacute;ng 4 năm 2018 website: phutungkubota.vn được tạo ra c&ugrave;ng&nbsp;c&aacute;c t&ecirc;n miền đầy đủ: phutungkubota.com v&agrave; phutungkubota.com.vn.</strong></p>
 
                             <p><strong> &nbsp; Với kỳ vọng gi&uacute;p kh&aacute;ch h&agrave;ng sử dụng m&aacute;y n&ocirc;ng nghiệp mua được phụ t&ugrave;ng ch&iacute;nh h&atilde;ng từ Kubota Việt nam với những thao t&aacute;c đơn giản tr&ecirc;n điện thoại, m&aacute;y t&iacute;nh, hoặc Tivi c&oacute; kết nối internet...&nbsp;</strong></p>
@@ -21,7 +21,7 @@ const About = () => {
                         </div>
                         
                         <div className="col-lg-4">
-                            <h2>Các kho hàng</h2>
+                            <h2 className="header-style">Các kho hàng</h2>
                             <p><strong> &nbsp; Hiện tại ch&uacute;ng t&ocirc;i giao h&agrave;ng phụ t&ugrave;ng cho qu&yacute; kh&aacute;ch h&agrave;ng trực tiếp từ 1 trong 3 kho h&agrave;ng tại Bắc - Trung - Nam.</strong></p>
 
                             <p><strong> 1. B&ecirc;n C&aacute;t - B&igrave;nh Dương. - Kubota Việt Nam</strong></p>
@@ -38,7 +38,7 @@ const About = () => {
                         </div>
                         
                         <div className="col-lg-4">
-                            <h2>Chọn Kubota vì</h2>
+                            <h2 className="header-style">Chọn Kubota vì</h2>
                             <p><strong> &nbsp; Sản phẩm của ch&uacute;ng t&ocirc;i l&agrave;: 100% h&agrave;ng phụ t&ugrave;ng l&agrave; h&agrave;ng ch&iacute;nh h&atilde;ng kubota để đảm bảo chất lượng v&agrave; nhận diện h&agrave;ng h&oacute;a cho người sử dụng.&nbsp;</strong></p>
 
                             <p><strong> &nbsp; Phutungkubota.vn kho phụ t&ugrave;ng tr&ecirc;n tay của bạn!</strong></p>
