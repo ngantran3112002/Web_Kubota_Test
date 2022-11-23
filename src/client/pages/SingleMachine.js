@@ -31,7 +31,7 @@ const SingleMachine = () => {
                 </div>
             </div>
         </div>
-        <div className="container content">
+        <div className="container-machine">
             <div className="row">
                 <div>
                     <h5 className="header-content">{description1}</h5>
