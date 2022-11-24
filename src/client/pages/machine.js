@@ -23,7 +23,7 @@ const MachineEngineering = () => {
                     <p className="card-text">{machine.details1}</p>
                   </div>
                   <div className="d-flex justify-content-between align-items-center">
-                    <Link to = {`/machine/${machine.id}`} className="btn btn-primary btn-sm"> Xem thêm &rarr; </Link>
+                    <Link to = {`/machine/${machine.id}`} className="button btn-primary btn-sm"> Xem thêm &rarr; </Link>
                   </div>
                 </div>
               </div>
