@@ -10,14 +10,9 @@
     padding-right: 50px;
 }
 
-/* .btn-primary-sm {
+.btn-primary {
 	font-weight: 600;
-	margin-right: 0;
-    margin-left: auto;
-	font-weight: 600; 
-	background-color: rgb(66, 113, 213);
-	border: 2px solid #fffaa4;
-} */
+} 
 
 .breadcrumb {
 	margin-bottom: 0;

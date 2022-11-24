@@ -1,6 +1,7 @@
 .machine-row .card .card-body {
     background: linear-gradient(0.25turn, #8adcff,#a3e3ff, #bbebff, #e2f6ff,#fffff1, #ffffdf, #ffffbf, #ffffa3, #ffff92, #ffff8e);
     border-radius: 3px;
+    margin-bottom: 3px;
 }
 
 .machine-row .col-lg-6 {
@@ -50,8 +51,6 @@
 
 .btn-primary {
 	border-radius: 3px;
-    margin-right: 0;
-    margin-left: auto;
 }
 
 .card .btn-primary {
