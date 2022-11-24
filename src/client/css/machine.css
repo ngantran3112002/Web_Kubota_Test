@@ -1,5 +1,5 @@
 .machine-row .card .card-body {
-    background: linear-gradient(0.25turn, #daf4ff, #ebf8e1, #ffeedc);
+    background: linear-gradient(0.25turn, #8adcff,#a3e3ff, #bbebff, #e2f6ff,#fffff1, #ffffdf, #ffffbf, #ffffa3, #ffff92, #ffff8e);
     border-radius: 3px;
 }
 
@@ -8,14 +8,17 @@
 }
 
 .machine-row .card-text {
-	color: rgb(105, 105, 105);
+	color: rgb(82, 82, 82);
 	font-size: 16px;
 	text-align: justify;
+    font-weight: 400;
 }
 
 .card {
-	border-radius: 5px;
+	border-radius: 7px;
 	box-shadow: 0px 10px 10px rgb(217, 217, 217);
+    width: 600px;
+    height: 450px;
 }
 
 .card .card-title {
@@ -26,7 +29,7 @@
 }
 
 .card .img-wrap {
-	height: 180px;
+	height: 320px;
 	text-align: center;
 	display: flex;
 	align-items: center;
@@ -34,7 +37,7 @@
     border-bottom: 2px solid black;
     min-height: 3em;
     border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23cffffe' /%3E%3Cstop offset='25%25' stop-color='%23f9f7d9' /%3E%3Cstop offset='50%25' stop-color='%23fce2ce' /%3E%3Cstop offset='100%25' stop-color='%23ffc1f3' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3'/%3E %3C/svg%3E") 1;
-    background: linear-gradient(0.25turn, #daf4ff, #ebf8e1, #ffeedc);
+    background: linear-gradient(0.25turn, #daf4ff, #d0f0fe, #f6fcc7);
 }
 
 .card .img-wrap img {
@@ -52,20 +55,18 @@
 }
 
 .card .btn-primary {
-	font-weight: 600;
-    
+	font-weight: 600;  
 }
 
 .container-machine {
     position: relative;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin-right: 230px;
-    margin-left: 225px;
-    padding-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    margin-right: 100px;
+    margin-left: 45px;
     padding-left: 150px;
     padding-bottom: 10px;
-    padding-right: 50px;
+    padding-right: 30px;
     min-height: 3em;
 }
 
