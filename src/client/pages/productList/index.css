@@ -2,6 +2,19 @@
     width: 100%;
     margin: 0px;
 } */
+
+.card-item-custom:hover {
+    border-color: cadetblue !important;
+    border-width: 2px;
+}
+
+.ant-body-child-content {
+    padding: 8px;
+}
+.ant-card-body {
+    padding: 0px !important;
+}
+
 #pagination {
     text-align-last: center;
 } 
@@ -13,6 +26,11 @@
 .ant-list {
     width: 100% !important;
 }
+
+#right-panel {
+    flex-basis: min-content !important;
+}
+
 .ant-pagination-item-active {
     border-color: green !important;
 }
@@ -21,13 +39,64 @@
     height: 90%;
 }
 
-#category:nth-child(even) {
-    background: red;
-}
 .ant-list-header {
     background-color: #F7F7F7 !important;
 }
 
 ul.ant-list-items > li:nth-child(even){
     background: #F7F7F7 !important;
+}
+
+div.ant-spin-container > div.ant-row {
+    display: -webkit-inline-flex;
+    flex-wrap: wrap !important;
+    /* position: absolute; */
+    /* flex-flow: wrap !important; */
+}
+
+@media screen and (max-width: 768px) {
+    .ant-row {
+        display: block !important;
+    }
+  }
+
+div.ant-list-item {
+    padding: 4px;
+}
+
+.name {
+    font-size: 16px;
+}
+
+
+
+.price {
+    font-size: 22px;
+    color: brown;
+}
+
+
+.list-child {
+    /* border: 8px; */
+    border-width: 2px;
+}
+
+.listRow {
+    margin: 4px;
+    border-style: solid;
+    width: 100%;
+    border-width: 1px;
+    height: 240px;
+}
+
+/* List view */
+.ant-list-item-meta-title > a {
+    font-size: 24px;
+}
+.ant-list-item-meta-description {
+    font-size: 18px !important;
+}
+
+.listItem {
+    /* height: 25vH; */
 }

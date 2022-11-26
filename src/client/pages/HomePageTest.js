@@ -8,7 +8,8 @@ import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Login from "./Login";
 import Nav from "./Nav";
-import Product from "./product";
+import ProductList from "./productList";
+import ProductDetail from "./ProductDetail";
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
 import About from "./about";
@@ -114,7 +115,7 @@ const HomePageTest = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
 
-          <Route exact path="/products/:categoryId/" element={<ProductList  ></ProductList>} />
+          <Route exact path="/products/category/:categoryId" element={<ProductList  ></ProductList>} />
           <Route exact path="/products" element={<ProductList  ></ProductList>} />
           <Route exact path="/products/details/:id" element={<ProductDetail></ProductDetail>} />
           <Route exact path="/introduction" element={<HomePage />} />
