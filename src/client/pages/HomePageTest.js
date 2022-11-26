@@ -12,8 +12,7 @@ import ProductList from "./ProductList";
 import ProductDetail from "./ProductDetail/ProductDetail"
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
-
-
+import {CartContext } from './ProductDetail/cart'
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -99,9 +98,13 @@ const HomePageTest = () => {
               <Nav />
             </div>
             <div className={classes.rightTaskbar}>
+              <CartContext.Consumer>
+                {({addToCart}) =>(
               <button className={classes.btn} onClick={handleCartButton}>
-                GIỎ HÀNG
+                GIỎ HÀNG (cartItem.length)
               </button>
+                    )}
+            </CartContext.Consumer>
               <button className={classes.btn} onClick={handleLoginButton}>
                 ĐĂNG NHẬP
               </button>

@@ -12,13 +12,46 @@
     background-color: #40c0f0;
     width: 1.5rem;
 }
+
 .button.remove {
     background-color: #f04040;
     width: 1.5rem;
 }
+
 .button.badge {
     background-color: #f04040;
     border: none;
     color: #ffffff;
     width: 1.5rem;
+}
+._3-CbwQ {
+    font-size: 14px;
+    padding: 3px 6px;
+    max-width: 450px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: red;
+}
+._34CHXV {
+    color: #757575;
+    width: 110px;
+    text-transform: capitalize;
+    flex-shrink: 0;
+    align-items: center;
+}
+.label {
+    cursor: default;
+}
+.product_price {
+    font-size: 1.875rem;
+    font-weight: 500;
+    color: red;
+}
+
+.btn.btn-tinted {
+    position: relative;
+    overflow: visible;
+    outline: 0;
+    background: rgba(208,1,27,.08);
 }
