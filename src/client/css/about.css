@@ -1,0 +1,80 @@
+/* .container-about {
+     position: relative;
+    background-color: rgb(255, 252, 249);
+    background-color: rgb(247, 253, 255);
+    margin-top: 50px;
+    margin-bottom: 70px;
+    margin-right: 230px;
+    margin-left: 225px;
+    padding: 10px;
+    border: 10px solid black;
+    min-height: 3em;
+    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23cffffe' /%3E%3Cstop offset='25%25' stop-color='%23f9f7d9' /%3E%3Cstop offset='50%25' stop-color='%23fce2ce' /%3E%3Cstop offset='100%25' stop-color='%23ffc1f3' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='3'/%3E %3C/svg%3E") 1;
+    background: linear-gradient(to top, rgba(#cffffe, 0.3), rgba(#f9f7d9, 0.3), rgba(#fce2ce, 0.3), rgba(#ffc1f3, 0.3)); } */
+
+
+.header-style {
+	text-transform: uppercase;
+	font-size: 22px;
+	font-weight: 600;
+	padding-bottom: 10px;
+	position: relative;
+	margin-bottom: 20px;
+    font-style: italic;
+    color: rgb(18, 33, 75);
+    text-shadow: 5px 5px 10px #cffffe;
+    text-decoration: rgb(11, 33, 93) solid underline;
+    text-underline-position: under;
+}
+
+.p-style {
+    color: rgb(4, 13, 38);
+    font-size: 19px;
+    text-align: justify;
+    font-weight: 600;
+	content: '';
+	left: 0;
+}
+
+.gradient-border {
+    --borderWidth: 4px;
+    background: linear-gradient(60deg,#f7fcff, #fcfeff, #ffffff, #feffea, #feffe2) ;
+    position: relative;
+    border-radius: var(--borderWidth);
+  }
+.gradient-border:after {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    /* background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82); */
+    background: linear-gradient(60deg, #c17528, #f79533, #b69a00, #ddbc01, #ffdc15, #ffe030, #ffe138, #ffe659, #ffec7e, #ffef91, #9bbdff, #77a5ff, #548dff, #256dff, #1764ff, #0042c7, #0035a0, #002a7e, #021b4e, #22005a, #1d0541 );
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 3s ease alternate infinite;
+    background-size: 300% 300%;
+  }
+  
+  
+  @keyframes animatedgradient {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
+  
+#box {
+    position: relative;
+    margin-top: 35px;
+    margin-bottom: 40px;
+    margin-right: 200px;
+    margin-left: 200px;
+    padding: 10px;
+}

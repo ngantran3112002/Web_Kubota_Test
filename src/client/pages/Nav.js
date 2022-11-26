@@ -12,8 +12,6 @@ const Nav = () => {
     textDecoration: "underline",
   };
 
-  let activeClassName = "underline";
-
   return (
     <>
       <NavLink
@@ -33,7 +31,7 @@ const Nav = () => {
       </NavLink>
 
       <NavLink
-        to="/introduction"
+        to="/about"
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
         className={classes.link}
       >
