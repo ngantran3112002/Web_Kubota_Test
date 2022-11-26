@@ -47,7 +47,7 @@ const ListView = ({
             avatar={
               <Image
                 style={{ width: 300, height: 300 }}
-                src="https://via.placeholder.com/1000"
+                src="https://joeschmoe.io/api/v1/random"
               />
             }
             title={

@@ -100,3 +100,53 @@ div.ant-list-item {
 .listItem {
     /* height: 25vH; */
 }
+
+/* menu */
+#menu {
+
+}
+
+#menu > #view-option {
+    float: right;
+    position: relative;
+    right: 10px;
+    bottom: 6px;
+    
+    
+}
+
+#menu > #search-box {
+    float: left;
+    position: relative;
+    width: 100% !important;
+    -webkit-transition: width 0.4s ease-in-out !important;
+    transition: width 0.4s ease-in-out !important;
+    top: 24px;
+    left: 16px;
+}
+
+.ant-select:focus {
+    width: 150% !important;
+    background-color: antiquewhite !important;
+
+}
+
+.ant-select-selector:focus {
+    width: 150% !important;
+    background-color: antiquewhite !important;
+
+}
+
+.ant-select-auto-complete:focus {
+    background-color: antiquewhite;
+}
+
+#rc_select_0 {
+    background-color: aliceblue;
+
+}
+#rc_select_0:focus {
+    width: 150% !important;
+    background-color: antiquewhite;
+
+}

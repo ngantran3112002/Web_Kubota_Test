@@ -20,14 +20,14 @@ import {
   Divider,
   BackTop,
   Button,
-  Breadcrumb,
   Input,
   AutoComplete,
   Space,
-  SpinProps,
 } from "antd";
 import axios from "axios";
-import { BsChevronDoubleUp } from "react-icons/bs";
+import { BsChevronDoubleUp, BsCardList, BsGridFill } from "react-icons/bs";
+
+import { FaListUl, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ListView from "./ListView";
@@ -110,7 +110,7 @@ const ProductList = () => {
   //   console.log(autoCmp)
 
   useEffect(() => {
-    console.log("move here");
+    // console.log("move here");
     setLoading(true);
     console.log(loadingState);
     const page =
@@ -134,24 +134,10 @@ const ProductList = () => {
     // console.log(page)
   }, [searchParams, categoryId]);
 
-  const onChangeView = (e) => {
-    console.log(e.target.id);
-    if (e.target.id === "list") {
-      setTimeout(() => {
-        setGridView(false);
-        setLoading(true);
-        console.log(gridView);
-      }, 500);
-      setSearchParams({ page: currentPage, view: "list" });
-    } else {
-      setTimeout(() => {
-        setGridView(true);
-        setLoading(true);
-        console.log(gridView);
-      }, 500);
-      setSearchParams({ page: currentPage, view: "grid" });
-    }
-  };
+  useEffect(() => {
+    setLoading(false);
+  }, [gridView]);
+
   console.log(searchParams.toString());
   const onPageChange = (page) => {
     setSearchParams({ page: page });
@@ -159,14 +145,6 @@ const ProductList = () => {
 
   return (
     <>
-      <AutoComplete
-        options={autoCmp}
-        style={{ width: "20%" }}
-        filterOption={(inputValue, option) =>
-          option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-        }
-      />
-
       <Row>
         <Col id="left=panel" flex="20%">
           <LeftPanel category={category}></LeftPanel>
@@ -178,27 +156,67 @@ const ProductList = () => {
             "margin-top": "24px",
           }}
         >
-          <div>
-            <Space.Compact block>
-              <Button
-                id="list"
-                onClick={(e) => {
-                  onChangeView(e);
-                }}
-                type="primary"
+          <div id="menu">
+            <div id="search-box">
+              <AutoComplete
+                options={autoCmp}
+                // style={{ width: "40%" }}
+                filterOption={(inputValue, option) =>
+                  option.value
+                    .toUpperCase()
+                    .indexOf(inputValue.toUpperCase()) !== -1
+                }
+                dropdownStyle={{ minWidth: "21.5%" }}
               >
-                List
-              </Button>
-              <Button
-                id="grid"
-                onClick={(e) => {
-                  onChangeView(e);
-                }}
-                type="primary"
-              >
-                Grid
-              </Button>
-            </Space.Compact>
+                <Input
+                  id="search-box"
+                  size="large"
+                  // prefix={<FaSearch></FaSearch>}
+                  placeholder=" Tìm sản phẩm ở đây"
+                />
+              </AutoComplete>
+            </div>
+            <div id="view-option">
+              <Space.Compact block>
+                <Button
+                  id="list"
+                  style={
+                    gridView
+                      ? { background: "!important" }
+                      : { backgroundColor: "green" }
+                  }
+                  onClick={(e) => {
+                    if (gridView) {
+                      setLoading(true);
+                      setTimeout(() => {
+                        setGridView(false);
+                      }, 1000);
+                    }
+                  }}
+                >
+                  <FaListUl></FaListUl>
+                </Button>
+                <Button
+                  size="large"
+                  id="grid"
+                  style={
+                    !gridView
+                      ? { background: "transparent !important" }
+                      : { backgroundColor: "green" }
+                  }
+                  onClick={(e) => {
+                    if (!gridView) {
+                      setLoading(true);
+                      setTimeout(() => {
+                        setGridView(true);
+                      }, 1000);
+                    }
+                  }}
+                >
+                  <BsGridFill></BsGridFill>
+                </Button>
+              </Space.Compact>
+            </div>
             <Divider />
           </div>
           <Row>

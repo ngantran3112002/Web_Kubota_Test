@@ -57,7 +57,7 @@ const GridView = ({
             <Image
               style={{ width: "100%", borderRadius: 8 }}
               alt="example"
-              src="https://via.placeholder.com/1000"
+              src="https://joeschmoe.io/api/v1/random"
               preview={false}
             />
             <div className="ant-body-child-content">
