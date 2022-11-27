@@ -14,6 +14,7 @@ import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
 import About from "./about";
 import SingleMachine from "./SingleMachine";
+import {CartContext} from "./Cart";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -100,9 +101,13 @@ const HomePageTest = () => {
               <Nav />
             </div>
             <div className={classes.rightTaskbar}>
-              <button className={classes.btn} onClick={handleCartButton}>
-                GIỎ HÀNG
-              </button>
+              {/*<CartContext.Consumer>*/}
+              {/*  {({addToCart}) =>(*/}
+              {/*      <button className={classes.btn} onClick={handleCartButton}*/}
+              {/*        GIỎ HÀNG {cartItem.length}*/}
+              {/*      </button>*/}
+              {/*  )}*/}
+              {/*</CartContext.Consumer>*/}
               <button className={classes.btn} onClick={handleLoginButton}>
                 ĐĂNG NHẬP
               </button>
