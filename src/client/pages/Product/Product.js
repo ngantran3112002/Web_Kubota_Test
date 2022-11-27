@@ -17,7 +17,7 @@ const Product = ({id,name,src}) => {
                         style={{width: "100%",height:"100%"}}
                     />
                     <div className="single-content text-center hiii">
-                        <Link to= {name}> {name}> </Link>
+                        <Link to= {`/products/details/${name}`}> {name} </Link>
                     </div>
                 </a>
 

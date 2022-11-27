@@ -1,6 +1,7 @@
 import React from 'react';
-
-const Pagination = ({ postsPerPage, totalPosts, paginate, current }) => {
+import { Link } from 'react-router-dom';
+import { Pagination } from "antd";
+const Paginator = ({ postsPerPage, totalPosts, paginate, currentPage}) => {
     const pageNumbers = [];
 
     for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
@@ -11,13 +12,11 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, current }) => {
             <ul className='pagination'>
                 {pageNumbers.map(number => (
                     <li key={number} className='page-item'>
-                        <a onClick={() => paginate(number)} href={"/products/:page"} page = {current} className='page-link'>
-                            {number}
-                        </a>
+                        <Link  onClick={ () =>{ paginate(number)}} to= {`/products/${number}`} className='page-link'>{number}</Link>
                     </li>
                 ))}
             </ul>
         </nav>
     );
 };
-export default Pagination;
+export default Paginator;

@@ -2,17 +2,19 @@ import { faLocation, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useHistory} from "react-router-dom";
 import {useState} from "react";
 import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Login from "./Login";
 import Nav from "./Nav";
-import ProductList from "./ProductList";
-import ProductDetail from "./ProductDetail/ProductDetail"
+import ProductList from "./productList";
+import ProductDetail from "./ProductDetail";
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
-import {CartContext } from './ProductDetail/cart'
+import About from "./about";
+import SingleMachine from "./SingleMachine";
+
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -98,13 +100,9 @@ const HomePageTest = () => {
               <Nav />
             </div>
             <div className={classes.rightTaskbar}>
-              <CartContext.Consumer>
-                {({addToCart}) =>(
               <button className={classes.btn} onClick={handleCartButton}>
-                GIỎ HÀNG (cartItem.length)
+                GIỎ HÀNG
               </button>
-                    )}
-            </CartContext.Consumer>
               <button className={classes.btn} onClick={handleLoginButton}>
                 ĐĂNG NHẬP
               </button>
@@ -117,14 +115,16 @@ const HomePageTest = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
 
-          <Route exact path="/products/" element={<ProductList  ></ProductList>} />
-          <Route exact path="/products/:id" element={<ProductDetail></ProductDetail>} />
+          <Route exact path="/products/category/:categoryId" element={<ProductList  ></ProductList>} />
+          <Route exact path="/products" element={<ProductList  ></ProductList>} />
+          <Route exact path="/products/details/:id" element={<ProductDetail></ProductDetail>} />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/cart" element={<HomePage />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
-
+          <Route path="/machine/:machineId" element={<SingleMachine />} />
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </div>
     </div>
