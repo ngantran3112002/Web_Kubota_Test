@@ -10,6 +10,7 @@ import Nav from "./Nav";
 import Product from "./Product";
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
+import RegisterAccount from "./registerAccount";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -114,7 +115,7 @@ const HomePageTest = () => {
           <Route exact path="/cart" element={<HomePage />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
-
+          <Route exact path="/registerAccount" element={<RegisterAccount />} />
         </Routes>
       </div>
     </div>

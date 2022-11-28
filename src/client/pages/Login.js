@@ -16,8 +16,7 @@ const useStyles = makeStyles(() => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#eee',
-
+    backgroundColor: "#eee",
   },
 }));
 
@@ -75,7 +74,9 @@ const Login = () => {
       <div className="card">
         <div className="text">
           <h2>Đăng nhập tài khoản</h2>{" "}
-          <p>Enter your credentials to access your account.</p>
+          <p>
+            Nhập thông tin đăng nhập của bạn để truy cập vào tài khoản của bạn.
+          </p>
         </div>
         <form onSubmit={submitForm}>
           <div className="input-text">
@@ -108,33 +109,15 @@ const Login = () => {
           </div>
           <div className="forgot">
             <p>
-              Forgot your password? <a href="/forgotPassword">Reset Password</a>
+              Thay đổi mật khẩu? <a href="/forgotPassword">Change Password</a>
             </p>
+          </div>
+          <div className="register">
+            <p style={{ marginRight: "5px" }}>Bạn chưa có tài khoản?</p>
+            <a href="/registerAccount">Đăng kí tài khoản</a>
           </div>
         </form>
       </div>
-      {/* <div>
-        <Form>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-      </div> */}
     </div>
   );
 };

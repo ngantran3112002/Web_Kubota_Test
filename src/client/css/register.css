@@ -1,0 +1,26 @@
+label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.buttons button {
+  height: 45px;
+  width: 100%;
+  border: none;
+  background-color: #267fff;
+  border-radius: 9px;
+  font-size: 12px;
+  outline: 0;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.buttons button:hover {
+  background-color: #083c87;
+}
