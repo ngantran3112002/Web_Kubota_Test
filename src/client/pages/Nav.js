@@ -31,7 +31,7 @@ const Nav = () => {
       </NavLink>
 
       <NavLink
-        to="/introduction"
+        to="/about"
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
         className={classes.link}
       >

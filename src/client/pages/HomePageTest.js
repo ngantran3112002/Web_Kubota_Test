@@ -7,10 +7,12 @@ import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Login from "./Login";
 import Nav from "./Nav";
-import Product from "./Product";
+import Product from "./product";
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
 import RegisterAccount from "./registerAccount";
+import About from "./about";
+import SingleMachine from "./SingleMachine";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -116,6 +118,8 @@ const HomePageTest = () => {
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
           <Route exact path="/registerAccount" element={<RegisterAccount />} />
+          <Route path="/machine/:machineId" element={<SingleMachine />} />
+          <Route exact path="/about" element={<About />} />
         </Routes>
       </div>
     </div>
