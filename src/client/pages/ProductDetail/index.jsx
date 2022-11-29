@@ -9,15 +9,38 @@ import * as CurrencyFormat from 'react-currency-format';
 import {CartContext } from '../Cart'
 const ProductDetail = () => {
     const [value, setvalue] = useState(0)
-    function Carditem({value, onChange}) {
-        return (
-            <>
-            <Button onClick={()=>{onChange(value-1)}}>-</Button>
-            <span>{value}</span>
-            <Button onClick={()=>{onChange(value+1)}}>+</Button>
-        </>
-        )
+    // function Carditem({value, onChange}) {
+    //     return (
+    //         <>
+    //         <Button onClick={()=>{onChange(value-1)}}>-</Button>
+    //         <span>{value}</span>
+    //         <Button onClick={()=>{onChange(value+1)}}>+</Button>
+    //     </>
+    //     )
+    // }
+    const [cardItem, setcardItem] = useState(1)
+    const handleChange = event => {
+        let { value, min, max } = event.target;
+        value = Math.max(Number(min), Math.min(Number(max), Number(cardItem)));
+
+        this.setState({ cardItem });
+    };
+    const handleIncrease = () => {
+        setcardItem(cardItem + 1)
+
     }
+    const Increase = () => {
+        setcardItem(cardItem - 1)
+    }
+    const min = 1;
+    const max = 100;
+
+    const checkPrice = (cardItem) => {
+        if (cardItem > 0) {
+            return Promise.resolve();
+        }
+        return Promise.reject(new Error('Price must be greater than zero!'));
+    };
     var CurrencyFormat = require('react-currency-format');
     const [loading,setloading] = useState(false)
     const onButtonClick = (e) => {
@@ -51,7 +74,8 @@ const ProductDetail = () => {
 
         <div className="row f-flex justify-content-around" style={{display:"flex", left:"20px"}}>
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
-                <img src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg" alt="sdf" height="500" width="500" style={{position:"relative", left:"150px", top:"20px"}} />
+                <img src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg" alt="sdf" height="500" width="500"
+                     style={{position:"relative", left:"150px", top:"20px"}} />
             </div>
             <div className="col-12 col-lg-5 mt-5">
                 <h2>
@@ -86,22 +110,22 @@ const ProductDetail = () => {
                 </div>
                 </div>
                 <div className="stockCounter d-inline">
-                    <Form.Item
-                        required
-                        rules={[{
-                            validator(ruler,cardItem) {
-                                return new Promise((resolve, reject) => {
-                                    if (cardItem >= 0) {
-                                        resolve()
-                                    } else {
-                                        reject("Not found")
-                                    }
-                                })
-                            }
-                        }]}
-                        >
-                        <Carditem/>
-                </ Form.Item>
+                {/*    <Form.Item*/}
+                {/*        required*/}
+                {/*        rules={[{*/}
+                {/*            validator(ruler,cardItem) {*/}
+                {/*                return new Promise((resolve, reject) => {*/}
+                {/*                    if (cardItem >= 0) {*/}
+                {/*                        resolve()*/}
+                {/*                    } else {*/}
+                {/*                        reject("Not found")*/}
+                {/*                    }*/}
+                {/*                })*/}
+                {/*            }*/}
+                {/*        }]}*/}
+                {/*        >*/}
+                {/*        <Carditem/>*/}
+                {/*</ Form.Item>*/}
                 </div>
             {/*    <CartContext.Consumer>*/}
             {/*        {({addToCart}) =>(*/}
@@ -112,12 +136,34 @@ const ProductDetail = () => {
             {/*            onClick={()=>addToCart(ProductDetail)}*/}
             {/*        >Thêm vào giỏ hàng</Button>*/}
             {/*        )}*/}
+            {/*    <div class="TWC1HU shopee-input-quantity">*/}
+                    <button className="btn bg-danger minus"
+                        onClick={Increase}>-
+                    </button>
+                {/*<button className="btn bg-danger minus" onClick={Increase}>-</button>*/}
+                <Input type="number"
+                       onChange={handleChange}
+                       className="form-control count d-inline"
+                       value={cardItem}
+                       style={{width:"100px"}}
+                       min="1"
+                       max="250"
+                       // rules={[{ value: checkPrice }]}
+                />
+                <button className="btn btn-primary plus" onClick={handleIncrease}>+</button>
+            {/*</div>*/}
+                <Divider style={{borderColor:"white"}}/>
                 <Button
                    loading={loading}
                    icon={<AiOutlineShoppingCart/>}
                    class="btn btn-tinted btn--l vQ3lCI _8ULUF3"
                    onClick={onButtonClick}
-                   style={{paddingLeft:"20px",paddingRight:"20px",width:"217px",height:"46px", color:"red", backgroundColor:"rgba(208,1,27,0.08)", borderColor:"red"}}
+                   style={{paddingLeft:"20px",
+                       paddingRight:"20px",
+                       width:"217px",height:"46px",
+                       color:"red",
+                       backgroundColor:"rgba(208,1,27,0.08)",
+                       borderColor:"red"}}
                >Thêm vào giỏ hàng</Button>
             {/*</CartContext.Consumer>*/}
             </div>
