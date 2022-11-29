@@ -1,14 +1,20 @@
-
-import React from "react";
+import React, {useEffect} from "react";
 import "./ProductDetail.css";
 import { useState } from "react";
-import {Button, Divider, Form, Input, Rate, List, Avatar} from 'antd'
+import {Button, Divider, Form, List, Avatar, Input, Rate} from 'antd'
 import {AiOutlineShoppingCart} from "react-icons/ai";
 import "antd/dist/antd.css"
 import * as CurrencyFormat from 'react-currency-format';
-import {CartContext } from '../Cart'
+import {
+    useLocation,
+    useNavigate,
+    useParams,
+    useSearchParams,
+} from "react-router-dom";
+import axios from "axios";
+
 const ProductDetail = () => {
-    const [value, setvalue] = useState(0)
+    // const [value, setvalue] = useState(0)
     // function Carditem({value, onChange}) {
     //     return (
     //         <>
@@ -18,39 +24,6 @@ const ProductDetail = () => {
     //     </>
     //     )
     // }
-    const [cardItem, setcardItem] = useState(1)
-    const handleChange = event => {
-        let { value, min, max } = event.target;
-        value = Math.max(Number(min), Math.min(Number(max), Number(cardItem)));
-
-        this.setState({ cardItem });
-    };
-    const handleIncrease = () => {
-        setcardItem(cardItem + 1)
-
-    }
-    const Increase = () => {
-        setcardItem(cardItem - 1)
-    }
-    const min = 1;
-    const max = 100;
-
-    const checkPrice = (cardItem) => {
-        if (cardItem > 0) {
-            return Promise.resolve();
-        }
-        return Promise.reject(new Error('Price must be greater than zero!'));
-    };
-    var CurrencyFormat = require('react-currency-format');
-    const [loading,setloading] = useState(false)
-    const onButtonClick = (e) => {
-        console.log('Button clicked')
-        setloading(true)
-        setTimeout(() => {
-            setloading(false)
-
-        }, 2000);
-    }
     const data = [
         {
             title: 'Ant Design Title 1',
@@ -69,13 +42,56 @@ const ProductDetail = () => {
             description:'hihihihihi'
         },
     ];
+    const [cardItem, setcardItem] = useState(1)
+    // const handleChange = event => {
+    //     let { value, min, max } = event.target;
+    //     value = Math.max(Number(min), Math.min(Number(max), Number(cardItem)));
+    //
+    //     this.setState({ cardItem });
+    // };
+    const handleIncrease = () => {
+        setcardItem(cardItem + 1)
+
+    }
+    const Increase = () => {
+        setcardItem(cardItem - 1)
+    }
+    // const min = 1;
+    // const max = 100;
+
+    // const checkPrice = (cardItem) => {
+    //     if (cardItem > 0) {
+    //         return Promise.resolve();
+    //     }
+    //     return Promise.reject(new Error('Price must be greater than zero!'));
+    // };
+    // const prouctId = useParams();
+
+    //lấy data product từ backend
+    // useEffect(() => {
+    //     setTimeout(async () => {
+    //         await axios.get("")
+    //     }, 1000)
+    // })
+
+    var CurrencyFormat = require('react-currency-format');
+    const [loading,setloading] = useState(false)
+    const onButtonClick = (e) => {
+        console.log('Button clicked')
+        setloading(true)
+        setTimeout(() => {
+            setloading(false)
+
+        }, 2000);
+    }
 
     return (
-
-        <div className="row f-flex justify-content-around" style={{display:"flex", left:"20px"}}>
+        <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
+
                 <img src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg" alt="sdf" height="500" width="500"
                      style={{position:"relative", left:"150px", top:"20px"}} />
+
             </div>
             <div className="col-12 col-lg-5 mt-5">
                 <h2>
@@ -90,24 +106,25 @@ const ProductDetail = () => {
                 <hr />
                 <p>Write powerful product descriptions quickly with this easy to follow template and fill in the blank options to ensure you convert visitors into customers.</p>
                 <Divider style={{borderColor:"black"}}/>
-                <CurrencyFormat style = {{fontSize: "30px", color:"red"}} value={10000} displayType={'text'} thousandSeparator={true} prefix={'đ '} />
-
+                <CurrencyFormat style = {{fontSize: "30px", color:"red"}}
+                                value={10000}
+                                displayType={'text'}
+                                thousandSeparator={true} prefix={'đ '} />
                 <div className="flex VrhRS0" style={{display:"flex"}}>
                     <label className="_34CHXV">Deal Sốc</label>
                     <div className="_3-CbwQ">Mua để nhận quà</div>
                 </div>
-
                 <div className="flex tprdAj pN+gd-"style={{display:"flex",marginBottom:"20px"}}>
                     <label className="c27oHv">Vận chuyển</label>
                     <div className="FpxUz+ TKcfnJ">
                         <div className="qUe3y7">
                             <div className="C-UCH-" style={{marginLeft:"40px"}}>
                                 <img
-                                src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/1cdd37339544d858f4d0ade5723cd477.png"
-                                width="25" height="15" className="k0LUJt"/>Miễn phí vận chuyển
+                                    src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/1cdd37339544d858f4d0ade5723cd477.png"
+                                    width="25" height="15" className="k0LUJt"/>Miễn phí vận chuyển
                             </div>
                         </div>
-                </div>
+                    </div>
                 </div>
                 <div className="stockCounter d-inline">
                 {/*    <Form.Item*/}
@@ -142,7 +159,7 @@ const ProductDetail = () => {
                     </button>
                 {/*<button className="btn bg-danger minus" onClick={Increase}>-</button>*/}
                 <Input type="number"
-                       onChange={handleChange}
+                       // onChange={handleChange}
                        className="form-control count d-inline"
                        value={cardItem}
                        style={{width:"100px"}}
@@ -163,9 +180,10 @@ const ProductDetail = () => {
                        width:"217px",height:"46px",
                        color:"red",
                        backgroundColor:"rgba(208,1,27,0.08)",
-                       borderColor:"red"}}
-               >Thêm vào giỏ hàng</Button>
-            {/*</CartContext.Consumer>*/}
+                       borderColor:"red"}}>
+                    Thêm vào giỏ hàng
+                </Button>
+
             </div>
             {/*<Divider style={{borderColor:"red"}}/>*/}
             <Divider style={{borderColor:"gray"}}/>
@@ -182,9 +200,8 @@ const ProductDetail = () => {
                     </List.Item>
                 )}
             />
-
-
         </div>
+
 
     )
 }
