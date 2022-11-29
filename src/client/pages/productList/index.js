@@ -1,39 +1,29 @@
+import "antd/dist/antd.min.css";
 import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap-grid.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import * as queryString from "query-string";
+import * as _ from "lodash";
+
 import "./index.css";
+// import 'antd/dist/antd.less';
 import GridView from "./GridView";
 import {
+  useLocation,
+  useNavigate,
   useParams,
   useSearchParams,
-  createSearchParams,
 } from "react-router-dom";
-import "antd/dist/antd.css";
-import {
-  Pagination,
-  Card,
-  Row,
-  Col,
-  List,
-  Layout,
-  Image,
-  Divider,
-  BackTop,
-  Button,
-  Input,
-  AutoComplete,
-  Space,
-} from "antd";
+import { Row, Col, BackTop, Button } from "antd";
 import axios from "axios";
-import { BsChevronDoubleUp, BsCardList, BsGridFill } from "react-icons/bs";
+import { BsChevronDoubleUp, BsGridFill } from "react-icons/bs";
 
-import { FaListUl, FaSearch } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import ListView from "./ListView";
 import LeftPanel from "./LeftPanel";
+import TopMenu from "./TopMenu";
 
-const { Search } = Input;
+import { CartContext } from "../../context";
+import { useContext } from "react";
+import { LoadingContext } from "react-router-loading";
+
 
 const ProductList = () => {
   // const product = [
@@ -65,6 +55,12 @@ const ProductList = () => {
   //         src: "http://phutungkubota.vn/Uploads/20160830080604_QYJQ-5.png"
   //     },
   // ];
+  const context = useContext(CartContext);
+  const loadingContext = useContext(LoadingContext)
+  const { categoryId } = useParams();
+  const currentSearchParams = useLocation();
+  const navigate = useNavigate();
+
   const [product, setProduct] = useState([{}]);
   const [category, setCategory] = useState([{}]);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -73,15 +69,17 @@ const ProductList = () => {
   const [autoCmp, setAutoCmp] = useState([{}]);
   const [gridView, setGridView] = useState(true);
   const [loadingState, setLoading] = useState(true);
+  const [addToCartProduct, setAddToCartProduct] = [{}];
 
-  let navigate = useNavigate();
-  const { categoryId } = useParams();
+  const addToCart = (addToCartProduct) => {
+    context.setCartList([addToCartProduct, ...context.cartList]);
+  };
 
   useEffect(() => {
-    setLoading(true);
+    // setLoading(true);
     let endPoint = [
       "http://localhost:5000/category/alltest",
-      "http://localhost:5000/product/pagetest",
+      "http://localhost:5000/product/pagetest/1",
       "http://localhost:5000/product/alltest",
     ];
     setTimeout(() => {
@@ -100,48 +98,66 @@ const ProductList = () => {
             );
             setTotalPage(allProd.data.total);
             setLoading(false);
+            loadingContext.done()
           })
         );
       };
       fetchData();
     }, 1000);
   }, []);
-  // console.log(.getAll);
-  //   console.log(autoCmp)
 
-  useEffect(() => {
-    // console.log("move here");
-    setLoading(true);
-    console.log(loadingState);
+  const fetchChange = async (categoryId) => {
     const page =
       searchParams.get("page") === null ? 1 : searchParams.get("page");
-    setCurrentPage(page);
+      setCurrentPage(page);
+    const query = queryString.stringify(
+      { categoryId: categoryId,  sort_by: searchParams.get("sort_by")},
+      { skipNull: true }
+    );
+    console.log(currentSearchParams.search)
+    console.log(searchParams.get("sort_by"))
+    await axios
+      .get(`http://localhost:5000/product/pagetest/${page}?` + query)
+      .then((res) => {
+        setProduct(res.data.data);
+        setTotalPage(res.data.total);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    setLoading(true);
     setTimeout(() => {
-      const fetchChange = async (page, categoryId) => {
-        await axios
-          .get(
-            `http://localhost:5000/product/pagetest?page=${page}&category=${categoryId}`
-          )
-          .then((res) => {
-            setProduct(res.data.data);
-            setTotalPage(res.data.total);
-            console.log("params ", loadingState);
-            setLoading(false);
-          });
-      };
-      fetchChange(page, categoryId);
+      fetchChange(categoryId);
     }, 1000);
-    // console.log(page)
   }, [searchParams, categoryId]);
 
   useEffect(() => {
     setLoading(false);
   }, [gridView]);
 
-  console.log(searchParams.toString());
   const onPageChange = (page) => {
-    setSearchParams({ page: page });
+    const newQuery = queryString.parse(currentSearchParams.search);
+    setSearchParams({ ...newQuery, page: page });
   };
+
+  const onFilterChange = (option) => {
+    const queryParams = queryString.parse(currentSearchParams.search);
+    const newQuery = {...queryParams, sort_by: option}
+
+    console.log(`${currentSearchParams.pathname}` +'?'+ queryString.stringify(newQuery));
+    navigate({
+      pathname: currentSearchParams.pathname,
+      search: '?'+ queryString.stringify(newQuery)
+    })
+  };
+
+  const onSelect = (value) => {
+    const productId = _.find(autoCmp, {name: value}).productId;
+    navigate({
+      pathname: `/products/details/${productId}`
+    })
+  }
 
   return (
     <>
@@ -153,72 +169,19 @@ const ProductList = () => {
           id="right-panel"
           flex="auto"
           style={{
-            "margin-top": "24px",
+            marginTop: "24px",
           }}
         >
-          <div id="menu">
-            <div id="search-box">
-              <AutoComplete
-                options={autoCmp}
-                // style={{ width: "40%" }}
-                filterOption={(inputValue, option) =>
-                  option.value
-                    .toUpperCase()
-                    .indexOf(inputValue.toUpperCase()) !== -1
-                }
-                dropdownStyle={{ minWidth: "21.5%" }}
-              >
-                <Input
-                  id="search-box"
-                  size="large"
-                  // prefix={<FaSearch></FaSearch>}
-                  placeholder=" Tìm sản phẩm ở đây"
-                />
-              </AutoComplete>
-            </div>
-            <div id="view-option">
-              <Space.Compact block>
-                <Button
-                  id="list"
-                  style={
-                    gridView
-                      ? { background: "!important" }
-                      : { backgroundColor: "green" }
-                  }
-                  onClick={(e) => {
-                    if (gridView) {
-                      setLoading(true);
-                      setTimeout(() => {
-                        setGridView(false);
-                      }, 1000);
-                    }
-                  }}
-                >
-                  <FaListUl></FaListUl>
-                </Button>
-                <Button
-                  size="large"
-                  id="grid"
-                  style={
-                    !gridView
-                      ? { background: "transparent !important" }
-                      : { backgroundColor: "green" }
-                  }
-                  onClick={(e) => {
-                    if (!gridView) {
-                      setLoading(true);
-                      setTimeout(() => {
-                        setGridView(true);
-                      }, 1000);
-                    }
-                  }}
-                >
-                  <BsGridFill></BsGridFill>
-                </Button>
-              </Space.Compact>
-            </div>
-            <Divider />
-          </div>
+          <TopMenu
+            currentPage={currentPage}
+            currentSearchParams={currentSearchParams}
+            autoCmp={autoCmp}
+            gridView={gridView}
+            setGridView={setGridView}
+            setLoading={setLoading}
+            onFilterChange={onFilterChange}
+            onSelect={onSelect}
+          />
           <Row>
             <>
               {gridView ? (
@@ -228,6 +191,9 @@ const ProductList = () => {
                   currentPage={currentPage}
                   totalPage={totalPage}
                   onPageChange={onPageChange}
+                  addToCart={addToCart}
+                  itemObj={addToCartProduct}
+                  setAddToCartProduct={setAddToCartProduct}
                 />
               ) : (
                 <ListView
@@ -247,8 +213,8 @@ const ProductList = () => {
           type="primary"
           style={{
             borderRadius: "50%",
-            height: 50,
-            width: 50,
+            height: "50px",
+            width: "50px",
             backgroundColor: "green",
           }}
         >

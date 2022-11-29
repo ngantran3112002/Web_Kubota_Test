@@ -11,18 +11,20 @@
 .ant-body-child-content {
     padding: 8px;
 }
+
 .ant-card-body {
     padding: 0px !important;
 }
 
 #pagination {
     text-align-last: center;
-} 
+}
 
 .ant-card-meta-title {
     white-space: pre-line !important;
     font-size: small !important;
 }
+
 .ant-list {
     width: 100% !important;
 }
@@ -34,6 +36,7 @@
 .ant-pagination-item-active {
     border-color: green !important;
 }
+
 .row {
     /* width: 110% !important; */
     height: 90%;
@@ -43,11 +46,11 @@
     background-color: #F7F7F7 !important;
 }
 
-ul.ant-list-items > li:nth-child(even){
+ul.ant-list-items>li:nth-child(even) {
     background: #F7F7F7 !important;
 }
 
-div.ant-spin-container > div.ant-row {
+div.ant-spin-container>div.ant-row {
     display: -webkit-inline-flex;
     flex-wrap: wrap !important;
     /* position: absolute; */
@@ -58,7 +61,7 @@ div.ant-spin-container > div.ant-row {
     .ant-row {
         display: block !important;
     }
-  }
+}
 
 div.ant-list-item {
     padding: 4px;
@@ -90,63 +93,16 @@ div.ant-list-item {
 }
 
 /* List view */
-.ant-list-item-meta-title > a {
+.ant-list-item-meta-title>a {
     font-size: 24px;
 }
+
 .ant-list-item-meta-description {
     font-size: 18px !important;
 }
 
-.listItem {
-    /* height: 25vH; */
+input {
+    background-color: red !important;
 }
 
 /* menu */
-#menu {
-
-}
-
-#menu > #view-option {
-    float: right;
-    position: relative;
-    right: 10px;
-    bottom: 6px;
-    
-    
-}
-
-#menu > #search-box {
-    float: left;
-    position: relative;
-    width: 100% !important;
-    -webkit-transition: width 0.4s ease-in-out !important;
-    transition: width 0.4s ease-in-out !important;
-    top: 24px;
-    left: 16px;
-}
-
-.ant-select:focus {
-    width: 150% !important;
-    background-color: antiquewhite !important;
-
-}
-
-.ant-select-selector:focus {
-    width: 150% !important;
-    background-color: antiquewhite !important;
-
-}
-
-.ant-select-auto-complete:focus {
-    background-color: antiquewhite;
-}
-
-#rc_select_0 {
-    background-color: aliceblue;
-
-}
-#rc_select_0:focus {
-    width: 150% !important;
-    background-color: antiquewhite;
-
-}

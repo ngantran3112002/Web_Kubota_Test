@@ -1,0 +1,86 @@
+
+.popup {
+    width: 160%;
+}
+
+
+
+#menu>#view-option {
+    float: right;
+    position: relative;
+    right: 10px;
+    bottom: 24px;
+
+
+}
+
+#menu>#search-box {
+    float: left;
+    position: relative;
+    width: 120% !important;
+    -webkit-transition: width 0.4s ease-in-out !important;
+    transition: width 0.4s ease-in-out !important;
+    /* top: 24px; */
+    /* left: 16px; */
+}
+.ant-select-selector {
+    width: 130%;
+}
+
+/* .ant-select:focus {
+    width: 150% !important;
+    background-color: antiquewhite !important;
+
+}
+
+.ant-select-selector:focus {
+    width: 150% !important;
+    background-color: antiquewhite !important;
+
+} */
+
+/* .ant-select-auto-complete:focus {
+    background-color: antiquewhite;
+} */
+
+/* search box*/
+span.ant-select-selection-search > input[id^='rc_select'] {
+    background-color: aliceblue !important;
+
+}
+
+/* span.ant-select-selection-search>input {
+    background-color: aqua;
+
+} */
+span.ant-select-selection-search >input[id^='rc_select']:focus {
+    width: 160% !important;
+    background-color: antiquewhite !important;
+
+}
+
+/* filter */
+#menu>#filter {
+    display: inline-block;
+    position: relative;
+
+}
+
+.ant-space-item > #filter {
+    width: max-content;
+    padding: 6px;
+    background-color: beige;
+}
+
+.ant-space-item > #filter:hover {
+    width: max-content;
+    padding: 6px;
+    background-color: bisque;
+    border-color:cadetblue
+}
+
+.ant-space-item > #filter {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+}

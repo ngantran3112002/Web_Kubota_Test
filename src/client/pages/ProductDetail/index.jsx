@@ -127,60 +127,60 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className="stockCounter d-inline">
-                {/*    <Form.Item*/}
-                {/*        required*/}
-                {/*        rules={[{*/}
-                {/*            validator(ruler,cardItem) {*/}
-                {/*                return new Promise((resolve, reject) => {*/}
-                {/*                    if (cardItem >= 0) {*/}
-                {/*                        resolve()*/}
-                {/*                    } else {*/}
-                {/*                        reject("Not found")*/}
-                {/*                    }*/}
-                {/*                })*/}
-                {/*            }*/}
-                {/*        }]}*/}
-                {/*        >*/}
-                {/*        <Carditem/>*/}
-                {/*</ Form.Item>*/}
+                    {/*    <Form.Item*/}
+                    {/*        required*/}
+                    {/*        rules={[{*/}
+                    {/*            validator(ruler,cardItem) {*/}
+                    {/*                return new Promise((resolve, reject) => {*/}
+                    {/*                    if (cardItem >= 0) {*/}
+                    {/*                        resolve()*/}
+                    {/*                    } else {*/}
+                    {/*                        reject("Not found")*/}
+                    {/*                    }*/}
+                    {/*                })*/}
+                    {/*            }*/}
+                    {/*        }]}*/}
+                    {/*        >*/}
+                    {/*        <Carditem/>*/}
+                    {/*</ Form.Item>*/}
                 </div>
-            {/*    <CartContext.Consumer>*/}
-            {/*        {({addToCart}) =>(*/}
-            {/*            <Button*/}
-            {/*            loading={loading}*/}
-            {/*            icon={<AiOutlineShoppingCart/>}*/}
-            {/*            class="btn btn-tinted btn--l vQ3lCI _8ULUF3"*/}
-            {/*            onClick={()=>addToCart(ProductDetail)}*/}
-            {/*        >Thêm vào giỏ hàng</Button>*/}
-            {/*        )}*/}
-            {/*    <div class="TWC1HU shopee-input-quantity">*/}
-                    <button className="btn bg-danger minus"
+                {/*    <CartContext.Consumer>*/}
+                {/*        {({addToCart}) =>(*/}
+                {/*            <Button*/}
+                {/*            loading={loading}*/}
+                {/*            icon={<AiOutlineShoppingCart/>}*/}
+                {/*            class="btn btn-tinted btn--l vQ3lCI _8ULUF3"*/}
+                {/*            onClick={()=>addToCart(ProductDetail)}*/}
+                {/*        >Thêm vào giỏ hàng</Button>*/}
+                {/*        )}*/}
+                {/*    <div class="TWC1HU shopee-input-quantity">*/}
+                <button className="btn bg-danger minus"
                         onClick={Increase}>-
-                    </button>
+                </button>
                 {/*<button className="btn bg-danger minus" onClick={Increase}>-</button>*/}
                 <Input type="number"
-                       // onChange={handleChange}
+                    // onChange={handleChange}
                        className="form-control count d-inline"
                        value={cardItem}
                        style={{width:"100px"}}
                        min="1"
                        max="250"
-                       // rules={[{ value: checkPrice }]}
+                    // rules={[{ value: checkPrice }]}
                 />
                 <button className="btn btn-primary plus" onClick={handleIncrease}>+</button>
-            {/*</div>*/}
+                {/*</div>*/}
                 <Divider style={{borderColor:"white"}}/>
                 <Button
-                   loading={loading}
-                   icon={<AiOutlineShoppingCart/>}
-                   class="btn btn-tinted btn--l vQ3lCI _8ULUF3"
-                   onClick={onButtonClick}
-                   style={{paddingLeft:"20px",
-                       paddingRight:"20px",
-                       width:"217px",height:"46px",
-                       color:"red",
-                       backgroundColor:"rgba(208,1,27,0.08)",
-                       borderColor:"red"}}>
+                    loading={loading}
+                    icon={<AiOutlineShoppingCart/>}
+                    class="btn btn-tinted btn--l vQ3lCI _8ULUF3"
+                    onClick={onButtonClick}
+                    style={{paddingLeft:"20px",
+                        paddingRight:"20px",
+                        width:"217px",height:"46px",
+                        color:"red",
+                        backgroundColor:"rgba(208,1,27,0.08)",
+                        borderColor:"red"}}>
                     Thêm vào giỏ hàng
                 </Button>
 
