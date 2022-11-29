@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap-grid.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from "react";
 import "../index.css";
-import {
-  useParams,
-  useSearchParams,
-  createSearchParams,
-} from "react-router-dom";
-import "antd/dist/antd.css";
-import { Pagination, List, Image, Row, Col } from "antd";
-import axios from "axios";
+import 'antd/dist/antd.css';
+
+import { Pagination, List, Image} from "antd";
 import CurrencyFormat from "react-currency-format";
 import { Link } from "react-router-dom";
 

@@ -2,8 +2,9 @@ import { faLocation, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import { Route, Routes, useNavigate, useHistory} from "react-router-dom";
-import {useState} from "react";
+import {  useNavigate, useHistory } from "react-router-dom";
+import { Routes, Route } from "react-router-loading";
+import { useState } from "react";
 import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Login from "./Login";
@@ -14,7 +15,9 @@ import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
 import About from "./about";
 import SingleMachine from "./SingleMachine";
-import {CartContext} from "./Cart";
+import { useContext } from "react";
+import { CartContext } from "../context";
+import 'antd/dist/antd.css';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -63,7 +66,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const HomePageTest = () => {
-
+  const context = useContext(CartContext)
 
   const navigate = useNavigate();
   const classes = useStyles();
@@ -76,6 +79,7 @@ const HomePageTest = () => {
     navigate("/cart", { replace: true });
   };
   return (
+
     <div className={classes.container}>
       <div className={classes.header}>
         <div className={classes.logo}>
@@ -101,13 +105,9 @@ const HomePageTest = () => {
               <Nav />
             </div>
             <div className={classes.rightTaskbar}>
-              {/*<CartContext.Consumer>*/}
-              {/*  {({addToCart}) =>(*/}
-              {/*      <button className={classes.btn} onClick={handleCartButton}*/}
-              {/*        GIỎ HÀNG {cartItem.length}*/}
-              {/*      </button>*/}
-              {/*  )}*/}
-              {/*</CartContext.Consumer>*/}
+              <button className={classes.btn} onClick={handleCartButton}>
+                {context.cartList.length}
+              </button>
               <button className={classes.btn} onClick={handleLoginButton}>
                 ĐĂNG NHẬP
               </button>
@@ -120,8 +120,8 @@ const HomePageTest = () => {
         <Routes>
           <Route exact path="/" element={<HomePage />} />
 
-          <Route exact path="/products/category/:categoryId" element={<ProductList  ></ProductList>} />
-          <Route exact path="/products" element={<ProductList  ></ProductList>} />
+          <Route exact path="/products/category/:categoryId" element={<ProductList  ></ProductList>} loading/>
+          <Route exact path="/products" element={<ProductList  ></ProductList>} loading/>
           <Route exact path="/products/details/:id" element={<ProductDetail></ProductDetail>} />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
@@ -133,6 +133,7 @@ const HomePageTest = () => {
         </Routes>
       </div>
     </div>
+
   );
 };
 

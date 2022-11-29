@@ -6,18 +6,18 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
+import { CartProvider } from "./client/context";
 import HomePageTest from "./client/pages/HomePageTest";
+import 'antd/dist/antd.css';
 // import ProductList from "./client/pages/productList/ProductList"
 ReactDOM.render(
   <React.StrictMode>
-    {/* <BrowserRouter>
-      <Routes>
-        <Route path={"/"} element={<HomePage />}></Route>
-        <Route path={"/san-pham"} element={<Product />}></Route>
-      </Routes>
-    </BrowserRouter> */}
+
     <BrowserRouter>
-      <HomePageTest />
+      <CartProvider>
+
+        <HomePageTest />
+      </CartProvider>
       {/*  <ProductList></ProductList>*/}
     </BrowserRouter>
   </React.StrictMode>,

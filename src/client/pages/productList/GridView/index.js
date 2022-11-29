@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "bootstrap/dist/css/bootstrap-grid.css";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, {  } from "react";
+import { ReactDOM } from "react";
 import "../index.css";
-import {
-  useParams,
-  useSearchParams,
-  createSearchParams,
-} from "react-router-dom";
-import "antd/dist/antd.css";
-import { Pagination, Card, List, Image } from "antd";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import 'antd/dist/antd.min.css';
+import { Pagination, Card, List, Image, Button, Empty} from "antd";
 import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
@@ -20,9 +12,14 @@ const GridView = ({
   totalPage,
   loadingState,
   onPageChange,
-}) => (
-  <List
-    loading={loadingState ? true : false}
+  addToCart,
+}) => {
+
+
+
+  return (
+    <List
+    loading={loadingState}
     size={"small"}
     className={"ant-row-List"}
     itemLayout="verticle"
@@ -38,26 +35,25 @@ const GridView = ({
         total={totalPage}
         onChange={(page, newPageSize) => {
           onPageChange(page);
-          //   setParams({ page: page });
-          //   setLoading(true);
-          console.log("pag grid ", loadingState);
-          // window.location.reload();
+            
         }}
       ></Pagination>
     }
     renderItem={(item) => (
       <List.Item>
         <Card
-          style={{ width: "100%", borderRadius: 8 }}
+          loading = {loadingState}
+          style={{ width: "100%", borderRadius: "8" }}
           className="card-item-custom"
           hoverable
-          // cover={<img alt="example" src="https://via.placeholder.com/1000"/>}
+        // cover={<img alt="example" src="https://via.placeholder.com/1000"/>}
         >
           <div className="list-child">
             <Image
-              style={{ width: "100%", borderRadius: 8 }}
+              style={{ maxWidth: "100%", height: "300px", objectFit: "fill" }}
               alt="example"
               src="https://joeschmoe.io/api/v1/random"
+              // src="https://via.placeholder.com/1000"
               preview={false}
             />
             <div className="ant-body-child-content">
@@ -71,12 +67,17 @@ const GridView = ({
                 prefix={"đ"}
                 renderText={(value) => <p className="price">{value}</p>}
               />
+              <Button value={item} type="primary" onClick={e => {
+                addToCart(item)
+              }}>Thêm vào giỏ hàng</Button>
             </div>
           </div>
         </Card>
       </List.Item>
     )}
   />
-);
+  )
+}
+  
 
 export default GridView;
