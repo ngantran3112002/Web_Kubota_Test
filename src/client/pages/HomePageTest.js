@@ -104,7 +104,7 @@ const HomePageTest = () => {
                         </div>
                         <div className={classes.rightTaskbar}>
                             <button className={classes.btn} onClick={handleCartButton}>
-                                {context.cartList.length}
+                                {context.cartList.length === 0 ? "Giỏ hàng" : `Giỏ hàng(${context.cartList.length})`}
                             </button>
                             <button className={classes.btn} onClick={handleLoginButton}>
                                 ĐĂNG NHẬP
@@ -117,7 +117,6 @@ const HomePageTest = () => {
             <div className={classes.content}>
                 <Routes>
                     <Route exact path="/" element={<HomePage/>}/>
-
                     <Route exact path="/products/category/:categoryId" element={<ProductList></ProductList>} loading/>
                     <Route exact path="/products" element={<ProductList></ProductList>} loading/>
                     <Route exact path="/products/details/:productId" element={<ProductDetail></ProductDetail>} loading/>

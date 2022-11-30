@@ -78,3 +78,13 @@
     font-size: 30px!important;
     color: red!important;
 }
+
+#productImage {
+    width: 500px;
+    height: 500px;
+}
+
+#productImage > .ant-image-img {
+    width: 100%;
+    height: 100%;
+}
