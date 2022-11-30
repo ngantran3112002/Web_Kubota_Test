@@ -1,0 +1,91 @@
+
+/*list item list view*/
+.listItem {
+    width: 99% !important;
+    margin-bottom: 8px !important;
+    /*margin-right: 24px !important;*/
+    height: 280px;
+    border: 1px solid #DFDFDF;
+    border-radius: 8px;
+    padding: 2px !important;
+}
+
+.listItem:hover {
+    background-color: #F4FAF8;
+    border-color: #98A09E;
+}
+
+/*product Name*/
+
+#listItemMiddle {
+    width: 70%;
+}
+a.name {
+    font-size: 20px;
+    color: #09157B;
+    /*color: red !important;*/
+    /*width: 70%;*/
+    /*display: flex;*/
+}
+
+/*description*/
+.ant-space-item> p {
+    font-size: 18px;
+    word-break: break-all;
+    margin-bottom: 0;
+    margin-right: 40px;
+    color: #4C519E;
+    /*width: 70%;*/
+    /*display: flex;*/
+}
+
+/*.ant-space-item:has(> #listItemMiddle) {*/
+/*    width: 60%;*/
+/*}*/
+/*image*/
+.listItem > .ant-space > .ant-space-item {
+    height: 100%;
+}
+.ant-image:has(.listImage) {
+    /*width: 100%;*/
+    height: 100%;
+}
+.listCompact > .ant-image {
+    width: 40%;
+}
+
+.listImage {
+    width: 100%;
+    height: 100%;
+    max-width: 300px;
+    max-height: 275px;
+    border-radius: 4px;
+}
+
+/*in the middle*/
+#listItemMiddle {
+    width: 100%;
+    margin-right: 24px;
+    margin-left: 12px;
+}
+/*.listCompact > #listItemMiddle {*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*    max-width: 100%;*/
+/*}*/
+
+/*price*/
+p.price {
+    margin-bottom: 0;
+}
+
+
+.ant-space-item {
+    width: 100%;
+    /*height: 100%;*/
+}
+
+.listCompact {
+    width: 100%;
+    height: 100%;
+}

@@ -8,10 +8,10 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { CartProvider } from "./client/context";
 import HomePageTest from "./client/pages/HomePageTest";
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 // import ProductList from "./client/pages/productList/ProductList"
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
 
     <BrowserRouter>
       <CartProvider>
@@ -19,8 +19,8 @@ ReactDOM.render(
         <HomePageTest />
       </CartProvider>
       {/*  <ProductList></ProductList>*/}
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 

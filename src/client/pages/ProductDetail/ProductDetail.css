@@ -58,13 +58,13 @@
 ._8ULUF3 {
     background: red;
 }
-.ant-spin-container {
-    left: 200px;
-}
-.ant-list-item {
-    min-height: 200px;
-    width: 75%;
-}
+/*.ant-spin-container {*/
+/*    left: 200px;*/
+/*}*/
+/*.ant-list-item {*/
+/*    min-height: 200px;*/
+/*    width: 75%;*/
+/*}*/
 .col-12 col-lg-5 img-fluid {
     padding-right: 0;
 }

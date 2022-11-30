@@ -1,6 +1,7 @@
 
 .popup {
     width: 160%;
+    border-radius: 8px;
 }
 
 
@@ -10,7 +11,7 @@
     position: relative;
     right: 10px;
     bottom: 24px;
-
+    margin-right: 12px;
 
 }
 
@@ -83,4 +84,8 @@ span.ant-select-selection-search >input[id^='rc_select']:focus {
     border-style: solid;
     border-width: 1px;
     border-radius: 4px;
+}
+
+.ant-space-item > #viewOption {
+    margin-right: 16px;
 }

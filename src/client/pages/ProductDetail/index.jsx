@@ -1,19 +1,24 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./ProductDetail.css";
 import { useState } from "react";
 import {Button, Divider, Form, List, Avatar, Input, Rate} from 'antd'
 import {AiOutlineShoppingCart} from "react-icons/ai";
+import {Divider, Form, Rate} from 'antd'
 import "antd/dist/antd.css"
 import * as CurrencyFormat from 'react-currency-format';
-import {
-    useLocation,
-    useNavigate,
-    useParams,
-    useSearchParams,
-} from "react-router-dom";
+import {useParams,} from "react-router-dom";
+import {CartContext} from "../../context";
+import {LoadingContext} from "react-router-loading";
 import axios from "axios";
 
 const ProductDetail = () => {
+    const context = useContext(CartContext);
+    const loadingContext = useContext(LoadingContext)
+
+
+    const [value, setvalue] = useState(0)
+    const [product, setProduct] = useState({})
+    const {productId} = useParams();
     // const [value, setvalue] = useState(0)
     // function Carditem({value, onChange}) {
     //     return (
@@ -68,20 +73,47 @@ const ProductDetail = () => {
     // const prouctId = useParams();
 
     //lấy data product từ backend
+    /*  // Data mẫu
+        productId	1
+        name	"SP - FAKE1"
+        description	"khong co mo ta"
+        categoryId	1
+        quantityInStock	2
+        price	"100000"
+        discountId	0
+        image	"none"
+        createdAt	"2022-11-27T08:00:54.000Z"
+        updatedAt	"2022-11-27T08:00:54.000Z"
+    * */
+    const fetchProductData = async () => {
+        return await axios.get(`http://localhost:5000/product/detail/${productId}`);
+    }
+
+    useEffect( () => {
+        fetchProductData()
+            .then((productDataCall) => {
+                setProduct(productDataCall.data)
+                console.log(productDataCall.data)
+            })
+            .catch((err) => console.log(err))
+            .finally(() => loadingContext.done())
+    }, []) // <-- mảng rỗng để chỉ chạy 1 lần ở khởi tạo
+
     // useEffect(() => {
     //     setTimeout(async () => {
     //         await axios.get("")
     //     }, 1000)
     // })
 
-    var CurrencyFormat = require('react-currency-format');
-    const [loading,setloading] = useState(false)
+    //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.js của productList
+
+    let CurrencyFormat = require('react-currency-format');
+    const [loading, setLoading] = useState(true)
     const onButtonClick = (e) => {
         console.log('Button clicked')
-        setloading(true)
+        setLoading(true)
         setTimeout(() => {
-            setloading(false)
-
+            setLoading(false)
         }, 2000);
     }
 
@@ -92,6 +124,8 @@ const ProductDetail = () => {
                 <img src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg" alt="sdf" height="500" width="500"
                      style={{position:"relative", left:"150px", top:"20px"}} />
 
+                <img src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg" alt="sdf" height="500"
+                     width="500"/>
             </div>
             <div className="col-12 col-lg-5 mt-5">
                 <h2>
@@ -111,6 +145,12 @@ const ProductDetail = () => {
                                 displayType={'text'}
                                 thousandSeparator={true} prefix={'đ '} />
                 <div className="flex VrhRS0" style={{display:"flex"}}>
+                <hr/>
+                <p>Write powerful product descriptions quickly with this easy to follow template and fill in the blank
+                    options to ensure you convert visitors into customers.</p>
+                <Divider style={{borderColor: "black"}}/>
+                <CurrencyFormat value={10000} displayType={'text'} thousandSeparator={true} prefix={'$'}/>
+                <div className="flex VrhRS0">
                     <label className="_34CHXV">Deal Sốc</label>
                     <div className="_3-CbwQ">Mua để nhận quà</div>
                 </div>
@@ -127,45 +167,35 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className="stockCounter d-inline">
-                    {/*    <Form.Item*/}
-                    {/*        required*/}
-                    {/*        rules={[{*/}
-                    {/*            validator(ruler,cardItem) {*/}
-                    {/*                return new Promise((resolve, reject) => {*/}
-                    {/*                    if (cardItem >= 0) {*/}
-                    {/*                        resolve()*/}
-                    {/*                    } else {*/}
-                    {/*                        reject("Not found")*/}
-                    {/*                    }*/}
-                    {/*                })*/}
-                    {/*            }*/}
-                    {/*        }]}*/}
-                    {/*        >*/}
-                    {/*        <Carditem/>*/}
-                    {/*</ Form.Item>*/}
+
+                    <Form.Item
+                        required
+                        rules={[{
+                            validator(ruler, cardItem) {
+                                return new Promise((resolve, reject) => {
+                                    if (cardItem >= 0) {
+                                        resolve()
+                                    } else {
+                                        reject("Not found")
+                                    }
+                                })
+                            }
+                        }]}
+                    >
+
+                    </ Form.Item>
                 </div>
-                {/*    <CartContext.Consumer>*/}
-                {/*        {({addToCart}) =>(*/}
-                {/*            <Button*/}
-                {/*            loading={loading}*/}
-                {/*            icon={<AiOutlineShoppingCart/>}*/}
-                {/*            class="btn btn-tinted btn--l vQ3lCI _8ULUF3"*/}
-                {/*            onClick={()=>addToCart(ProductDetail)}*/}
-                {/*        >Thêm vào giỏ hàng</Button>*/}
-                {/*        )}*/}
-                {/*    <div class="TWC1HU shopee-input-quantity">*/}
+
                 <button className="btn bg-danger minus"
                         onClick={Increase}>-
                 </button>
-                {/*<button className="btn bg-danger minus" onClick={Increase}>-</button>*/}
                 <Input type="number"
-                    // onChange={handleChange}
+
                        className="form-control count d-inline"
                        value={cardItem}
                        style={{width:"100px"}}
                        min="1"
                        max="250"
-                    // rules={[{ value: checkPrice }]}
                 />
                 <button className="btn btn-primary plus" onClick={handleIncrease}>+</button>
                 {/*</div>*/}
@@ -183,7 +213,6 @@ const ProductDetail = () => {
                         borderColor:"red"}}>
                     Thêm vào giỏ hàng
                 </Button>
-
             </div>
             {/*<Divider style={{borderColor:"red"}}/>*/}
             <Divider style={{borderColor:"gray"}}/>
@@ -200,8 +229,11 @@ const ProductDetail = () => {
                     </List.Item>
                 )}
             />
-        </div>
+            <Divider style={{borderColor: "black"}}/>
 
+
+        </div>
+        </div>
 
     )
 }
