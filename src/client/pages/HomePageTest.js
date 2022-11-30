@@ -11,7 +11,8 @@ import Nav from "./Nav";
 import ProductList from "./productList";
 import ProductDetail from "./ProductDetail";
 import MachineEngineering from "./machine";
-import {ForgotPassword} from "./ForgotPassword";
+import { ForgotPassword } from "./ForgotPassword";
+import RegisterAccount from "./registerAccount";
 import About from "./about";
 import SingleMachine from "./SingleMachine";
 import {CartContext} from "../context";
@@ -114,24 +115,22 @@ const HomePageTest = () => {
                 </div>
             </div>
 
-            <div className={classes.content}>
-                <Routes>
-                    <Route exact path="/" element={<HomePage/>}/>
-                    <Route exact path="/products/category/:categoryId" element={<ProductList></ProductList>} loading/>
-                    <Route exact path="/products" element={<ProductList></ProductList>} loading/>
-                    <Route exact path="/products/details/:productId" element={<ProductDetail></ProductDetail>} loading/>
-                    <Route exact path="/introduction" element={<HomePage/>}/>
-                    <Route exact path="/login" element={<Login/>}/>
-                    <Route exact path="/cart" element={<HomePage/>}/>
-                    <Route path="/forgotPassword" element={<ForgotPassword/>}/>
-                    <Route exact path="/machine" element={<MachineEngineering/>}/>
-                    <Route path="/machine/:machineId" element={<SingleMachine/>}/>
-                    <Route exact path="/about" element={<About/>}/>
-                </Routes>
-            </div>
-        </div>
-
-    );
+      <div className={classes.content}>
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route exact path="/product" element={<Product />} />
+          <Route exact path="/introduction" element={<HomePage />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/cart" element={<HomePage />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
+          <Route exact path="/machine" element={<MachineEngineering />} />
+          <Route exact path="/registerAccount" element={<RegisterAccount />} />
+          <Route path="/machine/:machineId" element={<SingleMachine />} />
+          <Route exact path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </div>
+  );
 };
 
 export default HomePageTest;

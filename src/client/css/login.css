@@ -11,7 +11,7 @@
   background-color: #eee;
 }
 .card {
-  height: 380px;
+  height: 450px;
   width: 400px;
   background-color: #fff;
   position: relative;
@@ -115,6 +115,14 @@ input[type="password"] {
   align-items: center;
 }
 .forgot a {
+  text-decoration: none;
+}
+.register {
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+}
+.register a {
   text-decoration: none;
 }
 .warning {
