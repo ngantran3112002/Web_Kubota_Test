@@ -108,17 +108,18 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Row
-        style={{ marginTop: 40, marginLeft: 300, marginRight: 300 }}
-        gutter={20}
-      >
-        <Col span={10} align="right">
+      <Row style={{ marginTop: 40 }} gutter={200}>
+        <Col span={10} align="right" style={{ paddingRight: 0 }}>
           <Image
             id="productImage"
             src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg"
           />
         </Col>
-        <Col span={12} align="left">
+        <Col
+          span={12}
+          align="left"
+          style={{ paddingLeft: 50, paddingRight: 250 }}
+        >
           <Space direction="vertical" align={"start"}>
             {/*<div className="col-12 col-lg-5 mt-5">*/}
             <h2>HỘP CẦU CHÌ MÁY GẶT MÁY KÉO</h2>
