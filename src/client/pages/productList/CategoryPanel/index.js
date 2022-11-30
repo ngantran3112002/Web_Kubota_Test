@@ -1,7 +1,6 @@
-
 import "../index.css";
 
-import 'antd/dist/antd.min.css';
+import "antd/dist/antd.min.css";
 
 import { List, Row } from "antd";
 import { Link } from "react-router-dom";
