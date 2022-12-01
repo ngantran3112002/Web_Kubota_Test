@@ -17,6 +17,7 @@ import About from "./about";
 import SingleMachine from "./SingleMachine";
 import { CartContext } from "../context";
 import "antd/dist/antd.css";
+import AdminPage from "./admin";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -144,6 +145,7 @@ const HomePageTest = () => {
           <Route exact path="/machine" element={<MachineEngineering />} />
           <Route path="/machine/:machineId" element={<SingleMachine />} />
           <Route exact path="/about" element={<About />} />
+          <Route path="/admin/*" element={<AdminPage />} />
         </Routes>
       </div>
     </div>
