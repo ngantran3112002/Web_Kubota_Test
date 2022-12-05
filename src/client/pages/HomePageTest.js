@@ -146,6 +146,7 @@ const HomePageTest = () => {
           <Route path="/machine/:machineId" element={<SingleMachine />} />
           <Route exact path="/about" element={<About />} />
           <Route path="/admin/*" element={<AdminPage />} />
+          <Route path="/registerAccount" element={<RegisterAccount />}/>
         </Routes>
       </div>
     </div>

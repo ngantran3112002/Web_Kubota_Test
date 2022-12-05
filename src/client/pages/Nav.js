@@ -47,7 +47,7 @@ const Nav = () => {
       </NavLink>
 
       <NavLink
-        to="admin"
+        to="admin/orders"
         style={({ isActive }) => (isActive ? activeStyle : undefined)}
         className={classes.link}
       >
