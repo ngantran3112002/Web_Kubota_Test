@@ -94,7 +94,7 @@ const ProductDetail = () => {
       .finally(() => loadingContext.done());
   }, []); // <-- mảng rỗng để chỉ chạy 1 lần ở khởi tạo
 
-  //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.js của productList
+  //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.jsx của productList
 
   let CurrencyFormat = require("react-currency-format");
   const [loading, setLoading] = useState(false);

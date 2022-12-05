@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import "../css/register.css";
+import axios from "axios";
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -17,7 +18,25 @@ const RegisterAccount = () => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  const submitForm = () => {};
+  
+
+const config = {
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+}
+
+  const params = new URLSearchParams();
+  params.append('userName', email);
+  params.append('email', email);
+  params.append('phone', phone);
+  params.append('password', password)
+  params.append('address', address)
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    await axios.post("http://localhost:5000/users/register", params, config).then((res) => console.log(res))
+  };
 
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -41,7 +60,7 @@ const RegisterAccount = () => {
   return (
     <div className={classes.container}>
       <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
-      <form onSubmit={submitForm} style={{ width: "400px" }}>
+      <form onSubmit={(e) => submitForm} style={{ width: "400px" }}>
         <label for="name">
           <b>Tên</b>
         </label>
@@ -111,7 +130,7 @@ const RegisterAccount = () => {
         />
       </form>
       <div className="buttons">
-        <button type="submit" style={{ padding: "0px 30px", fontSize: "20px" }}>
+        <button type="submit" onClick={(e) => {submitForm(e)}} style={{ padding: "0px 30px", fontSize: "20px" }}>
           Đăng kí tài khoản
         </button>
       </div>

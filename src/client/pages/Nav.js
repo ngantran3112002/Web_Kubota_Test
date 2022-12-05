@@ -45,6 +45,14 @@ const Nav = () => {
       >
         KỸ THUẬT MÁY
       </NavLink>
+
+      <NavLink
+        to="admin/orders"
+        style={({ isActive }) => (isActive ? activeStyle : undefined)}
+        className={classes.link}
+      >
+        ADMIN
+      </NavLink>
     </>
   );
 };

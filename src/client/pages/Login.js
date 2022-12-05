@@ -9,6 +9,8 @@ import {
   faEye,
   faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
+import { email } from "ra-core";
+import axios from "axios";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -33,6 +35,16 @@ const Login = () => {
   const [password, setpassword] = useState("password");
   const [type, settype] = useState(false);
 
+  const params = new URLSearchParams();
+  params.append('email', inputtext.email)
+  params.append('password', inputtext.password)
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  }
+
   const inputEvent = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -44,7 +56,7 @@ const Login = () => {
     });
   };
 
-  const submitForm = (e) => {
+  const submitForm = async (e) => {
     e.preventDefault();
     setwarnemail(false);
     setwarnpassword(false);
@@ -53,7 +65,9 @@ const Login = () => {
     } else if (inputtext.password === "") {
       setwarnpassword(true);
     } else {
-      alert("form submitted");
+      console.log(email)
+      await axios.post("http://localhost:5000/users/login", params, config).then((res) => console.log(res.data)).catch((err) => console.warn(err))
+      
     }
   };
 
@@ -78,7 +92,7 @@ const Login = () => {
             Nhập thông tin đăng nhập của bạn để truy cập vào tài khoản của bạn.
           </p>
         </div>
-        <form onSubmit={submitForm}>
+        <form onSubmit={(e) => submitForm(e)}>
           <div className="input-text">
             <input
               type="text"
@@ -105,7 +119,7 @@ const Login = () => {
             <FontAwesomeIcon onClick={Eye} icon={eye ? faEye : faEyeSlash} />
           </div>
           <div className="buttons">
-            <button type="submit">Sign in</button>
+            <button type="submit" >Sign in</button>
           </div>
           <div className="forgot">
             <p>
