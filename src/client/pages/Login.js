@@ -75,7 +75,7 @@ const Login = () => {
 				.then((res) => {
           if (res.status === 200) {
             setUser({ userInfo: res.data.user, token: res.data.accessToken })
-            navigate("/")
+            goHomePage()
           } 
         })
 				.catch((err) => console.warn(err));
