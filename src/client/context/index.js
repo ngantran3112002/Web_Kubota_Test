@@ -15,6 +15,8 @@ function ContextProvider({ children }) {
 		setCartList,
 		user,
 		setUser,
+        setLogined,
+        logined
 	};
 
 	return (
