@@ -1,22 +1,27 @@
-import React, { useState } from "react";
-import ProductDetail from "../pages/ProductDetail/index";
-import { createContext } from "react";
+import React, { useState } from 'react';
+import ProductDetail from '../pages/ProductDetail/index';
+import { createContext } from 'react';
 
 const CartContext = createContext();
-function CartProvider({ children }) {
-    const [cartList, setCartList] = useState([])
+const UserContext = createContext();
 
+function ContextProvider({ children }) {
+	const [cartList, setCartList] = useState([]);
+	const [user, setUser] = useState({});
+	const [logined, setLogined] = useState(false);
 
+	const values = {
+		cartList,
+		setCartList,
+		user,
+		setUser,
+	};
 
-    const values = {
-        cartList, setCartList
-    }
-
-    return (
-        <CartContext.Provider value={values}>
-            {children}
-        </CartContext.Provider>
-    )
+	return (
+		<UserContext.Provider value={values}>
+			<CartContext.Provider value={values}>{children}</CartContext.Provider>
+		</UserContext.Provider>
+	);
 }
 
-export { CartContext, CartProvider };
+export { CartContext, UserContext, ContextProvider };

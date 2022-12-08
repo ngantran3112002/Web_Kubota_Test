@@ -77,9 +77,9 @@ const ProductList = () => {
 
     useEffect(() => {
         let apiUrls = [
-            "http://localhost:5000/category/alltest",
+            "http://localhost:5000/categories/alltest",
             // "http://localhost:5000/product/pagetest/1",
-            "http://localhost:5000/product/alltest",
+            "http://localhost:5000/products/alltest",
         ];
 
         const categoryDataCall = axios.get(apiUrls[0]);
@@ -120,7 +120,7 @@ const ProductList = () => {
             {categoryId: categoryId, sort_by: searchParams.get("sort_by")},
             {skipNull: true}
         );
-        return await axios.get(`http://localhost:5000/product/pagetest/${page}?` + query)
+        return await axios.get(`http://localhost:5000/products/pagetest/${page}?` + query)
 
     };
 

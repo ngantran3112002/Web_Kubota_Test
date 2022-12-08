@@ -24,3 +24,4 @@ yarn-error.log*
 
 database.json
 content-range.js
+.vscode/*

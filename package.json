@@ -18,6 +18,7 @@
     "lodash": "^4.17.21",
     "nvm": "^0.0.4",
     "query-string": "^7.1.1",
+    "ra-core": "^4.6.0",
     "ra-data-rest-client": "^1.1.1",
     "ra-data-simple-rest": "^4.5.2",
     "react": "^17.0.2",
