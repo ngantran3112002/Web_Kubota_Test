@@ -55,7 +55,7 @@ const GridView = ({
                 }}
                 alt="example"
                 // src="https://joeschmoe.io/api/v1/random"
-                src="https://via.placeholder.com/1000"
+                src= {item.image}
                 preview={false}
               />
               <div className="ant-body-child-content">
