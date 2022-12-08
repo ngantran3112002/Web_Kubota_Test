@@ -9,7 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import { ContextProvider } from "./client/context";
 import HomePageTest from "./client/pages/HomePageTest";
 import 'antd/dist/antd.min.css';
-// import ProductList from "./client/pages/productList/ProductList"
+// import productList from "./client/pages/productList/productList"
 ReactDOM.render(
   // <React.StrictMode>
 
