@@ -14,7 +14,8 @@ import {
   Space,
   InputNumber,
 } from "antd";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineShoppingCart} from "react-icons/ai";
+
 import "antd/dist/antd.min.css";
 import * as CurrencyFormat from "react-currency-format";
 import { useParams } from "react-router-dom";
@@ -31,33 +32,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
 
-  const data = [
-    {
-      title: "Ant Design Title 1",
-      description:
-        " Sản phẩm chất lượng, chính hãng, giá tốt! Shop xử lý đơn và giao hàng nhanh! Sẽ tiếp tục ủng hộ Shop ở những đơn hàng sau!!!ihwrfureihgpqqqqqqqqqqqqqqqqqqqqqqqqsssssssssdcndsjunfcwdnfcifwnfc",
-    },
-    {
-      title: "Ant Design Title 2",
-      description:
-        " Hàng chính hãng. Đóng gói kỹ càng. Chất lượng tốt. Mua sale nên rẻ hơn bên ngoài khá nhiều. Giao hàng tận nhà nên đỡ công đi lại...i chdddddddddddddddd hfiq3jfiehrcu2e nwih uhfiu2griehruhfu3rfuhergyfgrgurftuewhf724y rciryurh utuewgut83ugfy45turhfur3gurg73rgfuyrgfuwgf87hf",
-    },
-    {
-      title: "Ant Design Title 3",
-      description: "Giao hành nhanh chất lượng tốt đáng mua",
-    },
-    {
-      title: "Ant Design Title 4",
-      description: "hihihihihi",
-    },
-  ];
-  const [cardItem, setcardItem] = useState(1);
-  // const handleChange = event => {
-  //     let { value, min, max } = event.target;
-  //     value = Math.max(Number(min), Math.min(Number(max), Number(cardItem)));
-  //
-  //     this.setState({ cardItem });
-  // };
+
   const handleDecrease = async () => {
     setQuantity(quantity - 1);
   };
@@ -97,6 +72,11 @@ const ProductDetail = () => {
   //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.jsx của productList
 
   let CurrencyFormat = require("react-currency-format");
+  // const [input, setInput] = useState('')
+  // // const handleSubmit = e => {
+  // //   e.preventDefault();
+  // //   prop (event:React.FormEvent<T>):void
+  // // };
   const [loading, setLoading] = useState(false);
   const onButtonClick = (e) => {
     console.log("Button clicked");
@@ -143,7 +123,7 @@ const ProductDetail = () => {
             />
             <div className="flex VrhRS0" style={{ display: "flex" }}>
               <label className="_34CHXV">Deal Sốc</label>
-              <div className="_3-CbwQ">Mua để nhận quà</div>
+              <div className="_3-CbwQ" style={{marginTop:"7px"}}>Mua để nhận quà</div>
             </div>
             <div
               className="flex tprdAj pN+gd-"
@@ -152,7 +132,7 @@ const ProductDetail = () => {
               <label className="c27oHv">Vận chuyển</label>
               <div className="FpxUz+ TKcfnJ">
                 <div className="qUe3y7">
-                  <div className="C-UCH-" style={{ marginLeft: "40px" }}>
+                  <div className="C-UCH-" style={{ marginLeft: "40px",marginTop:"10px" }}>
                     <img
                       src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/1cdd37339544d858f4d0ade5723cd477.png"
                       width="25"
@@ -164,7 +144,7 @@ const ProductDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="stockCounter d-inline"></div>
+            <div className="stockCounter d-inline" style={{display:"flex"}}></div>
             <p>Số lượng</p>
             <Space block="true" size={0}>
               <Button
@@ -198,8 +178,9 @@ const ProductDetail = () => {
               >
                 +
               </Button>
-              <Divider style={{ borderColor: "white" }} />
+
             </Space>
+
             <Button
               loading={loading}
               icon={<AiOutlineShoppingCart />}
@@ -221,19 +202,33 @@ const ProductDetail = () => {
         </Col>
       </Row>
       <Divider style={{ borderColor: "gray" }} />
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-              title={item.title}
-              description={item.description}
-            />
-          </List.Item>
-        )}
-      />
+      {/*<List*/}
+      {/*  itemLayout="horizontal"*/}
+      {/*  dataSource={data}*/}
+      {/*  renderItem={(item) => (*/}
+      {/*    <List.Item>*/}
+      {/*      <List.Item.Meta*/}
+      {/*        avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}*/}
+      {/*        title={item.title}*/}
+      {/*        description={item.description}*/}
+      {/*      />*/}
+      {/*    </List.Item>*/}
+      {/*  )}*/}
+      {/*/>*/}
+      {/*<form className="comment-form" >*/}
+      {/*  <input*/}
+      {/*      type="text"*/}
+      {/*      placeholder="thêm bình luận"*/}
+      {/*      // value={input}*/}
+      {/*      name="text"*/}
+      {/*      className="comment-input"*/}
+      {/*      style={{width:"1000px"}}*/}
+      {/*  />*/}
+      {/*  <button className="comment-button">*/}
+      {/*    Gửi*/}
+      {/*  </button>*/}
+      {/*</form>*/}
+
     </>
   );
 };
