@@ -1,0 +1,84 @@
+
+.popup {
+    border-radius: 8px;
+    /*background-color: #F1F3F4;*/
+    width: 300px !important;
+}
+
+.ant-select-item-option:hover:not(.ant-select-item-option-disabled) {
+    background-color: #DADCE0;
+}
+
+/*#menu>#view-option {*/
+/*    float: right;*/
+/*    position: relative;*/
+/*    right: 10px;*/
+/*    bottom: 24px;*/
+/*    margin-right: 12px;*/
+
+/*}*/
+#menu {
+
+}
+#menu>#search-box {
+    float: left;
+    position: relative;
+    /*width: 100% !important;*/
+    -webkit-transition: width 0.4s ease-in-out !important;
+    transition: width 0.4s ease-in-out !important;
+    margin-bottom: 12px;
+
+}
+
+#menu {
+    margin-bottom: 12px !important;
+}
+
+/* search box*/
+span.ant-select-selection-search > input[id^='rc_select'] {
+    background-color: aliceblue !important;
+
+}
+
+/* span.ant-select-selection-search>input {
+    background-color: aqua;
+
+} */
+span.ant-select-selection-search >input[id^='rc_select']:focus {
+    width: 150% !important;
+    background-color: antiquewhite !important;
+
+}
+
+/* filter */
+#menu>#filter {
+    display: inline-block;
+    position: relative;
+
+}
+
+.ant-space-item > #filter {
+    width: max-content;
+    padding: 6px;
+    background-color: beige;
+}
+
+.ant-space-item > #filter:hover {
+    width: max-content;
+    padding: 6px;
+    background-color: bisque;
+    border-color:cadetblue
+}
+
+.ant-space-item > #filter {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+#menu > #viewOption {
+    height: 100%;
+    position: relative;
+    float: right;
+    right: 12px !important;
+}

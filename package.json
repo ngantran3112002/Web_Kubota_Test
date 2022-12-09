@@ -35,11 +35,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": " react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch database.json --middlewares content-range.js"
+    "server": "json-server --watch database.json --middlewares content-range.js",
+    "test": "cd backend & npm run start && cd .. && npm run start"
   },
   "eslintConfig": {
     "extends": [

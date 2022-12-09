@@ -1,0 +1,121 @@
+/* .container {
+    width: 100%;
+    margin: 0px;
+} */
+
+
+.ant-body-child-content {
+    padding: 8px;
+}
+
+.ant-card-body {
+    padding: 0px !important;
+}
+
+#pagination {
+    text-align-last: center;
+}
+
+.ant-card-meta-title {
+    white-space: pre-line !important;
+    font-size: small !important;
+}
+
+.ant-list {
+    width: 100% !important;
+}
+
+#right-panel {
+    flex-basis: min-content !important;
+}
+
+.ant-pagination-item-active {
+    border-color: green !important;
+}
+
+.row {
+    /* width: 110% !important; */
+    height: 90%;
+}
+
+.ant-list-header {
+    background-color: #F7F7F7 !important;
+}
+
+ul.ant-list-items > li:nth-child(even) {
+    /*background: rgba(149, 134, 146, 0.13) !important;*/
+}
+
+ul.ant-list-items > li {
+    /*background: red !important;*/
+    margin: 0 auto;
+    width: 100%;
+    padding: 0px;
+}
+
+
+div.ant-spin-container > div.ant-row {
+    flex-wrap: wrap !important;
+}
+
+@media screen and (max-width: 768px) {
+    .ant-row {
+        display: block !important;
+    }
+}
+
+/*div.ant-list-item {*/
+/*    padding: 4px;*/
+/*}*/
+
+.name {
+    font-size: 16px;
+}
+
+
+.price {
+    font-size: 22px;
+    color: brown;
+}
+
+
+.list-child {
+    /* border: 8px; */
+    border-width: 2px;
+    display: flex;
+    flex-direction: column;
+}
+
+.listRow {
+    margin: 4px;
+    border-style: solid;
+    width: 100%;
+    border-width: 1px;
+    height: 240px;
+}
+
+/* List view */
+.ant-list-item-meta-title > a {
+    font-size: 24px;
+}
+
+.ant-list-item-meta-description {
+    font-size: 18px !important;
+}
+
+
+/*list item list view*/
+.listItem {
+    margin-bottom: 8px !important;
+    height: 252px;
+
+    border: 2px;
+    /*border-style: solid;*/
+    padding: 2px !important;
+}
+
+.listItem:hover {
+    border-color: lightcoral;
+}
+
+/* menu */
