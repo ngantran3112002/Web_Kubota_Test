@@ -71,7 +71,7 @@ const Login = () => {
 		} else {
 			console.log(email);
 			await axios
-				.post('http://localhost:5000/users/login', params, config)
+				.post('http://localhost:5000/api/users/login', params, config)
 				.then((res) => {
           if (res.status === 200) {
             setUser({ userInfo: res.data.user, token: res.data.accessToken })

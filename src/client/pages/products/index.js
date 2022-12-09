@@ -7,7 +7,7 @@ import "./index.css";
 // import 'antd/dist/antd.less';
 import GridView from "./GridView";
 import {useLocation, useNavigate, useParams, useSearchParams,} from "react-router-dom";
-import {BackTop, Button, Col, Row} from "antd";
+import {BackTop, Button, Col, Empty, Row} from "antd";
 import axios from "axios";
 import {BsChevronDoubleUp} from "react-icons/bs";
 
@@ -52,9 +52,9 @@ const ProductList = () => {
 
     useEffect(() => {
         let apiUrls = [
-            "http://localhost:5000/categories/alltest",
+            "http://localhost:5000/api/categories/alltest",
             // "http://localhost:5000/product/pagetest/1",
-            "http://localhost:5000/products/alltest",
+            "http://localhost:5000/api/products/alltest",
         ];
 
         const categoryDataCall = axios.get(apiUrls[0]);
@@ -72,9 +72,8 @@ const ProductList = () => {
                 //
                 //
                 setCategory(categoryData)
-                // setProducts(productsData.products)
+                
                 setAutoComplete(autoCmpData)
-                // setTotalPage(productsData.total)
             }))
             .catch((err) => console.log(err))
             .finally(() => {
@@ -95,7 +94,7 @@ const ProductList = () => {
             {categoryId: categoryId, sort_by: searchParams.get("sort_by")},
             {skipNull: true}
         );
-        return await axios.get(`http://localhost:5000/products/pagetest/${page}?` + query)
+        return await axios.get(`http://localhost:5000/api/products/pagetest/${page}?` + query)
 
     };
 
@@ -143,6 +142,11 @@ const ProductList = () => {
     }
 
     console.log(products)
+
+    if (_.isEmpty(products)) {
+        return (<><Empty/></>)
+    }
+    
     return (
         <>
             <Row>
