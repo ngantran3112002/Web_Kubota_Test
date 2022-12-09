@@ -61,7 +61,7 @@ const GridView = ({
               <div className="ant-body-child-content">
                 <Link
                   className="name"
-                  to={`/products/details/${item.productId}`}
+                  to={`/products/details/${item.id}`}
                 >
                   {item.name}
                 </Link>

@@ -81,9 +81,10 @@ const ProductDetail = () => {
           updatedAt	"2022-11-27T08:00:54.000Z"
       * */
   const fetchProductData = async () => {
-    return await axios.get(`http://localhost:5000/product/detail/${productId}`);
+    console.log(productId)
+    return await axios.get(`http://localhost:5000/api/products/detail/${productId}`);
   };
-
+  
   useEffect(() => {
     fetchProductData()
       .then((productDataCall) => {

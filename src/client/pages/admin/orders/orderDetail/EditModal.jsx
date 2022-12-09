@@ -96,7 +96,7 @@ const EditModal = ({
       title="Chỉnh sửa đơn hàng"
       visible={isEdit}
       okText="Lưu"
-      width={800}
+      width={1200}
       onCancel={() => {
         setIsEdit(false);
       }}
