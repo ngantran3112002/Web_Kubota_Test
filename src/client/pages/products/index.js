@@ -41,7 +41,9 @@ const ProductList = () => {
     const [loadingStatus, setLoadingStatus] = useState(true);
 
     const addToCart = (addToCartProduct) => {
-        console.log(addToCartProduct)
+        //chưa có thì thêm vào
+        cartContext.addToCart(addToCartProduct)
+        console.log(cartContext.cartList)
         // cartContext.setCartList([addToCartProduct, ...context.cartList]);
     };
 
