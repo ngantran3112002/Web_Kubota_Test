@@ -8,14 +8,14 @@ import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Login from "./Login";
 import Nav from "./Nav";
-import ProductList from "./productList";
+import ProductList from "./products";
 import ProductDetail from "./ProductDetail";
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";
 import RegisterAccount from "./registerAccount";
 import About from "./about";
 import SingleMachine from "./SingleMachine";
-import { CartContext } from "../context";
+import { CartContext, UserContext} from "../context";
 import "antd/dist/antd.css";
 import CheckOut from "./CheckOut";
 
@@ -66,7 +66,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const HomePageTest = () => {
-  const context = useContext(CartContext);
+  const cartContext = useContext(CartContext);
+  const userContext = useContext(UserContext)
+
+  console.log(userContext)
 
   const navigate = useNavigate();
   const classes = useStyles();
@@ -105,12 +108,12 @@ const HomePageTest = () => {
             </div>
             <div className={classes.rightTaskbar}>
               <button className={classes.btn} onClick={handleCartButton}>
-                {context.cartList.length === 0
+                {cartContext.cartList.length === 0
                   ? "Giỏ hàng"
-                  : `Giỏ hàng(${context.cartList.length})`}
+                  : `Giỏ hàng(${cartContext.cartList.length})`}
               </button>
               <button className={classes.btn} onClick={handleLoginButton}>
-                ĐĂNG NHẬP
+                {!_.isEmpty(userContext.user) ? `${userContext.user.userInfo.userName}` : "ĐĂNG NHẬP" }
               </button>
             </div>
           </div>

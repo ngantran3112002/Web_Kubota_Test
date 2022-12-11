@@ -81,9 +81,10 @@ const ProductDetail = () => {
           updatedAt	"2022-11-27T08:00:54.000Z"
       * */
   const fetchProductData = async () => {
-    return await axios.get(`http://localhost:5000/product/detail/${productId}`);
+    console.log(productId)
+    return await axios.get(`http://localhost:5000/api/products/detail/${productId}`);
   };
-
+  
   useEffect(() => {
     fetchProductData()
       .then((productDataCall) => {
@@ -94,7 +95,7 @@ const ProductDetail = () => {
       .finally(() => loadingContext.done());
   }, []); // <-- mảng rỗng để chỉ chạy 1 lần ở khởi tạo
 
-  //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.js của productList
+  //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.jsx của productList
 
   let CurrencyFormat = require("react-currency-format");
   const [loading, setLoading] = useState(false);

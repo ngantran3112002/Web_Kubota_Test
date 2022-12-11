@@ -46,6 +46,16 @@ const NavLinkRouter = () => {
             )}
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to="./admin"
+            className={({ isActive }) =>
+              isActive ? activeClassName : undefined
+            }
+          >
+            ADMIN
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

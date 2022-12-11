@@ -6,7 +6,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 import { BrowserRouter } from "react-router-dom";
-import { CartProvider } from "./client/context";
+import { ContextProvider } from "./client/context";
 import HomePageTest from "./client/pages/HomePageTest";
 import 'antd/dist/antd.min.css';
 // import ProductList from "./client/pages/productList/ProductList"
@@ -14,11 +14,9 @@ ReactDOM.render(
   // <React.StrictMode>
 
     <BrowserRouter>
-      <CartProvider>
-
+      <ContextProvider>
         <HomePageTest />
-      </CartProvider>
-      {/*  <ProductList></ProductList>*/}
+      </ContextProvider>
     </BrowserRouter>,
   // </React.StrictMode>,
   document.getElementById("root")
