@@ -15,7 +15,6 @@ import {
   InputNumber,
 } from "antd";
 import { AiOutlineShoppingCart} from "react-icons/ai";
-
 import "antd/dist/antd.min.css";
 import * as CurrencyFormat from "react-currency-format";
 import { useParams } from "react-router-dom";
@@ -25,7 +24,7 @@ import axios from "axios";
 import { value } from "lodash/seq";
 
 const ProductDetail = () => {
-  const context = useContext(CartContext);
+  const cartContext = useContext(CartContext);
   const loadingContext = useContext(LoadingContext);
 
   const [quantity, setQuantity] = useState(1);
@@ -40,23 +39,8 @@ const ProductDetail = () => {
     setQuantity(quantity + 1);
   };
 
-  // const prouctId = useParams();
-
-  //lấy data product từ backend
-  /*  // Data mẫu
-          productId	1
-          name	"SP - FAKE1"
-          description	"khong co mo ta"
-          categoryId	1
-          quantityInStock	2
-          price	"100000"
-          discountId	0
-          image	"none"
-          createdAt	"2022-11-27T08:00:54.000Z"
-          updatedAt	"2022-11-27T08:00:54.000Z"
-      * */
   const fetchProductData = async () => {
-    return await axios.get(`http://localhost:5000/product/detail/${productId}`);
+    return await axios.get(`http://localhost:5000/api/product/detail/${productId}`);
   };
 
   useEffect(() => {
@@ -68,7 +52,12 @@ const ProductDetail = () => {
       .catch((err) => console.log(err))
       .finally(() => loadingContext.done());
   }, []); // <-- mảng rỗng để chỉ chạy 1 lần ở khởi tạo
+  const addToCart = ({name,price}) => {
 
+    cartContext.addToCart(name,price)
+    console.log(cartContext.cartList)
+    // cartContext.setCartList([addToCartProduct, ...context.cartList]);
+  };
   //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.jsx của productList
 
   let CurrencyFormat = require("react-currency-format");
@@ -88,11 +77,11 @@ const ProductDetail = () => {
 
   return (
     <>
-      <Row style={{ marginTop: 40 }} gutter={200}>
+      <Row style={{ marginTop: 40 }} gutter={200} >
         <Col span={10} align="right" style={{ paddingRight: 0 }}>
           <Image
             id="productImage"
-            src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg"
+            src={ProductDetail.image}
           />
         </Col>
         <Col
@@ -102,21 +91,19 @@ const ProductDetail = () => {
         >
           <Space direction="vertical" align={"start"}>
             {/*<div className="col-12 col-lg-5 mt-5">*/}
-            <h2>HỘP CẦU CHÌ MÁY GẶT MÁY KÉO</h2>
+            <h2>{ProductDetail.name}</h2>
 
             <Rate defaultValue={4} allowHalf count={5} />
 
             <span id="no_of_reviews">(5 reviews)</span>
             <hr />
             <p>
-              Write powerful product descriptions quickly with this easy to
-              follow template and fill in the blank options to ensure you
-              convert visitors into customers.
+              {ProductDetail.description}
             </p>
             <Divider style={{ borderColor: "black" }} />
             <CurrencyFormat
               style={{ fontSize: "30px", color: "red" }}
-              value={10000}
+              value={ProductDetail.price}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"đ "}
@@ -202,33 +189,6 @@ const ProductDetail = () => {
         </Col>
       </Row>
       <Divider style={{ borderColor: "gray" }} />
-      {/*<List*/}
-      {/*  itemLayout="horizontal"*/}
-      {/*  dataSource={data}*/}
-      {/*  renderItem={(item) => (*/}
-      {/*    <List.Item>*/}
-      {/*      <List.Item.Meta*/}
-      {/*        avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}*/}
-      {/*        title={item.title}*/}
-      {/*        description={item.description}*/}
-      {/*      />*/}
-      {/*    </List.Item>*/}
-      {/*  )}*/}
-      {/*/>*/}
-      {/*<form className="comment-form" >*/}
-      {/*  <input*/}
-      {/*      type="text"*/}
-      {/*      placeholder="thêm bình luận"*/}
-      {/*      // value={input}*/}
-      {/*      name="text"*/}
-      {/*      className="comment-input"*/}
-      {/*      style={{width:"1000px"}}*/}
-      {/*  />*/}
-      {/*  <button className="comment-button">*/}
-      {/*    Gửi*/}
-      {/*  </button>*/}
-      {/*</form>*/}
-
     </>
   );
 };
