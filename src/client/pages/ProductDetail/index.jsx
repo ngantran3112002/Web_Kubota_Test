@@ -18,13 +18,13 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import "antd/dist/antd.min.css";
 import * as CurrencyFormat from "react-currency-format";
 import { useParams } from "react-router-dom";
-import { CartContext } from "../../context";
+import { Context } from "../../context";
 import { LoadingContext } from "react-router-loading";
 import axios from "axios";
 import { value } from "lodash/seq";
 
 const ProductDetail = () => {
-  const context = useContext(CartContext);
+  const context = useContext(Context);
   const loadingContext = useContext(LoadingContext);
 
   const [quantity, setQuantity] = useState(1);
@@ -100,9 +100,10 @@ const ProductDetail = () => {
   let CurrencyFormat = require("react-currency-format");
   const [loading, setLoading] = useState(false);
   const onButtonClick = (e) => {
-    console.log("Button clicked");
     setLoading(true);
     setTimeout(() => {
+      // const callback = {quantity: quantity }
+      // context.addToCart(product, callback)
       setLoading(false);
     }, 2000);
   };
@@ -215,6 +216,8 @@ const ProductDetail = () => {
                 backgroundColor: "rgba(208,1,27,0.08)",
                 borderColor: "red",
               }}
+
+
             >
               Thêm vào giỏ hàng
             </Button>

@@ -15,14 +15,13 @@ import ListView from "./ListView";
 import LeftPanel from "./CategoryPanel";
 import TopMenu from "./TopMenu";
 
-import {CartContext, UserContext} from "../../context";
+import {Context} from "../../context";
 import {LoadingContext} from "react-router-loading";
 
 
 const ProductList = () => {
     
-    const cartContext = useContext(CartContext);
-    const userContext = useContext(UserContext)
+    const context = useContext(Context)
 
     const loadingContext = useContext(LoadingContext)
     const {categoryId} = useParams();
@@ -40,10 +39,10 @@ const ProductList = () => {
     const [gridView, setGridView] = useState(true);
     const [loadingStatus, setLoadingStatus] = useState(true);
 
-    const addToCart = (addToCartProduct) => {
+    const addToCart = async (addToCartProduct) => {
         //chưa có thì thêm vào
-        cartContext.addToCart(addToCartProduct)
-        console.log(cartContext.cartList)
+        await context.addToCart(addToCartProduct)
+        // console.log(cartContext.cartList)
         // cartContext.setCartList([addToCartProduct, ...context.cartList]);
     };
 

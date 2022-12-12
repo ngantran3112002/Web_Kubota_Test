@@ -5,7 +5,7 @@ import '../css/login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { email } from 'ra-core';
-import { UserContext } from '../context';
+import { Context } from '../context';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Login = () => {
-	const { setUser } = useContext(UserContext);
+	const context = useContext(Context);
   const navigate = useNavigate();
 
   const goHomePage = () => {
@@ -74,7 +74,7 @@ const Login = () => {
 				.post('http://localhost:5000/api/users/login', params, config)
 				.then((res) => {
           if (res.status === 200) {
-            setUser({ userInfo: res.data.user, token: res.data.accessToken })
+            context.setUser({ userInfo: res.data.user, token: res.data.accessToken })
             goHomePage()
           } 
         })

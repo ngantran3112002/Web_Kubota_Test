@@ -15,9 +15,12 @@ import { ForgotPassword } from "./ForgotPassword";
 import RegisterAccount from "./registerAccount";
 import About from "./about";
 import SingleMachine from "./SingleMachine";
-import { CartContext, UserContext} from "../context";
+import { Context} from "../context";
 import "antd/dist/antd.css";
 import CheckOut from "./CheckOut";
+
+import * as _ from "lodash"
+import AdminPage from "./admin";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -66,10 +69,9 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const HomePageTest = () => {
-  const cartContext = useContext(CartContext);
-  const userContext = useContext(UserContext)
+  const context = useContext(Context)
 
-  console.log(userContext)
+
 
   const navigate = useNavigate();
   const classes = useStyles();
@@ -108,12 +110,12 @@ const HomePageTest = () => {
             </div>
             <div className={classes.rightTaskbar}>
               <button className={classes.btn} onClick={handleCartButton}>
-                {cartContext.cartList.length === 0
+                {context.cartList.length === 0
                   ? "Giỏ hàng"
-                  : `Giỏ hàng(${cartContext.cartList.length})`}
+                  : `Giỏ hàng(${context.cartList.length})`}
               </button>
               <button className={classes.btn} onClick={handleLoginButton}>
-                {!_.isEmpty(userContext.user) ? `${userContext.user.userInfo.userName}` : "ĐĂNG NHẬP" }
+                {!_.isEmpty(context.user) ? `${context.user.userInfo.userName}` : "ĐĂNG NHẬP" }
               </button>
             </div>
           </div>
@@ -149,6 +151,8 @@ const HomePageTest = () => {
           <Route path="/machine/:machineId" element={<SingleMachine />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/CheckOut" element={<CheckOut />} />
+          <Route exact path="/admin/*" element={<AdminPage />} />
+
         </Routes>
       </div>
     </div>
