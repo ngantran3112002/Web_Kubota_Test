@@ -31,26 +31,6 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const { productId } = useParams();
 
-  const data = [
-    {
-      title: "Ant Design Title 1",
-      description:
-        " Sản phẩm chất lượng, chính hãng, giá tốt! Shop xử lý đơn và giao hàng nhanh! Sẽ tiếp tục ủng hộ Shop ở những đơn hàng sau!!!ihwrfureihgpqqqqqqqqqqqqqqqqqqqqqqqqsssssssssdcndsjunfcwdnfcifwnfc",
-    },
-    {
-      title: "Ant Design Title 2",
-      description:
-        " Hàng chính hãng. Đóng gói kỹ càng. Chất lượng tốt. Mua sale nên rẻ hơn bên ngoài khá nhiều. Giao hàng tận nhà nên đỡ công đi lại...i chdddddddddddddddd hfiq3jfiehrcu2e nwih uhfiu2griehruhfu3rfuhergyfgrgurftuewhf724y rciryurh utuewgut83ugfy45turhfur3gurg73rgfuyrgfuwgf87hf",
-    },
-    {
-      title: "Ant Design Title 3",
-      description: "Giao hành nhanh chất lượng tốt đáng mua",
-    },
-    {
-      title: "Ant Design Title 4",
-      description: "hihihihihi",
-    },
-  ];
   const [cardItem, setcardItem] = useState(1);
   // const handleChange = event => {
   //     let { value, min, max } = event.target;
@@ -67,19 +47,6 @@ const ProductDetail = () => {
 
   // const prouctId = useParams();
 
-  //lấy data product từ backend
-  /*  // Data mẫu
-          productId	1
-          name	"SP - FAKE1"
-          description	"khong co mo ta"
-          categoryId	1
-          quantityInStock	2
-          price	"100000"
-          discountId	0
-          image	"none"
-          createdAt	"2022-11-27T08:00:54.000Z"
-          updatedAt	"2022-11-27T08:00:54.000Z"
-      * */
   const fetchProductData = async () => {
     console.log(productId)
     return await axios.get(`http://localhost:5000/api/products/detail/${productId}`);
@@ -97,13 +64,14 @@ const ProductDetail = () => {
 
   //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.jsx của productList
 
+
   let CurrencyFormat = require("react-currency-format");
   const [loading, setLoading] = useState(false);
   const onButtonClick = (e) => {
     setLoading(true);
     setTimeout(() => {
-      // const callback = {quantity: quantity }
-      // context.addToCart(product, callback)
+      const callback = {quantity: quantity }
+      context.addToCart(product, callback)
       setLoading(false);
     }, 2000);
   };
@@ -114,7 +82,7 @@ const ProductDetail = () => {
         <Col span={10} align="right" style={{ paddingRight: 0 }}>
           <Image
             id="productImage"
-            src="http://phutungkubota.vn/Uploads/20976f702965e13bb874-1.jpg"
+           src= {product.image}
           />
         </Col>
         <Col
@@ -124,21 +92,19 @@ const ProductDetail = () => {
         >
           <Space direction="vertical" align={"start"}>
             {/*<div className="col-12 col-lg-5 mt-5">*/}
-            <h2>HỘP CẦU CHÌ MÁY GẶT MÁY KÉO</h2>
+            <h2>{product.name}</h2>
 
             <Rate defaultValue={4} allowHalf count={5} />
 
             <span id="no_of_reviews">(5 reviews)</span>
             <hr />
             <p>
-              Write powerful product descriptions quickly with this easy to
-              follow template and fill in the blank options to ensure you
-              convert visitors into customers.
+              {product.description}
             </p>
             <Divider style={{ borderColor: "black" }} />
             <CurrencyFormat
               style={{ fontSize: "30px", color: "red" }}
-              value={10000}
+              value={product.price}
               displayType={"text"}
               thousandSeparator={true}
               prefix={"đ "}
@@ -187,7 +153,7 @@ const ProductDetail = () => {
                 size="default"
                 defaultValue={quantity}
                 value={quantity}
-                disabled={quantity - 1 === 0 || quantity + 1 > 10}
+                disabled={quantity - 1 === 0 || quantity + 1 > product.quantityInStock}
                 // style={{ width: 80 }}
               />
               <Button
@@ -196,7 +162,7 @@ const ProductDetail = () => {
                 onClick={() => {
                   handleIncrease();
                 }}
-                disabled={quantity + 1 > 10}
+                disabled={quantity + 1 > product.quantityInStock}
               >
                 +
               </Button>
@@ -225,17 +191,8 @@ const ProductDetail = () => {
         </Col>
       </Row>
       <Divider style={{ borderColor: "gray" }} />
-      <List
-        itemLayout="horizontal"
-        dataSource={data}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta
-              avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-              title={item.title}
-              description={item.description}
-            />
-          </List.Item>
+
+
         )}
       />
     </>
