@@ -20,6 +20,7 @@ import "antd/dist/antd.css";
 import AdminPage from "./admin";
 
 import * as _ from "lodash"
+import Cart from "./cart/cart";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -71,7 +72,8 @@ const HomePageTest = () => {
   const cartContext = useContext(CartContext);
   const userContext = useContext(UserContext)
 
-  console.log(userContext)
+  console.log('userContex: ', userContext);
+  console.log('cartContex: ', cartContext);
 
   const navigate = useNavigate();
   const classes = useStyles();
@@ -145,7 +147,7 @@ const HomePageTest = () => {
           />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/cart" element={<HomePage />} />
+          <Route exact path="/cart" element={<Cart />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
           <Route path="/machine/:machineId" element={<SingleMachine />} />
