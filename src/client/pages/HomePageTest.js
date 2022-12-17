@@ -15,12 +15,15 @@ import { ForgotPassword } from "./ForgotPassword";
 import RegisterAccount from "./registerAccount";
 import About from "./about";
 import SingleMachine from "./SingleMachine";
-import { Context} from "../context";
+import { Context } from "../context";
 import "antd/dist/antd.css";
 import CheckOut from "./CheckOut";
 
-import * as _ from "lodash"
+import * as _ from "lodash";
 import AdminPage from "./admin";
+
+import * as _ from "lodash";
+import Cart from "./cart/cart";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -69,9 +72,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const HomePageTest = () => {
-  const context = useContext(Context)
+  const context = useContext(Context);
 
-
+  console.log("userContex: ", userContext);
+  console.log("cartContex: ", cartContext);
 
   const navigate = useNavigate();
   const classes = useStyles();
@@ -115,7 +119,9 @@ const HomePageTest = () => {
                   : `Giỏ hàng(${context.cartList.length})`}
               </button>
               <button className={classes.btn} onClick={handleLoginButton}>
-                {!_.isEmpty(context.user) ? `${context.user.userInfo.userName}` : "ĐĂNG NHẬP" }
+                {!_.isEmpty(context.user)
+                  ? `${context.user.userInfo.userName}`
+                  : "ĐĂNG NHẬP"}
               </button>
             </div>
           </div>
@@ -145,14 +151,13 @@ const HomePageTest = () => {
           />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
-          <Route exact path="/cart" element={<HomePage />} />
+          <Route exact path="/cart" element={<Cart />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
           <Route path="/machine/:machineId" element={<SingleMachine />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/CheckOut" element={<CheckOut />} />
           <Route exact path="/admin/*" element={<AdminPage />} />
-
         </Routes>
       </div>
     </div>
