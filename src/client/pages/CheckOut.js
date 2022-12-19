@@ -6,7 +6,7 @@ import { Context } from "../context";
 import { Table } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 
 const CheckOut = () => {
   const context = useContext(Context);
