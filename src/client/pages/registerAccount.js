@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import "../css/register.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const useStyles = makeStyles(() => ({
   container: {
     display: "flex",
@@ -11,6 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const RegisterAccount = () => {
+  const navigate = useNavigate();
   const classes = useStyles();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,24 +21,27 @@ const RegisterAccount = () => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-  
 
-const config = {
-  headers: {
-    'Content-Type': 'application/x-www-form-urlencoded'
-  }
-}
+  const config = {
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  };
 
   const params = new URLSearchParams();
-  params.append('userName', email);
-  params.append('email', email);
-  params.append('phone', phone);
-  params.append('password', password)
-  params.append('address', address)
+  params.append("userName", name);
+  params.append("email", email);
+  params.append("phone", phone);
+  params.append("password", password);
+  params.append("address", address);
 
   const submitForm = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:5000/users/register", params, config).then((res) => console.log(res))
+    await axios
+      .post("http://localhost:5000/api/users/register", params, config)
+      .then((res) => console.log(res));
+    navigate("/login");
+    alert("register account successfully");
   };
 
   const handleChangeName = (event) => {
@@ -130,7 +136,13 @@ const config = {
         />
       </form>
       <div className="buttons">
-        <button type="submit" onClick={(e) => {submitForm(e)}} style={{ padding: "0px 30px", fontSize: "20px" }}>
+        <button
+          type="submit"
+          onClick={(e) => {
+            submitForm(e);
+          }}
+          style={{ padding: "0px 30px", fontSize: "20px" }}
+        >
           Đăng kí tài khoản
         </button>
       </div>

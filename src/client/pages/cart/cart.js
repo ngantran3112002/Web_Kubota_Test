@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import { CartContext } from "../../context";
+import { Context } from "../../context";
 import { Space, Table, Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
-  const cartContex = useContext(CartContext);
+  const cartContex = useContext(Context);
+  const navigate = useNavigate();
+  console.log("cartContex: ", cartContex);
   const cartLists = cartContex.cartList;
   const [rowData, setRowData] = useState([]);
+  const [rowDataPayment, setRowDataPayment] = useState([]);
   const [productQuantity, setProductQuantity] = useState(0);
   const searchInput = useRef(null);
+  const [moneySumAll, setMoneySumAll] = useState(0);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
   };
@@ -114,8 +119,12 @@ const Cart = () => {
 
   const onChangeProductQuantity = (event) => {
     setProductQuantity(event.target.value);
+    console.log("productQuan: ", productQuantity);
+  };
 
-    console.log("productQUna: ", productQuantity);
+  const handleClickPayConfirm = (event) => {
+    event.preventDefault();
+    navigate("/CheckOut", { replace: true });
   };
 
   const head = [
@@ -150,10 +159,6 @@ const Cart = () => {
       dataIndex: "quantity",
       key: "quantity",
       onCell: sharedOnCell,
-      sorter: {
-        compare: (a, b) => a.quantity - b.quantity,
-        multiple: 3,
-      },
     },
     {
       title: "Thành tiền",
@@ -167,19 +172,20 @@ const Cart = () => {
   ];
 
   useEffect(() => {
-    let moneySumAll = 0;
     const dataRow = [];
+    let allMoney = 0;
     cartLists.forEach((product, index) => {
       setProductQuantity(product.quantity);
-      const moneySum = product.obj.price * product.quantity;
-      moneySumAll += moneySum;
       let indexI = "incrementor" + index;
+      const val = parseInt(document.getElementById(indexI)?.value);
+      console.log("val: ", val);
+      const moneySum = product.obj.price * val;
+      allMoney += moneySum;
       dataRow.push({
         key: index,
         id: product.obj.id,
         name: product.obj.name,
         price: product.obj.price,
-        // quantity: product.quantity,
         quantity: (
           <>
             <input
@@ -187,35 +193,73 @@ const Cart = () => {
               step="1"
               id={indexI}
               min="0"
-              value={productQuantity}
-              onChange={() => {
-                product.quantity += 1;
-              }}
+              defaultValue={product.quantity}
+              onChange={onChangeProductQuantity}
             />
           </>
         ),
-        money: moneySum,
+        money: moneySum ? moneySum : product.obj.price * productQuantity,
       });
+      if (cartContex.cartList[index].quantity !== val) {
+        cartContex.cartList[index].quantity = val;
+      }
     });
-    // dataRow.push({
-    //   //   key: "sum",
-    //   id: "Tổng tiền",
-    //   //   name: "",
-    //   //   price: "",
-    //   //   quantity: "",
-    //   name: moneySumAll,
-    // });
 
-    console.log("moneySumAll: ", moneySumAll);
+    console.log("moneySumAll: ", allMoney);
+    setMoneySumAll(allMoney);
+    cartContex.cartList.money = allMoney;
     setRowData(dataRow);
-  }, [cartLists, productQuantity]);
+  }, [productQuantity]);
+
+  useEffect(() => {
+    console.log("helllo");
+    const rowDataPayment = [
+      {
+        key: "sumMoneyRow",
+        sumMoney: moneySumAll,
+      },
+    ];
+    setRowDataPayment(rowDataPayment);
+  }, [moneySumAll]);
 
   return (
     <div className="container">
       <div className="tableCart">
         <Table columns={head} dataSource={rowData} />
       </div>
-      <div className="payment"></div>
+      <div className="payment">
+        <h1>Thanh toán</h1>
+        <div>
+          <div
+            className="sumMoney"
+            style={{
+              display: "flex",
+              justifyContent: "space-around",
+              borderBottom: "1px dotted",
+              alignItems: "center",
+              marginBottom: 20,
+            }}
+          >
+            <h4>Tổng tiền</h4>
+            <h5>{moneySumAll}</h5>
+          </div>
+          <div
+            className="payConfirm"
+            style={{ display: "flex", justifyContent: "flex-end" }}
+          >
+            <button
+              onClick={handleClickPayConfirm}
+              style={{
+                backgroundColor: "beige",
+                borderRadius: "10%",
+                padding: 15,
+              }}
+            >
+              Xác thực thanh toán
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

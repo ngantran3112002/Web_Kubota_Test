@@ -1,167 +1,180 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/CheckOut.css";
+import { Context } from "../context";
+import { Table } from "antd";
 
 const CheckOut = () => {
+  const context = useContext(Context);
+  const userContext = context.user;
+  const cartContex = context.cartList;
+  const [dataRow, setDataRow] = useState([]);
+  const head = [
+    {
+      title: "ID",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Đơn giá",
+      dataIndex: "price",
+      key: "price",
+    },
+    {
+      title: "Số lượng",
+      dataIndex: "quantity",
+      key: "quantity",
+    },
+    {
+      title: "Thành tiền",
+      dataIndex: "money",
+      key: "money",
+    },
+  ];
+  useEffect(() => {
+    const row = [];
+    cartContex.forEach((product, index) => {
+      const moneySum = product.obj.price * product.quantity;
+      row.push({
+        key: index,
+        id: product.obj.id,
+        name: product.obj.name,
+        price: product.obj.price,
+        quantity: product.quantity,
+        money: moneySum,
+      });
+    });
+    row.push({
+      key: "sumAllMoney",
+      name: "Tổng tiền",
+      money: cartContex.money,
+    });
+    setDataRow(row);
+  }, [cartContex]);
   return (
     <div className="row">
-        <div className="container-checkout">
-          <div className="col-md-7">
-              <div className="card-checkout">
-                <div className="card-checkout-header">
-                    <h5>NHẬP THÔNG TIN KHÁCH HÀNG</h5>
+      <div className="container-checkout">
+        <div className="col-md-7">
+          <div className="card-checkout">
+            <div className="card-checkout-header">
+              <h5>NHẬP THÔNG TIN KHÁCH HÀNG</h5>
+            </div>
+            <div className="card-checkout-body">
+              <div className="row">
+                <div className="col-md-12">
+                  <div className="form-group mb-6">
+                    <label> Họ và Tên</label>
+                    <input
+                      type="text"
+                      name="name"
+                      className="form-control"
+                      defaultValue={
+                        userContext ? userContext.userInfo?.userName : ""
+                      }
+                    />
+                  </div>
                 </div>
-                <div className="card-checkout-body">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="form-group mb-6">
-                                <label> Họ và Tên</label>
-                                <input type="text" name="name"  className="form-control" />
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="form-group mb-3">
-                                <label> Số điện thoại</label>
-                                <input type="number" name="phone" className="form-control" />
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="form-group mb-3">
-                                <label> Email</label>
-                                <input type="email" name="email"  className="form-control" />
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <div className="form-group mb-3">
-                                <label> Địa chỉ</label>
-                                <textarea rows="3" name="address"  className="form-control"></textarea>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="form-group mb-3">
-                                <label>Tỉnh, Thành phố</label>
-                                <input type="text" name="city"  className="form-control" />
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="form-group mb-3">
-                                <label>Quận, Huyện</label>
-                                <input type="text" name="district"  className="form-control" />
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="form-group mb-3">
-                                <label>Zip Code</label>
-                                <input type="text" name="zipcode"  className="form-control" />
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <div className="form-group mb-3">
-                                <label> Ghi chú</label>
-                                <textarea rows="3" name="address"  className="form-control"></textarea>
-                            </div>
-                        </div>
-                    </div>
+                <div className="col-md-6">
+                  <div className="form-group mb-3">
+                    <label> Số điện thoại</label>
+                    <input
+                      type="number"
+                      name="phone"
+                      className="form-control"
+                      defaultValue={
+                        userContext ? userContext.userInfo?.phone : ""
+                      }
+                    />
+                  </div>
                 </div>
+                <div className="col-md-6">
+                  <div className="form-group mb-3">
+                    <label> Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control"
+                      defaultValue={
+                        userContext ? userContext.userInfo?.email : ""
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="form-group mb-3">
+                    <label> Địa chỉ</label>
+                    <textarea
+                      rows="3"
+                      name="address"
+                      className="form-control"
+                      defaultValue={
+                        userContext ? userContext.userInfo?.address : ""
+                      }
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="form-group mb-3">
+                    <label> Ghi chú</label>
+                    <textarea
+                      rows="3"
+                      name="address"
+                      className="form-control"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        
-        <div className="col-md-5 container-productscreen">
-        <div >
-            <h5>CHI TIẾT ĐƠN HÀNG</h5>
+      <div className="col-md-5 container-productscreen">
+        <div>
+          <h5>CHI TIẾT ĐƠN HÀNG</h5>
         </div>
-          <table className="table table-bordered">
-              <thead>
-                  <tr>
-                      <th width="50%">Sản phẩm</th>
-                      <th>Đơn giá</th>
-                      <th>Số lượng</th>
-                      <th>Tổng</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {/* {cart.map( (item, idx) => {
-                      totalCartPrice += item.product.selling_price * item.product_qty;
-                      return (
-                          <tr key={idx}>
-                              <td>{item.product.name}</td>
-                              <td>{item.product.selling_price}</td>
-                              <td>{item.product_qty}</td>
-                              <td>{item.product.selling_price * item.product_qty}</td>
-                          </tr>
-                      )
-                  })} */}
-                  <tr>
-                      <td colSpan="2" className="text-end fw-bold">Tổng cộng</td>
-                      <td colSpan="2" className="text-end fw-bold">Thành tiền</td>
-                  </tr>
-              </tbody>
-            </table>
-            {/* <div id="payment" class="woocommerce-checkout-payment">
-              <ul class="wc_payment_methods payment_methods methods">
-                      <li class="wc_payment_method payment_method_cheque">
-                              <input id="BANK" type="radio" checked="checked" class="input-radio" name="Payment.Value" value="BANK" data-order_button_text=""/>
-                          
-                          <label for="BANK">
-                              Chuyển khoản
-                          </label>
-                          <div class="payment_box payment_method_cod" style="display:none;">
-                              <p> </p>
-                          </div>
-
-                      </li>
-                      <li class="wc_payment_method payment_method_cheque">
-                              <input id="COD" type="radio" class="input-radio" name="Payment.Value" value="COD" data-order_button_text=""/>
-                          
-                          <label for="COD">
-                              Thanh to&#225;n khi nhận h&#224;ng
-                          </label>
-                          <div class="payment_box payment_method_cod" style="display:none;">
-                              <p> </p>
-                          </div>
-
-                      </li>
-                </ul>
-              </div> */}
-              <div>
-              <h6>HÌNH THỨC THANH TOÁN</h6>
-              <ul>
-                <li>
-                  <input type="radio" id="html" name="fav_language" value="HTML"/>
-                  <label for="html">Thanh toán khi nhận hàng (COD) </label> 
-                </li>
-                <li>
-                  <input type="radio" id="css" name="fav_language" value="CSS"/>
-                  <label for="css">Thanh tóan bằng hình thức chuyển khoản</label>
-                </li>
-              </ul>
-              
-              
-              </div>
-            <div className="col-md-12">
-                <div className="form-group text-end">
-                   <button type="button" className="btn btn-primary mx-1" >Đặt hàng</button>
-                </div>
-            </div>
+        <Table columns={head} dataSource={dataRow} />
+        <div>
+          <h6>HÌNH THỨC THANH TOÁN</h6>
+          <ul>
+            <li>
+              <input type="radio" id="html" name="fav_language" value="HTML" />
+              <label for="html">Thanh toán khi nhận hàng (COD) </label>
+            </li>
+            <li>
+              <input type="radio" id="css" name="fav_language" value="CSS" />
+              <label for="css">Thanh tóan bằng hình thức chuyển khoản</label>
+            </li>
+          </ul>
         </div>
-      </div> 
-  )
-}
+        <div className="col-md-12">
+          <div className="form-group text-end">
+            <button type="button" className="btn btn-primary mx-1">
+              Đặt hàng
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default CheckOut;
 
 /*/////////////////////////////////////////////////////////////////////////////////*/
-
 
 // import React, {useEffect, useState} from 'react';
 // import ReactDOM from 'react-dom';
 // import axios from 'axios';
 // import swal from 'sweetalert';
 // import { useNavigate } from 'react-router-dom';
-
 
 // function Checkout()
 // {
@@ -171,7 +184,7 @@ export default CheckOut;
 //         navigate('/');
 //         swal("Warning","Login to goto Cart Page","error");
 //     }
-    
+
 //     const [loading, setLoading] = useState(true);
 //     const [cart, setCart] = useState([]);
 //     var totalCartPrice = 0;
@@ -206,8 +219,8 @@ export default CheckOut;
 //                     swal("Warning",res.data.message,"error");
 //                 }
 //             }
-//         }); 
- 
+//         });
+
 //         return () => {
 //             isMounted = false
 //         };
@@ -307,7 +320,7 @@ export default CheckOut;
 //                         setError([]);
 //                         var options = {
 //                             "key": "rzp_test_5AEIUNtEJxBPvS",
-//                             "amount": (1 * 100), 
+//                             "amount": (1 * 100),
 //                             "name": "Funda Reat Ecom",
 //                             "description": "Cảm ơn đã mua hàng của Kubota",
 //                             "image": "https://example.com/your_logo",
@@ -357,11 +370,11 @@ export default CheckOut;
 //                     }
 //                 });
 //                 break;
-        
+
 //             default:
 //                 break;
 //         }
-       
+
 //     }
 
 //     if(loading)
@@ -531,7 +544,5 @@ export default CheckOut;
 //         </div>
 //     )
 // }
-
-
 
 // export default Checkout;

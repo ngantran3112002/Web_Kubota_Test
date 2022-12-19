@@ -22,7 +22,6 @@ import CheckOut from "./CheckOut";
 import * as _ from "lodash";
 import AdminPage from "./admin";
 
-import * as _ from "lodash";
 import Cart from "./cart/cart";
 
 const useStyles = makeStyles(() => ({
@@ -73,10 +72,6 @@ const useStyles = makeStyles(() => ({
 }));
 const HomePageTest = () => {
   const context = useContext(Context);
-
-  console.log("userContex: ", userContext);
-  console.log("cartContex: ", cartContext);
-
   const navigate = useNavigate();
   const classes = useStyles();
   const handleLoginButton = (event) => {
@@ -158,6 +153,7 @@ const HomePageTest = () => {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/CheckOut" element={<CheckOut />} />
           <Route exact path="/admin/*" element={<AdminPage />} />
+          <Route exact path="/registerAccount" element={<RegisterAccount />} />
         </Routes>
       </div>
     </div>
