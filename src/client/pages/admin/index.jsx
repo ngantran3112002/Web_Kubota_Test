@@ -26,9 +26,6 @@ export default function AdminPage() {
 
   return (
     <>
-      {/* <Breadcrumb>
-        <Breadcrumb.Item menu={{ items }}>Ant Design</Breadcrumb.Item>
-       </Breadcrumb> */}
       <Row>
         <Col style={{ width: "20%" }}>
           <Menu items={items} />

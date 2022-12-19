@@ -83,15 +83,24 @@ const CheckOut = () => {
         key: index,
         id: product.obj.id,
         name: product.obj.name,
-        price: product.obj.price,
+        price: Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(product.obj.price),
         quantity: product.quantity,
-        money: moneySum,
+        money: Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(moneySum),
       });
     });
     row.push({
       key: "sumAllMoney",
       name: "Tổng tiền",
-      money: cartContex.money,
+      money: Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(cartContex.money),
     });
     setDataRow(row);
     console.log("dataRowJson: ", context);

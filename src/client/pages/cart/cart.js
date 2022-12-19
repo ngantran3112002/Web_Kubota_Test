@@ -188,7 +188,10 @@ const Cart = () => {
         key: index,
         id: product.obj.id,
         name: product.obj.name,
-        price: product.obj.price,
+        price: Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(product.obj.price),
         quantity: (
           <>
             <input
@@ -202,7 +205,14 @@ const Cart = () => {
           </>
         ),
         money: moneySum
-          ? moneySum : product.obj.price * productQuantity,
+          ? Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(moneySum)
+          : Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(product.obj.price * productQuantity),
       });
       if (cartContex.cartList[index].quantity !== val) {
         cartContex.cartList[index].quantity = val;
@@ -220,13 +230,13 @@ const Cart = () => {
 
   useEffect(() => {
     const orderDetail = [];
-    rowData.forEach((product, index) => {
+    cartLists.forEach((product, index) => {
       let indexI = "incrementor" + index;
       const productQuantity = parseInt(document.getElementById(indexI)?.value);
       orderDetail.push({
-        product_id: product.id,
+        product_id: product.obj.id,
         quantity: productQuantity,
-        priceEach: product.price,
+        priceEach: product.obj.price,
       });
     });
     const data = {
@@ -259,7 +269,7 @@ const Cart = () => {
           >
             <h4>Tổng tiền</h4>
             <h5>
-              {new Intl.NumberFormat("vi-VN", {
+              {Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
               }).format(moneySumAll)}
