@@ -15,7 +15,6 @@ const CheckOut = () => {
   const cartContex = context.cartList;
   const [dataRow, setDataRow] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const token = userContext?.token;
   const token = userContext.token ? userContext.token : '';
   const navigate = useNavigate();
   const config = {
