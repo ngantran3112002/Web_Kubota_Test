@@ -48,10 +48,12 @@ const ProductDetail = () => {
   // const prouctId = useParams();
 
   const fetchProductData = async () => {
-    console.log(productId)
-    return await axios.get(`http://localhost:3001/api/products/detail/${productId}`);
+    console.log(productId);
+    return await axios.get(
+      `http://localhost:5000/api/products/detail/${productId}`
+    );
   };
-  
+
   useEffect(() => {
     fetchProductData()
       .then((productDataCall) => {
@@ -64,14 +66,13 @@ const ProductDetail = () => {
 
   //chưa làm hàm addToCart => sử dụng setCartList từ context, VD mẫu tử file index.jsx của productList
 
-
   let CurrencyFormat = require("react-currency-format");
   const [loading, setLoading] = useState(false);
   const onButtonClick = (e) => {
     setLoading(true);
     setTimeout(() => {
-      const callback = {quantity: quantity }
-      context.addToCart(product, callback)
+      const callback = { quantity: quantity };
+      context.addToCart(product, callback);
       setLoading(false);
     }, 2000);
   };
@@ -80,10 +81,7 @@ const ProductDetail = () => {
     <>
       <Row style={{ marginTop: 40 }} gutter={200}>
         <Col span={10} align="right" style={{ paddingRight: 0 }}>
-          <Image
-            id="productImage"
-           src= {product.image}
-          />
+          <Image id="productImage" src={product.image} />
         </Col>
         <Col
           span={12}
@@ -98,9 +96,7 @@ const ProductDetail = () => {
 
             <span id="no_of_reviews">(5 reviews)</span>
             <hr />
-            <p>
-              {product.description}
-            </p>
+            <p>{product.description}</p>
             <Divider style={{ borderColor: "black" }} />
             <CurrencyFormat
               style={{ fontSize: "30px", color: "red" }}
@@ -153,7 +149,9 @@ const ProductDetail = () => {
                 size="default"
                 defaultValue={quantity}
                 value={quantity}
-                disabled={quantity - 1 === 0 || quantity + 1 > product.quantityInStock}
+                disabled={
+                  quantity - 1 === 0 || quantity + 1 > product.quantityInStock
+                }
                 // style={{ width: 80 }}
               />
               <Button
@@ -182,8 +180,6 @@ const ProductDetail = () => {
                 backgroundColor: "rgba(208,1,27,0.08)",
                 borderColor: "red",
               }}
-
-
             >
               Thêm vào giỏ hàng
             </Button>
@@ -191,10 +187,6 @@ const ProductDetail = () => {
         </Col>
       </Row>
       <Divider style={{ borderColor: "gray" }} />
-
-
-        
-  
     </>
   );
 };

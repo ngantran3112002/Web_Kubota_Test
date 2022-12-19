@@ -132,6 +132,9 @@ const ProductList = () => {
     const queryParams = queryString.parse(currentSearchParams.search);
     const newQuery = { ...queryParams, sort_by: option };
 
+    console.log(
+      `${currentSearchParams.pathname}` + "?" + queryString.stringify(newQuery)
+    );
     navigate({
       pathname: currentSearchParams.pathname,
       search: "?" + queryString.stringify(newQuery),
