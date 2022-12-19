@@ -3,16 +3,19 @@ import { Context } from "../../context";
 import { Space, Table, Button, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import axios, { Axios } from "axios";
 const Cart = () => {
   const cartContex = useContext(Context);
   const navigate = useNavigate();
   console.log("cartContex: ", cartContex);
   const cartLists = cartContex.cartList;
   const [rowData, setRowData] = useState([]);
-  const [rowDataPayment, setRowDataPayment] = useState([]);
   const [productQuantity, setProductQuantity] = useState(0);
   const searchInput = useRef(null);
   const [moneySumAll, setMoneySumAll] = useState(0);
+  const [totalProductQuantity, setTotalProductQuantity] = useState(0);
+  const [orderDetailDataJson, setOrderDetailDataJson] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
   };
@@ -122,7 +125,7 @@ const Cart = () => {
     console.log("productQuan: ", productQuantity);
   };
 
-  const handleClickPayConfirm = (event) => {
+  const handleClickPayConfirm = async (event) => {
     event.preventDefault();
     navigate("/CheckOut", { replace: true });
   };
@@ -174,11 +177,11 @@ const Cart = () => {
   useEffect(() => {
     const dataRow = [];
     let allMoney = 0;
+    let totalProduct = 0;
     cartLists.forEach((product, index) => {
       setProductQuantity(product.quantity);
       let indexI = "incrementor" + index;
       const val = parseInt(document.getElementById(indexI)?.value);
-      console.log("val: ", val);
       const moneySum = product.obj.price * val;
       allMoney += moneySum;
       dataRow.push({
@@ -203,24 +206,37 @@ const Cart = () => {
       if (cartContex.cartList[index].quantity !== val) {
         cartContex.cartList[index].quantity = val;
       }
+      totalProduct += product.quantity;
     });
 
     console.log("moneySumAll: ", allMoney);
     setMoneySumAll(allMoney);
+    setTotalProductQuantity(totalProduct);
     cartContex.cartList.money = allMoney;
+    cartContex.cartList.totalProduct = totalProductQuantity;
     setRowData(dataRow);
   }, [productQuantity]);
 
   useEffect(() => {
-    console.log("helllo");
-    const rowDataPayment = [
-      {
-        key: "sumMoneyRow",
-        sumMoney: moneySumAll,
-      },
-    ];
-    setRowDataPayment(rowDataPayment);
-  }, [moneySumAll]);
+    const orderDetail = [];
+    rowData.forEach((product, index) => {
+      let indexI = "incrementor" + index;
+      const productQuantity = parseInt(document.getElementById(indexI)?.value);
+      orderDetail.push({
+        product_id: product.id,
+        quantity: productQuantity,
+        priceEach: product.price,
+      });
+    });
+    const data = {
+      user_id: cartContex.user?.userInfo?.id,
+      total: cartContex.cartList.totalProduct,
+    };
+    data.orderDetails = orderDetail;
+
+    setOrderDetailDataJson(JSON.stringify(data));
+    cartContex.order = orderDetailDataJson;
+  }, [rowData]);
 
   return (
     <div className="container">

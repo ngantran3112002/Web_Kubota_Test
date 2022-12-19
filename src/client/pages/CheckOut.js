@@ -4,12 +4,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/CheckOut.css";
 import { Context } from "../context";
 import { Table } from "antd";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const CheckOut = () => {
   const context = useContext(Context);
   const userContext = context.user;
   const cartContex = context.cartList;
   const [dataRow, setDataRow] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const token = cartContex?.user?.token;
+  const navigate = useNavigate();
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  };
+
+  const handleClickOrder = async (_body, _config) => {
+    setIsLoading(true);
+    await axios
+      .post("http://localhost:5000/api/orders/add/create", _body, _config)
+      .then((res) =>
+        alert("Order Placed Successfully", res.data.message, "success")
+      );
+    setIsLoading(false);
+    navigate("/introduction", { replace: true });
+  };
+
   const head = [
     {
       title: "ID",
@@ -56,6 +79,7 @@ const CheckOut = () => {
       money: cartContex.money,
     });
     setDataRow(row);
+    console.log("dataRowJson: ", context);
   }, [cartContex]);
   return (
     <div className="row">
@@ -156,7 +180,11 @@ const CheckOut = () => {
         </div>
         <div className="col-md-12">
           <div className="form-group text-end">
-            <button type="button" className="btn btn-primary mx-1">
+            <button
+              type="button"
+              className="btn btn-primary mx-1"
+              onClick={() => handleClickOrder(context.order, config)}
+            >
               Đặt hàng
             </button>
           </div>

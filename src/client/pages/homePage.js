@@ -14,7 +14,7 @@ const HomePage = () => {
             className="d-block w-100"
             alt="FirstSlide"
             src="https://wallpapercave.com/wp/wp7079153.jpg"
-            style={{ height: '500px' }}
+            style={{ height: "500px" }}
           />
         </Carousel.Item>
         <Carousel.Item interval={1000}>
@@ -22,7 +22,7 @@ const HomePage = () => {
             className="d-block w-100"
             alt="secondSlide"
             src="https://www.americafem.com/wp-content/uploads/2022/03/L02Lanuch.jpg"
-            style={{ height: '500px' }}
+            style={{ height: "500px" }}
           />
         </Carousel.Item>
       </Carousel>
@@ -103,7 +103,10 @@ const HomePage = () => {
       </div>
 
       <footer>
-        <div className="container text-center wow fadeInUp">
+        <div
+          className="container text-center wow fadeInUp"
+          style={{ backgroundColor: "yellow", padding: "10px 0px" }}
+        >
           <h3>PHỤ TÙNG MÁY NÔNG NGHIỆP CHÍNH HÃNG</h3>
           <div className="single-content">
             <p>
@@ -116,20 +119,6 @@ const HomePage = () => {
               Hotline: 0398.490.986 - 0949.265.919 &nbsp; - &nbsp;
               Email:phutungkubota.vn@gmail.com
             </p>
-          </div>
-        </div>
-        <div className="foot">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-4"></div>
-              <div className="col-md-6 text-right">
-                CÔNG TY TNHH KỸ THUẬT MÁY KTM
-                <br />
-                Giấy phép kinh doanh số 2802799630 do Sở KHĐT T. Thanh Hóa cấp
-                ngày 02/10/2019
-              </div>
-              <div className="col-md-2 text-right"></div>
-            </div>
           </div>
         </div>
       </footer>
