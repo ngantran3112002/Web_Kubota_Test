@@ -188,10 +188,7 @@ const Cart = () => {
         key: index,
         id: product.obj.id,
         name: product.obj.name,
-        price: new Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }).format(product.obj.price),
+        price: product.obj.price,
         quantity: (
           <>
             <input
@@ -205,14 +202,7 @@ const Cart = () => {
           </>
         ),
         money: moneySum
-          ? new Intl.NumberFormat("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            }).format(moneySum)
-          : new Intl.NumberFormat("vi-VN", {
-              style: "currency",
-              currency: "VND",
-            }).format(product.obj.price * productQuantity),
+          ? moneySum : product.obj.price * productQuantity,
       });
       if (cartContex.cartList[index].quantity !== val) {
         cartContex.cartList[index].quantity = val;

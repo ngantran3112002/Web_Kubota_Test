@@ -7,6 +7,7 @@ import { Table } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
+import * as _ from 'lodash'
 
 const CheckOut = () => {
   const context = useContext(Context);
@@ -15,6 +16,7 @@ const CheckOut = () => {
   const [dataRow, setDataRow] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const token = userContext?.token;
+  const token = userContext.token ? userContext.token : '';
   const navigate = useNavigate();
   const config = {
     headers: {
@@ -36,10 +38,13 @@ const CheckOut = () => {
   const handleClickOrder = async (_body, _config) => {
     setIsLoading(true);
     await axios
-      .post("http://localhost:5000/api/orders/add/create", _body, _config)
+      .post("http://localhost:3001/api/orders/add/create", _body, _config)
       .then((res) =>
-        alert("Order Placed Successfully", res.data.message, "success")
-      );
+        {
+          alert("Order Placed Successfully", res.data.message, "success")
+          cartContex.splice(0)
+        }
+      ).catch(err => console.warn(err));
     setIsLoading(false);
     navigate("/introduction", { replace: true });
   };
@@ -79,24 +84,15 @@ const CheckOut = () => {
         key: index,
         id: product.obj.id,
         name: product.obj.name,
-        price: new Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }).format(product.obj.price),
+        price: product.obj.price,
         quantity: product.quantity,
-        money: new Intl.NumberFormat("vi-VN", {
-          style: "currency",
-          currency: "VND",
-        }).format(moneySum),
+        money: moneySum,
       });
     });
     row.push({
       key: "sumAllMoney",
       name: "Tổng tiền",
-      money: new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-      }).format(cartContex.money),
+      money: cartContex.money,
     });
     setDataRow(row);
     console.log("dataRowJson: ", context);

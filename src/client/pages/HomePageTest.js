@@ -153,7 +153,7 @@ const HomePageTest = () => {
           <Route path="/machine/:machineId" element={<SingleMachine />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/CheckOut" element={<CheckOut />} />
-          {context.user.isAdmin && context.user.isAdmin === true ? <Route exact path="/admin/*" element={<AdminPage />} />: <></>}
+          <Route exact path="/admin/*" element={<AdminPage />} />
           <Route exact path="/registerAccount" element={<RegisterAccount />} />
         </Routes>
       </div>

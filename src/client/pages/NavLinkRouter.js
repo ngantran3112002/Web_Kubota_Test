@@ -48,7 +48,7 @@ const NavLinkRouter = () => {
             )}
           </NavLink>
         </li>
-        {context.user.userInfo.isAdmin === true? <li>
+        <li>
           <NavLink
             to="./admin"
             className={({ isActive }) =>
@@ -57,7 +57,7 @@ const NavLinkRouter = () => {
           >
             ADMIN
           </NavLink>
-        </li> : <></>}
+        </li>
       </ul>
     </nav>
   );
