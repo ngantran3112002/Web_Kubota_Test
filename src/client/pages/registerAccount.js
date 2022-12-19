@@ -38,7 +38,7 @@ const RegisterAccount = () => {
   const submitForm = async (e) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:5000/api/users/register", params, config)
+      .post("http://localhost:3001/api/users/register", params, config)
       .then((res) => console.log(res));
     navigate("/login");
     alert("register account successfully");

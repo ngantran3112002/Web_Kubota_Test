@@ -94,7 +94,7 @@ const AdminOrder = ({
   const currentSearchParams = useLocation();
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/orders/alltest/test").then(async (res) => {
+    axios.get("http://localhost:3001/api/orders/alltest/test").then(async (res) => {
       setOrders(
         res.data.rows.map((row) => ({
           id: row.id,
@@ -113,7 +113,7 @@ const AdminOrder = ({
   const fetchOrderDetails = async (id, record) => {
     setLoading(true);
     await axios
-      .get(`http://localhost:5000/api/orders/${id}`)
+      .get(`http://localhost:3001/api/orders/${id}`)
       .then((res) => {
         setOrderDetail(
           res.data.flatMap((items) => ({
@@ -147,10 +147,10 @@ const AdminOrder = ({
     setIsEdit(false);
     setLoading(true);
     await axios
-      .post(`http://localhost:5000/api/orders/${orderId}?status=${status}`)
+      .post(`http://localhost:3001/api/orders/${orderId}?status=${status}`)
       .then((res) => console.log("post OK"));
     await axios
-      .get("http://localhost:5000/api/orders/alltest/test")
+      .get("http://localhost:3001/api/orders/alltest/test")
       .then(async (res) => {
         setOrders(
           res.data.rows.map((row) => ({

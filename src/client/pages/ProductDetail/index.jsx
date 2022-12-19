@@ -49,7 +49,7 @@ const ProductDetail = () => {
 
   const fetchProductData = async () => {
     console.log(productId)
-    return await axios.get(`http://localhost:5000/api/products/detail/${productId}`);
+    return await axios.get(`http://localhost:3001/api/products/detail/${productId}`);
   };
   
   useEffect(() => {
@@ -193,8 +193,8 @@ const ProductDetail = () => {
       <Divider style={{ borderColor: "gray" }} />
 
 
-        )}
-      />
+        
+  
     </>
   );
 };
