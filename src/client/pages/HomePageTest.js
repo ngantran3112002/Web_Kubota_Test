@@ -72,6 +72,7 @@ const useStyles = makeStyles(() => ({
 }));
 const HomePageTest = () => {
   const context = useContext(Context);
+  console.log(context.user)
   const navigate = useNavigate();
   const classes = useStyles();
   const handleLoginButton = (event) => {
@@ -152,7 +153,7 @@ const HomePageTest = () => {
           <Route path="/machine/:machineId" element={<SingleMachine />} />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/CheckOut" element={<CheckOut />} />
-          <Route exact path="/admin/*" element={<AdminPage />} />
+          {context.user.isAdmin && context.user.isAdmin === true ? <Route exact path="/admin/*" element={<AdminPage />} />: <></>}
           <Route exact path="/registerAccount" element={<RegisterAccount />} />
         </Routes>
       </div>

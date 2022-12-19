@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ProductList from "./productList";
 import { NavLink } from "react-router-dom";
+import { Context } from "../context";
 
 const NavLinkRouter = () => {
+  const context = useContext(Context)
   let activeStyle = {
     textDecoration: "underline",
   };
@@ -46,7 +48,7 @@ const NavLinkRouter = () => {
             )}
           </NavLink>
         </li>
-        <li>
+        {context.user.userInfo.isAdmin === true? <li>
           <NavLink
             to="./admin"
             className={({ isActive }) =>
@@ -55,7 +57,7 @@ const NavLinkRouter = () => {
           >
             ADMIN
           </NavLink>
-        </li>
+        </li> : <></>}
       </ul>
     </nav>
   );

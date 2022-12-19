@@ -58,7 +58,7 @@ const ListView = ({
               >
                 <Link
                   className="name"
-                  to={`/products/details/${item.productId}`}
+                  to={`/products/details/${item.id}`}
                 >
                   {item.name}
                 </Link>

@@ -79,15 +79,24 @@ const CheckOut = () => {
         key: index,
         id: product.obj.id,
         name: product.obj.name,
-        price: product.obj.price,
+        price: new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(product.obj.price),
         quantity: product.quantity,
-        money: moneySum,
+        money: new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(moneySum),
       });
     });
     row.push({
       key: "sumAllMoney",
       name: "Tổng tiền",
-      money: cartContex.money,
+      money: new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(cartContex.money),
     });
     setDataRow(row);
     console.log("dataRowJson: ", context);
@@ -178,14 +187,16 @@ const CheckOut = () => {
         <Table columns={head} dataSource={dataRow} />
         <div>
           <h6>HÌNH THỨC THANH TOÁN</h6>
-          <input
-            type="radio"
-            id="html"
-            name="fav_language"
-            value="HTML"
-            checked
-          />
-          <label for="html">Thanh toán khi nhận hàng (COD) </label>
+          <ul>
+            <li>
+              <input type="radio" id="html" name="fav_language" value="HTML" />
+              <label for="html">Thanh toán khi nhận hàng (COD) </label>
+            </li>
+            <li>
+              <input type="radio" id="css" name="fav_language" value="CSS" />
+              <label for="css">Thanh tóan bằng hình thức chuyển khoản</label>
+            </li>
+          </ul>
         </div>
         <div className="col-md-12">
           <div className="form-group text-end">

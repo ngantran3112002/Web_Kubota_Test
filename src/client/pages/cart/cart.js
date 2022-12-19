@@ -188,7 +188,10 @@ const Cart = () => {
         key: index,
         id: product.obj.id,
         name: product.obj.name,
-        price: product.obj.price,
+        price: new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(product.obj.price),
         quantity: (
           <>
             <input
@@ -201,7 +204,15 @@ const Cart = () => {
             />
           </>
         ),
-        money: moneySum ? moneySum : product.obj.price * productQuantity,
+        money: moneySum
+          ? new Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(moneySum)
+          : new Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(product.obj.price * productQuantity),
       });
       if (cartContex.cartList[index].quantity !== val) {
         cartContex.cartList[index].quantity = val;
@@ -257,7 +268,12 @@ const Cart = () => {
             }}
           >
             <h4>Tổng tiền</h4>
-            <h5>{moneySumAll}</h5>
+            <h5>
+              {new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(moneySumAll)}
+            </h5>
           </div>
           <div
             className="payConfirm"
