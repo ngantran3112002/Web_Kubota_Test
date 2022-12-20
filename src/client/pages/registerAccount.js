@@ -246,6 +246,7 @@ const RegisterAccount = () => {
           </label>
           <Space>
             <Input
+              type="number"
               placeholder="Vui lòng nhập số điện thoại"
               value={phone}
               onChange={handleChangePhone}
@@ -257,6 +258,7 @@ const RegisterAccount = () => {
         {contextHolder}
         <button
           type="submit"
+          disabled={!checkAll}
           onClick={(e) => {
             submitForm(e);
           }}
@@ -265,6 +267,13 @@ const RegisterAccount = () => {
           Đăng kí tài khoản
         </button>
       </div>
+      {!checkAll && (
+        <Alert
+          style={{ marginTop: 10 }}
+          message="Vui lòng điền đầy đủ thông tin"
+          type="error"
+        />
+      )}
     </div>
   );
 };

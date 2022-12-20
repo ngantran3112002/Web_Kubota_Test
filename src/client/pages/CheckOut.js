@@ -3,21 +3,23 @@ import "bootstrap/dist/css/bootstrap-grid.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/CheckOut.css";
 import { Context } from "../context";
-import { Table } from "antd";
+import { Alert, Button, notification, Space, Table } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
-import * as _ from 'lodash'
+import * as _ from "lodash";
 import { BASE_URL } from "../../apiConfig";
+import { SmileOutlined } from "@ant-design/icons";
 
 const CheckOut = () => {
   let context = useContext(Context);
   const userContext = context.user;
   const cartContex = context.cartList;
-  const [note, setNote] = useState('')
+  const [note, setNote] = useState("");
   const [dataRow, setDataRow] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const token = userContext.token ? userContext.token : "";
+
   const navigate = useNavigate();
   const config = {
     headers: {
@@ -26,9 +28,22 @@ const CheckOut = () => {
     },
   };
 
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState(
+    userContext ? userContext.userInfo?.userName : ""
+  );
+  const [phone, setPhone] = useState(null);
+  const [address, setAddress] = useState(
+    userContext ? userContext.userInfo?.address : ""
+  );
+
+  const handleOnChange = (e, setValue) => {
+    setValue(e.target.value);
+  };
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleMessageChange = event => {
+  const handleMessageChange = (event) => {
     // 👇️ access textarea value
     setNote(event.target.value);
     // console.log(event.target.value);
@@ -44,17 +59,25 @@ const CheckOut = () => {
   };
 
   const handleClickOrder = async (_body, _config) => {
-   
     // console.log(_body)
     setIsLoading(true);
     await axios
-      .post(`${BASE_URL}/api/orders/add/create`,{ _body, note: note}, _config)
-      .then((res) =>
-        {
-          alert("Order Placed Successfully", res.data.message, "success")
-          cartContex.splice(0)
-        }
-      ).catch(err => console.warn(err));
+      .post(`${BASE_URL}/api/orders/add/create`, { _body, note: note }, _config)
+      .then((res) => {
+        notification.open({
+          message: "Thông báo",
+          description: `Đặt hàng thành công`,
+          icon: (
+            <SmileOutlined
+              style={{
+                color: "#108ee9",
+              }}
+            />
+          ),
+        });
+        cartContex.splice(0);
+      })
+      .catch((err) => console.warn(err));
     setIsLoading(false);
     navigate("/introduction", { replace: true });
   };
@@ -116,6 +139,7 @@ const CheckOut = () => {
     setDataRow(row);
     console.log("dataRowJson: ", context);
   }, [cartContex]);
+
   return (
     <div className="row">
       <div className="container-checkout">
@@ -136,6 +160,8 @@ const CheckOut = () => {
                       defaultValue={
                         userContext ? userContext.userInfo?.userName : ""
                       }
+                      value={name}
+                      onChange={(e) => handleOnChange(e, setName)}
                     />
                   </div>
                 </div>
@@ -149,6 +175,8 @@ const CheckOut = () => {
                       defaultValue={
                         userContext ? userContext.userInfo?.phone : ""
                       }
+                      value={phone}
+                      onChange={(e) => handleOnChange(e, setPhone)}
                     />
                   </div>
                 </div>
@@ -162,6 +190,8 @@ const CheckOut = () => {
                       defaultValue={
                         userContext ? userContext.userInfo?.email : ""
                       }
+                      value={email}
+                      onChange={(e) => handleOnChange(e, setEmail)}
                     />
                   </div>
                 </div>
@@ -175,6 +205,8 @@ const CheckOut = () => {
                       defaultValue={
                         userContext ? userContext.userInfo?.address : ""
                       }
+                      value={address}
+                      onChange={(e) => handleOnChange(e, setAddress)}
                     ></textarea>
                   </div>
                 </div>
@@ -204,16 +236,9 @@ const CheckOut = () => {
         <Table columns={head} dataSource={dataRow} />
         <div>
           <h6>HÌNH THỨC THANH TOÁN</h6>
-          <ul>
-            <li>
-              <input type="radio" id="html" name="fav_language" value="HTML" />
-              <label for="html">Thanh toán khi nhận hàng (COD) </label>
-            </li>
-            <li>
-              <input type="radio" id="css" name="fav_language" value="CSS" />
-              <label for="css">Thanh tóan bằng hình thức chuyển khoản</label>
-            </li>
-          </ul>
+
+          <input type="radio" id="html" name="fav_language" value="HTML" />
+          <label for="html">Thanh toán khi nhận hàng (COD) </label>
         </div>
         <div className="col-md-12">
           <div className="form-group text-end">
