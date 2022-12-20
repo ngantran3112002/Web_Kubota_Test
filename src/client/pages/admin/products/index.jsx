@@ -136,6 +136,48 @@ const App = () => {
     // setCount(count + 1);
   };
 
+  const edit = (record) => {
+    form.setFieldsValue({
+      name: '',
+      description: '',
+      price: '',
+      quantityInStock: '',
+      ...record,
+    });
+    setEditingKey(record.key);
+  };
+  const cancel = () => {
+    setEditingKey('');
+  };
+
+
+  const save = async (key, id) => {
+    try {
+      let row = await form.validateFields();
+      row = {id: id, ...row}
+      handleProductChange(row)
+      console.log(id)
+      const newData = [...dataSource];
+      const index = newData.findIndex((item) => key === item.key);
+      if (index > -1) {
+        const item = newData[index];
+        newData.splice(index, 1, {
+          ...item,
+          ...row,
+        });
+        setDataSource(newData);
+        setEditingKey('');
+      } else {
+        newData.push(row);
+        setDataSource(newData);
+        setEditingKey('');
+      }
+    } catch (errInfo) {
+      console.log('Validate Failed:', errInfo);
+    }
+  };
+
+
   useEffect(() => {
     axios
       .get(`${BASE_URL}/api/products/alltest`)
