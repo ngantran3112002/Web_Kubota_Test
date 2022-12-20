@@ -86,32 +86,45 @@ const App = () => {
   const [loadingStatus, setLoadingStatus] = useState(true);
 
   const [count, setCount] = useState(2);
-  const handleDelete = (key) => {
+  const handleDelete = async (key, productId) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
+    await axios
+      .delete(`http://localhost:3001/api/products/detail/${productId}`)
+      .then((response) => console.log("Delete successful"));
   };
   useEffect(() => {
-    const fetchData = async () => {
-      let apiUrls = "http://localhost:3001/api/products/alltest";
-      await axios.get(apiUrls);
-      setTimeout(() => loadingContext.done(), 1000);
-    };
-    fetchData()
-      .then(
-        (...allData) => console.log("allData: ", allData)
-        // {
-        //   const autoCmpData = allData?.data.allProducts.map((item) => {
-        //     return { value: item.name, label: item.name, ...item };
-        //   });
-        //   setAutoComplete(autoCmpData);
-        // }
-      )
-
+    axios
+      .get("http://localhost:3001/api/products/alltest")
+      .then(async (allData) => {
+        const autoCmpData = allData.data.allProducts.map((item) => {
+          return { value: item.name, label: item.name, ...item };
+        });
+        setAutoComplete(autoCmpData);
+      })
       .catch((err) => console.log(err))
       .finally(() => {
         setLoadingStatus(false);
       });
   }, []);
+
+  useEffect(() => {
+    const dataRow = [];
+    autoComplete.forEach((product, index) => {
+      dataRow.push({
+        key: index,
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        price: Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(product.price),
+        quantityInStock: product.quantityInStock,
+      });
+    });
+    setDataSource(dataRow);
+  }, [autoComplete]);
   console.log("autoComplete: ", autoComplete);
   const defaultColumns = [
     {
@@ -121,13 +134,13 @@ const App = () => {
     },
     {
       title: "Name",
-      dataIndex: "Name",
+      dataIndex: "name",
       width: "30%",
       editable: true,
     },
     {
       title: "Description",
-      dataIndex: "Description",
+      dataIndex: "description",
       width: "30%",
       editable: true,
     },
@@ -148,7 +161,7 @@ const App = () => {
         dataSource.length >= 1 ? (
           <Popconfirm
             title="Sure to delete?"
-            onConfirm={() => handleDelete(record.key)}
+            onConfirm={() => handleDelete(record.key, record.id)}
           >
             <a>Delete</a>
           </Popconfirm>
