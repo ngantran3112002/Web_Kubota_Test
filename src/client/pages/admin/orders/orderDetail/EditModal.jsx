@@ -105,6 +105,8 @@ const EditModal = ({
       }}
     >
       <Typography>ngày tạo đơn: {record.createdAt}</Typography>
+      <Title level={4}>Ghi chú</Title>
+      <Typography>{record.note}</Typography>
       <Title level={4}>Trạng thái đơn hàng</Title>
       <Select
         defaultValue={record.status}

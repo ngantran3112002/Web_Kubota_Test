@@ -92,8 +92,8 @@ const AdminOrder = ({
   const [modalInfo, setModalInfo] = useState({});
 
   const [loading, setLoading] = useState(true);
-  const currentSearchParams = useLocation();
 
+  //fetch khởi tạo
   useEffect(() => {
     axios.get(`${BASE_URL}/api/orders/alltest/test`).then(async (res) => {
       setOrders(
@@ -102,6 +102,7 @@ const AdminOrder = ({
           user_id: row.user_id,
           status: row.status.toString(),
           createdAt: row.createdAt,
+          note: row.note,
         }))
       );
 
@@ -111,6 +112,7 @@ const AdminOrder = ({
     });
   }, []);
 
+  //fetch chi tiết
   const fetchOrderDetails = async (id, record) => {
     setLoading(true);
     await axios
@@ -143,6 +145,7 @@ const AdminOrder = ({
     setDisplayedOrders(orders);
   }, [orders]);
 
+  //fetch đổi trạng thái
   const changeStatus = async (status, orderId) => {
     console.log(orderId);
     setIsEdit(false);

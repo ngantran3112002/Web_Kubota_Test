@@ -15,11 +15,11 @@ import {
 
 import { UploadOutlined } from "@ant-design/icons";
 
-// import AddProduct from "./AddProduct";
 import axios from "axios";
 import { LoadingContext } from "react-router-loading";
 import { BASE_URL } from "../../../../apiConfig";
 import FormData from "form-data";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 const EditableContext = React.createContext(null);
 
@@ -84,6 +84,22 @@ const App = () => {
   const isEditing = (record) => record.key === editingKey;
 
   const [count, setCount] = useState(2);
+
+  const getAllProds = async () => {
+    await axios
+      .get(`${BASE_URL}/api/products/alltest`)
+      .then(async (allData) => {
+        const autoCmpData = allData.data.allProducts.map((item) => {
+          return { value: item.name, label: item.name, ...item };
+        });
+        setAutoComplete(autoCmpData);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        setLoadingStatus(false);
+      });
+  }
+
   const handleDelete = async (key, productId) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
@@ -104,13 +120,13 @@ const App = () => {
 
   const handleAdd = async (val) => {
     console.log(val);
+    setLoadingStatus(true)
     const formData = new FormData();
     formData.append("name", val.name);
     formData.append("description", val.description);
     formData.append("price", val.price);
     formData.append("quantityInStock", val.quantityInStock);
     formData.append("image", val.image.file);
-    const test = { a: "1", b: "2" };
 
     const config = {
       headers: {
@@ -125,7 +141,11 @@ const App = () => {
     await axios
       .post(`${BASE_URL}/api/products/addProduct/add`, formData, config)
       .then((res) => {
-        console.log(res);
+        setIsAddProduct(false)
+        getAllProds()
+        setTimeout(() => {
+          setLoadingStatus(false)
+        }, 1000)
       })
       .catch((err) => {
         console.warn(err.response.data);
@@ -176,18 +196,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    axios
-      .get(`${BASE_URL}/api/products/alltest`)
-      .then(async (allData) => {
-        const autoCmpData = allData.data.allProducts.map((item) => {
-          return { value: item.name, label: item.name, ...item };
-        });
-        setAutoComplete(autoCmpData);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        setLoadingStatus(false);
-      });
+    getAllProds()
   }, []);
 
   useEffect(() => {
@@ -404,7 +413,7 @@ const App = () => {
         <Table
           components={components}
           // columns={mergedColumns}
-
+          loading={loadingStatus}
           rowClassName={() => "editable-row"}
           bordered
           dataSource={dataSource}

@@ -6,6 +6,7 @@ import "antd/dist/antd.min.css";
 import { Button, Image, List, Pagination, Space } from "antd";
 import CurrencyFormat from "react-currency-format";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../../apiConfig";
 
 const ListView = ({
   products,
@@ -46,7 +47,7 @@ const ListView = ({
             <Space.Compact className="listCompact" block={true} size="large">
               <Image
                 className="listImage"
-                src={item.image}
+                src= {`${BASE_URL}` + `${item.image}`}
                 // src="https://via.placeholder.com/1000"
                 // src="https://picsum.photos/seed/picsum/300/300"
               />

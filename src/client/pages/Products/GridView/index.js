@@ -6,6 +6,8 @@ import { Button, Card, Image, List, Pagination } from "antd";
 import { Link } from "react-router-dom";
 import CurrencyFormat from "react-currency-format";
 
+import { BASE_URL } from "../../../../apiConfig";
+
 const GridView = ({
   products,
   currentPage,
@@ -55,7 +57,7 @@ const GridView = ({
                 }}
                 alt="example"
                 // src="https://joeschmoe.io/api/v1/random"
-                src= {item.image}
+                src= {`${BASE_URL}` + `${item.image}`}
                 preview={false}
               />
               <div className="ant-body-child-content">

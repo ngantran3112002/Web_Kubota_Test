@@ -143,7 +143,7 @@ const ProductList = () => {
   };
 
   const onSelect = (value) => {
-    const productId = _.find(autoComplete, { name: value }).productId;
+    const productId = _.find(autoComplete, { name: value }).id;
     navigate({
       pathname: `/products/details/${productId}`,
     });
