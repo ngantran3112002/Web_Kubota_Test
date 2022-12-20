@@ -153,7 +153,8 @@ const Cart = () => {
       dataIndex: "price",
       key: "price",
       sorter: {
-        compare: (a, b) => a.price - b.price,
+        compare: (a, b) =>
+          a.price.toLowerCase().localeCompare(b.price.toLowerCase()),
         multiple: 3,
       },
     },
@@ -168,7 +169,8 @@ const Cart = () => {
       dataIndex: "money",
       key: "money",
       sorter: {
-        compare: (a, b) => a.money - b.money,
+        compare: (a, b) =>
+          a.price.toLowerCase().localeCompare(b.price.toLowerCase()),
         multiple: 3,
       },
     },

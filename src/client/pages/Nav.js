@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 const Nav = () => {
-  const context = useContext(Context)
+  const context = useContext(Context);
 
   const classes = useStyles();
   let activeStyle = {
@@ -50,18 +50,17 @@ const Nav = () => {
       >
         KỸ THUẬT MÁY
       </NavLink>
-      {
-        context.user.userInfo && context.user.userInfo.isAdmin === false? 
-          <NavLink
-            to="admin/orders"
-            style={({ isActive }) => (isActive ? activeStyle : undefined)}
-            className={classes.link}
-          >
-            ADMIN
-          </NavLink>
-          :
-          <></>
-      }
+      {context.user.userInfo && context.user.userInfo.isAdmin === true ? (
+        <NavLink
+          to="admin/orders"
+          style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          className={classes.link}
+        >
+          ADMIN
+        </NavLink>
+      ) : (
+        <></>
+      )}
     </>
   );
 };

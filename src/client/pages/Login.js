@@ -13,9 +13,9 @@ import {
 import { email } from "ra-core";
 import { Context } from "../context";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import { BASE_URL } from '../../apiConfig';
-import { Alert } from "bootstrap";
+import axios from "axios";
+import { BASE_URL } from "../../apiConfig";
+import { Alert } from "antd";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -71,19 +71,19 @@ const Login = () => {
     });
   };
 
-	const submitForm = async (e) => {
-		e.preventDefault();
-		setwarnemail(false);
-		setwarnpassword(false);
-		if (inputtext.email === '') {
-			setwarnemail(true);
-		} else if (inputtext.password === '') {
-			setwarnpassword(true);
-		} else {
-			console.log(email);
-			await axios
-				.post(`${BASE_URL}/api/users/login`, params, config)
-				.then((res) => {
+  const submitForm = async (e) => {
+    e.preventDefault();
+    setwarnemail(false);
+    setwarnpassword(false);
+    if (inputtext.email === "") {
+      setwarnemail(true);
+    } else if (inputtext.password === "") {
+      setwarnpassword(true);
+    } else {
+      console.log(email);
+      await axios
+        .post(`${BASE_URL}/api/users/login`, params, config)
+        .then((res) => {
           if (res.status === 200) {
             context.setUser({
               userInfo: res.data.user,
@@ -96,6 +96,7 @@ const Login = () => {
     }
   };
 
+  console.log("status: ", statusCode);
   const Eye = () => {
     if (password === "password") {
       setpassword("text");
