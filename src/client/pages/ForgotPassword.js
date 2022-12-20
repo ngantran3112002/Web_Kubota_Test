@@ -1,4 +1,4 @@
-import { SmileOutlined } from "@ant-design/icons";
+import { FrownOutlined, SmileOutlined } from "@ant-design/icons";
 import { Alert, Input, Button, notification, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,15 @@ export const ForgotPassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [api, contextHolder] = notification.useNotification();
   const [warmingPassword, setWarningPassword] = useState(null);
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [wrongFormatPassword, setWrongFormatPassword] = React.useState(null);
+  const [statusCode, setStatusCode] = useState(null);
+  const [checkAll, setCheckAll] = useState(null);
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+  };
 
   const navigate = useNavigate();
   const handleChangeValue = (event, setValueFunction) => {
@@ -29,48 +37,88 @@ export const ForgotPassword = () => {
   };
 
   const submitForm = async (e) => {
-    await axios.post(`${BASE_URL}/api/users/changePassword`, {
-      email: email,
-      password: newPassword
-    }, config).then((res) => {
-      const key = `open${Date.now()}`;
-      const btn = (
-        <Space>
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              navigate("/login", { replace: true });
-              api.destroy(key);
-            }}
-          >
-            Đi tới đăng nhập
-          </Button>
-        </Space>
-      );
-      !warmingPassword &&
-        api.open({
-          message: "Thông báo",
-          description: "Thay đổi mật khẩu thành công",
-          btn,
-          key,
-          icon: (
-            <SmileOutlined
-              style={{
-                color: "#108ee9",
+    await axios
+      .post(
+        `${BASE_URL}/api/users/changePassword`,
+        {
+          email: email,
+          password: newPassword,
+        },
+        config
+      )
+      .then((res) => {
+        const key = `open${Date.now()}`;
+        const btn = (
+          <Space>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => {
+                navigate("/login", { replace: true });
+                api.destroy(key);
               }}
-            />
-          ),
-        });
-    })
-
-   
+            >
+              Đi tới đăng nhập
+            </Button>
+          </Space>
+        );
+        !warmingPassword &&
+          checkAll &&
+          api.open({
+            message: "Thông báo",
+            description: "Thay đổi mật khẩu thành công",
+            btn,
+            key,
+            icon: (
+              <SmileOutlined
+                style={{
+                  color: "#108ee9",
+                }}
+              />
+            ),
+          });
+        !checkAll &&
+          notification.open({
+            message: "Thông báo",
+            description: `Thay đổi mật khẩu không thành công. Vui lòng điền đầy đủ thông tin`,
+            icon: (
+              <FrownOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+      })
+      .catch((err) => setStatusCode(err.response.status));
+    statusCode === 400 &&
+      notification.open({
+        message: "Thông báo",
+        description: "Thay đổi mật khẩu thất bại",
+        icon: (
+          <FrownOutlined
+            style={{
+              color: "red",
+            }}
+          />
+        ),
+      });
   };
 
   useEffect(() => {
     if (newPassword !== confirmNewPwd) setWarningPassword(true);
     else setWarningPassword(false);
   }, [newPassword, confirmNewPwd]);
+
+  useEffect(() => {
+    if (!validateEmail(email)) setWrongFormatPassword(true);
+    else setWrongFormatPassword(false);
+  }, [email]);
+
+  useEffect(() => {
+    if (!email || !newPassword || !oldPassword) setCheckAll(false);
+    else setCheckAll(true);
+  }, [email, newPassword, oldPassword]);
 
   return (
     <div
@@ -94,6 +142,9 @@ export const ForgotPassword = () => {
               onChange={(e) => handleChangeValue(e, setEmail)}
             />
           </Space>
+          {email && wrongFormatPassword && (
+            <Alert message="Email không hợp lệ" type="error" />
+          )}
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <label for="oldPassword">

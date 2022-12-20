@@ -7,6 +7,7 @@ import { Alert, Button, Input, notification, Space } from "antd";
 import {
   EyeInvisibleOutlined,
   EyeTwoTone,
+  FrownOutlined,
   SmileOutlined,
 } from "@ant-design/icons";
 import { BASE_URL } from "../../apiConfig";
@@ -34,6 +35,8 @@ const RegisterAccount = () => {
   const [address, setAddress] = useState("");
   const [api, contextHolder] = notification.useNotification();
   const [warmingPassword, setWarningPassword] = useState(null);
+  const [wrongFormatPassword, setWrongFormatPassword] = useState(null);
+  const [checkAll, setCheckAll] = useState(false);
 
   const config = {
     headers: {
@@ -49,38 +52,72 @@ const RegisterAccount = () => {
   params.append("address", address);
 
   const submitForm = async (e) => {
-    const key = `open${Date.now()}`;
-    const btn = (
-      <Space>
-        <Button
-          type="primary"
-          size="small"
-          onClick={() => {
-            navigate("/login", { replace: true });
-            api.destroy(key);
-          }}
-        >
-          Đi tới đăng nhập
-        </Button>
-      </Space>
-    );
     e.preventDefault();
     await axios
       .post(`${BASE_URL}/api/users/register`, params, config)
-      .then((res) => console.log(res));
-    api.open({
-      message: "Thông báo",
-      description: "Đăng ký tài khoản thành công",
-      btn,
-      key,
-      icon: (
-        <SmileOutlined
-          style={{
-            color: "#108ee9",
-          }}
-        />
-      ),
-    });
+      .then((res) => {
+        const key = `open${Date.now()}`;
+        const btn = (
+          <Space>
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => {
+                navigate("/login", { replace: true });
+                api.destroy(key);
+              }}
+            >
+              Đi tới đăng nhập
+            </Button>
+          </Space>
+        );
+        console.log("res: ", res);
+        res.data.message &&
+          checkAll &&
+          notification.open({
+            message: "Thông báo",
+            description: "Thay đổi mật khẩu thành công",
+            btn,
+            key,
+            icon: (
+              <SmileOutlined
+                style={{
+                  color: "#108ee9",
+                }}
+              />
+            ),
+          });
+        !res.data.message &&
+          notification.open({
+            message: "Thông báo",
+            description: `Đăng ký tài khoản không thành công. ${res.data}`,
+            icon: (
+              <FrownOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+        !checkAll &&
+          notification.open({
+            message: "Thông báo",
+            description: `Đăng ký tài khoản không thành công. Vui lòng điền đầy đủ thông tin`,
+            icon: (
+              <FrownOutlined
+                style={{
+                  color: "red",
+                }}
+              />
+            ),
+          });
+      });
+  };
+
+  const validateEmail = (email) => {
+    return email.match(
+      /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
   };
 
   const handleChangeName = (event) => {
@@ -107,6 +144,19 @@ const RegisterAccount = () => {
     else setWarningPassword(false);
   }, [password, confirmPwd]);
 
+  useEffect(() => {
+    if (!validateEmail(email)) setWrongFormatPassword(true);
+    else setWrongFormatPassword(false);
+  }, [email]);
+
+  useEffect(() => {
+    if (!name || !email || !password || !address || !phone) {
+      setCheckAll(false);
+    } else {
+      setCheckAll(true);
+    }
+  }, [name, email, password, address, phone]);
+
   return (
     <div className={classes.container}>
       <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
@@ -120,6 +170,7 @@ const RegisterAccount = () => {
               placeholder="Vui lòng nhập name"
               value={name}
               onChange={handleChangeName}
+              required
             />
           </Space>
         </div>
@@ -134,6 +185,9 @@ const RegisterAccount = () => {
               onChange={handleChangeEmail}
             />
           </Space>
+          {email && wrongFormatPassword && (
+            <Alert message="Email không hợp lệ" type="error" />
+          )}
         </div>
 
         <div className={classes.inputForm}>
