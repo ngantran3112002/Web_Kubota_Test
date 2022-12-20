@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@mui/styles";
 import "../css/register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Button, notification, Space } from "antd";
-import { SmileOutlined } from "@ant-design/icons";
+import { Alert, Button, Input, notification, Space } from "antd";
+import {
+  EyeInvisibleOutlined,
+  EyeTwoTone,
+  SmileOutlined,
+} from "@ant-design/icons";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -12,6 +16,10 @@ const useStyles = makeStyles(() => ({
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center",
+  },
+  inputForm: {
+    display: "flex",
+    flexDirection: "column",
   },
 }));
 const RegisterAccount = () => {
@@ -24,6 +32,7 @@ const RegisterAccount = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [api, contextHolder] = notification.useNotification();
+  const [warmingPassword, setWarningPassword] = useState(null);
 
   const config = {
     headers: {
@@ -92,77 +101,102 @@ const RegisterAccount = () => {
     setAddress(event.target.value);
   };
 
+  useEffect(() => {
+    if (password !== confirmPwd) setWarningPassword(true);
+    else setWarningPassword(false);
+  }, [password, confirmPwd]);
+
   return (
     <div className={classes.container}>
       <h3>ĐĂNG KÝ TÀI KHOẢN</h3>
       <form onSubmit={(e) => submitForm} style={{ width: "400px" }}>
-        <label for="name">
-          <b>Tên</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter your name"
-          name="name"
-          id="name"
-          value={name}
-          onChange={handleChangeName}
-          required
-        />
-        <label for="email">
-          <b>Email</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter your email"
-          name="email"
-          id="email"
-          onChange={handleChangeEmail}
-          required
-        />
-        <label for="pw">
-          <b>Mật khẩu</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter your password"
-          name="pw"
-          id="pw"
-          onChange={handleChangePassword}
-          required
-        />
-        <label for="pw-confirm">
-          <b>Xác minh mật khẩu</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Confirm your name"
-          name="pw-confirm"
-          id="pw-confirm"
-          onChange={handleChangeConfirmPwd}
-          required
-        />
-        <label for="address">
-          <b>Địa chỉ</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter your address"
-          name="address"
-          id="address"
-          onChange={handleChangeAddress}
-          required
-        />
-        <label for="phone">
-          <b>Số điện thoại</b>
-        </label>
-        <input
-          type="text"
-          placeholder="Enter your phone number"
-          name="phone"
-          id="phone"
-          onChange={handleChangePhone}
-          required
-        />
+        <div className={classes.inputForm}>
+          <label for="name">
+            <b>Tên</b>
+          </label>
+          <Space>
+            <Input
+              placeholder="Vui lòng nhập name"
+              value={name}
+              onChange={handleChangeName}
+            />
+          </Space>
+        </div>
+        <div className={classes.inputForm}>
+          <label for="email">
+            <b>Email</b>
+          </label>
+          <Space>
+            <Input
+              placeholder="Vui lòng nhập email"
+              value={email}
+              onChange={handleChangeEmail}
+            />
+          </Space>
+        </div>
+
+        <div className={classes.inputForm}>
+          <label for="pw">
+            <b>Mật khẩu</b>
+          </label>
+          <Space>
+            <Input.Password
+              placeholder="Vui lòng nhập mật khẩu"
+              value={password}
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              onChange={handleChangePassword}
+            />
+          </Space>
+        </div>
+        <div className={classes.inputForm}>
+          <label for="pw-confirm">
+            <b>Xác minh mật khẩu</b>
+          </label>
+          <Space>
+            <Input.Password
+              placeholder="Vui lòng xác minh mật khẩu"
+              value={confirmPwd}
+              iconRender={(visible) =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              onChange={handleChangeConfirmPwd}
+            />
+          </Space>
+          {warmingPassword && (
+            <Alert
+              style={{ marginTop: 10 }}
+              message="Không trùng khớp với mật khẩu"
+              type="error"
+            />
+          )}
+        </div>
+
+        <div className={classes.inputForm}>
+          <label for="address">
+            <b>Địa chỉ</b>
+          </label>
+          <Space>
+            <Input
+              placeholder="Vui lòng nhập địa chỉ"
+              value={address}
+              onChange={handleChangeAddress}
+            />
+          </Space>
+        </div>
+        <div className={classes.inputForm}>
+          <label for="phone">
+            <b>Số điện thoại</b>
+          </label>
+          <Space>
+            <Input
+              placeholder="Vui lòng nhập số điện thoại"
+              value={phone}
+              onChange={handleChangePhone}
+            />
+          </Space>
+        </div>
       </form>
       <div className="buttons">
         {contextHolder}

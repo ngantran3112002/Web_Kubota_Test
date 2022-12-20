@@ -165,12 +165,13 @@ const Login = () => {
           </div>
           <div className="forgot">
             <p>
-              Thay đổi mật khẩu? <a href="/forgotPassword">Change Password</a>
+              Bạn cần đổi mật khẩu?{" "}
+              <a href="/forgotPassword">Thay đổi mật khẩu</a>
             </p>
           </div>
           <div className="register">
             <p style={{ marginRight: "5px" }}>Bạn chưa có tài khoản?</p>
-            <a href="/registerAccount">Đăng kí tài khoản</a>
+            <a href="/register">Đăng kí tài khoản</a>
           </div>
         </form>
       </div>
