@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import "../css/homePage.css";
-import ProductList from "./products";
+import ProductList from "./Products";
 
 const HomePage = () => {
   return (

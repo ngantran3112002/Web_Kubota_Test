@@ -22,6 +22,7 @@ import TopMenu from "./TopMenu";
 
 import { Context } from "../../context";
 import { LoadingContext } from "react-router-loading";
+import { BASE_URL } from "../../../apiConfig";
 
 const ProductList = () => {
   const context = useContext(Context);
@@ -55,9 +56,9 @@ const ProductList = () => {
 
   useEffect(() => {
     let apiUrls = [
-      "http://localhost:3001/api/categories/alltest",
+      `${BASE_URL}/api/categories/alltest`,
       // "http://localhost:5000/product/pagetest/1",
-      "http://localhost:3001/api/products/alltest",
+      `${BASE_URL}/api/products/alltest`,
     ];
 
     const categoryDataCall = axios.get(apiUrls[0]);
@@ -99,7 +100,7 @@ const ProductList = () => {
       { skipNull: true }
     );
     return await axios.get(
-      `http://localhost:3001/api/products/pagetest/${page}?` + query
+      `${BASE_URL}/api/products/pagetest/${page}?` + query
     );
   };
 

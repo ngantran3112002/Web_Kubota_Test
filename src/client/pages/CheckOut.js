@@ -7,7 +7,8 @@ import { Table } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "antd";
-import * as _ from "lodash";
+import * as _ from 'lodash'
+import { BASE_URL } from "../../apiConfig";
 
 const CheckOut = () => {
   const context = useContext(Context);
@@ -39,11 +40,12 @@ const CheckOut = () => {
     setIsLoading(true);
     await axios
       .post("http://localhost:3001/api/orders/add/create", _body, _config)
-      .then((res) => {
-        alert("Order Placed Successfully", res.data.message, "success");
-        cartContex.splice(0);
-      })
-      .catch((err) => console.warn(err));
+      .then((res) =>
+        {
+          alert("Order Placed Successfully", res.data.message, "success")
+          cartContex.splice(0)
+        }
+      ).catch(err => console.warn(err));
     setIsLoading(false);
     navigate("/introduction", { replace: true });
   };

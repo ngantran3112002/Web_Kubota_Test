@@ -22,6 +22,7 @@ import { Context } from "../../context";
 import { LoadingContext } from "react-router-loading";
 import axios from "axios";
 import { value } from "lodash/seq";
+import { BASE_URL } from "../../../apiConfig";
 
 const ProductDetail = () => {
   const context = useContext(Context);
@@ -50,7 +51,7 @@ const ProductDetail = () => {
   const fetchProductData = async () => {
     console.log(productId);
     return await axios.get(
-      `http://localhost:3001/api/products/detail/:id/${productId}`
+      `${BASE_URL}/api/products/detail/${productId}`
     );
   };
 

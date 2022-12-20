@@ -3,12 +3,7 @@ import { makeStyles } from "@mui/styles";
 import "../css/register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Alert, Button, Input, notification, Space } from "antd";
-import {
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-  SmileOutlined,
-} from "@ant-design/icons";
+import { BASE_URL } from "../../apiConfig";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -65,7 +60,7 @@ const RegisterAccount = () => {
     );
     e.preventDefault();
     await axios
-      .post("http://localhost:3001/api/users/register", params, config)
+      .post(`${BASE_URL}/api/users/register`, params, config)
       .then((res) => console.log(res));
     api.open({
       message: "Thông báo",

@@ -8,7 +8,7 @@ import logo from "../../image/logo.png";
 import HomePage from "./homePage";
 import Login from "./Login";
 import Nav from "./Nav";
-import ProductList from "./products";
+import ProductList from "./Products";
 import ProductDetail from "./ProductDetail";
 import MachineEngineering from "./machine";
 import { ForgotPassword } from "./ForgotPassword";

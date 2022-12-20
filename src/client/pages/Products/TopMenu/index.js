@@ -25,7 +25,7 @@ export default function TopMenu({
       label: (
         <Button
           onClick={() => {
-            onFilterChange("price.desc");
+            onFilterChange("price.DESC");
           }}
         >
           {"xem theo giá giảm dần"}
@@ -37,7 +37,7 @@ export default function TopMenu({
       label: (
         <Button
           onClick={() => {
-            onFilterChange("price.asc");
+            onFilterChange("price.ASC");
           }}
         >
           {"xem theo giá tăng dần"}

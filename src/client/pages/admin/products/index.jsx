@@ -1,109 +1,144 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button, Form, Input, Popconfirm, Table, notification } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  Popconfirm,
+  Table,
+  Typography,
+  InputNumber,
+  Space,
+  Modal,
+  Upload,
+  message,
+} from "antd";
+
+import { UploadOutlined } from "@ant-design/icons";
+
+// import AddProduct from "./AddProduct";
 import axios from "axios";
 import { LoadingContext } from "react-router-loading";
+import { BASE_URL } from "../../../../apiConfig";
+import FormData from "form-data";
+
 const EditableContext = React.createContext(null);
-const EditableRow = ({ index, ...props }) => {
-  const [form] = Form.useForm();
-  return (
-    <Form form={form} component={false}>
-      <EditableContext.Provider value={form}>
-        <tr {...props} />
-      </EditableContext.Provider>
-    </Form>
-  );
+
+const checkPNG = {
+  beforeUpload: (file) => {
+    const isPNG = file.type === "image/png";
+    if (!isPNG) {
+      message.error(`${file.name} is not a png file`);
+    }
+    return false;
+  },
+  onChange: (info) => {
+    console.log(info.fileList);
+  },
 };
+
 const EditableCell = ({
-  title,
-  editable,
-  children,
+  editing,
   dataIndex,
+  title,
+  inputType,
   record,
-  handleSave,
+  index,
+  children,
   ...restProps
 }) => {
-  const [editing, setEditing] = useState(false);
-  const inputRef = useRef(null);
-  const form = useContext(EditableContext);
-  useEffect(() => {
-    if (editing) {
-      inputRef.current.focus();
-    }
-  }, [editing]);
-  const toggleEdit = () => {
-    setEditing(!editing);
-    form.setFieldsValue({
-      [dataIndex]: record[dataIndex],
-    });
-  };
-  const save = async () => {
-    try {
-      const values = await form.validateFields();
-      toggleEdit();
-      handleSave({
-        ...record,
-        ...values,
-      });
-    } catch (errInfo) {
-      console.log("Save failed:", errInfo);
-    }
-  };
-  let childNode = children;
-  if (editable) {
-    childNode = editing ? (
-      <Form.Item
-        style={{
-          margin: 0,
-        }}
-        name={dataIndex}
-        rules={[
-          {
-            required: true,
-            message: `${title} is required.`,
-          },
-        ]}
-      >
-        <Input ref={inputRef} onPressEnter={save} onBlur={save} />
-      </Form.Item>
-    ) : (
-      <div
-        className="editable-cell-value-wrap"
-        style={{
-          paddingRight: 24,
-        }}
-        onClick={toggleEdit}
-      >
-        {children}
-      </div>
-    );
-  }
-  return <td {...restProps}>{childNode}</td>;
+  const inputNode = inputType === "number" ? <InputNumber /> : <Input />;
+  return (
+    <td {...restProps}>
+      {editing ? (
+        <Form.Item
+          name={dataIndex}
+          style={{
+            margin: 0,
+          }}
+          rules={[
+            {
+              required: true,
+              message: `Please Input ${title}!`,
+            },
+          ]}
+        >
+          {inputNode}
+        </Form.Item>
+      ) : (
+        children
+      )}
+    </td>
+  );
 };
+
 const App = () => {
+  const [form] = Form.useForm();
+  const [addProductForm] = Form.useForm();
   const [dataSource, setDataSource] = useState([]);
   const loadingContext = useContext(LoadingContext);
   const [autoComplete, setAutoComplete] = useState([{}]);
   const [loadingStatus, setLoadingStatus] = useState(true);
-  const openNotification = (message) => {};
+  const [editingKey, setEditingKey] = useState("");
+  const [isAddProduct, setIsAddProduct] = useState(false);
+
+  const isEditing = (record) => record.key === editingKey;
 
   const [count, setCount] = useState(2);
   const handleDelete = async (key, productId) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
-    // await axios
-    //   .delete(`http://localhost:3001/api/products/detail/${productId}`)
-    //   .then((response) => console.log("Delete successful"));
-    notification.open({
-      message: "Thông báo",
-      description: "Xóa sản phẩm thành công",
-      onClick: () => {
-        console.log("Notification Clicked!");
-      },
-    });
+    await axios
+      .delete(`${BASE_URL}/api/products/${productId}`)
+      .then((response) => console.log("Delete successful"));
   };
+
+  const handleProductChange = async (item) => {
+    await axios
+      .post(`${BASE_URL}/api/products/${item.id}`, item, {
+        "Content-Type": "text/plain",
+      })
+      .then((res) => {
+        <Modal>Thành công</Modal>;
+      });
+  };
+
+  const handleAdd = async (val) => {
+    console.log(val);
+    const formData = new FormData();
+    formData.append("name", val.name);
+    formData.append("description", val.description);
+    formData.append("price", val.price);
+    formData.append("quantityInStock", val.quantityInStock);
+    formData.append('image', val.image.file)
+    const test = {a: '1' , b: '2'}
+
+    const config = {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    };
+
+    for (const value of formData.values()) {
+      console.log(value);
+    }
+
+
+    await axios
+      .post(`${BASE_URL}/api/products/addProduct/add`, formData, config)
+      .then(res => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.warn(err.response.data);
+      });
+
+    // setDataSource([...dataSource, newData]);
+    // setCount(count + 1);
+  };
+
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/products/alltest")
+      .get(`${BASE_URL}/api/products/alltest`)
       .then(async (allData) => {
         const autoCmpData = allData.data.allProducts.map((item) => {
           return { value: item.name, label: item.name, ...item };
@@ -133,77 +168,79 @@ const App = () => {
     });
     setDataSource(dataRow);
   }, [autoComplete]);
-  console.log("autoComplete: ", autoComplete);
+  // console.log("autoComplete: ", autoComplete);
   const defaultColumns = [
     {
       title: "id",
       dataIndex: "id",
-      editable: true,
+      // editable: true,
     },
     {
-      title: "Name",
+      title: "Tên sản phẩm",
       dataIndex: "name",
       width: "30%",
       editable: true,
     },
     {
-      title: "Description",
+      title: "Mô tả",
       dataIndex: "description",
       width: "30%",
       editable: true,
     },
     {
-      title: "Quantity In Stock",
+      title: "Số lượng trong kho",
       dataIndex: "quantityInStock",
       editable: true,
     },
     {
-      title: "Price",
+      title: "Giá",
       dataIndex: "price",
       editable: true,
     },
     {
-      title: "operation",
+      title: "Hành động",
+      width: "20%",
       dataIndex: "operation",
-      render: (_, record) =>
-        dataSource.length >= 1 ? (
-          <Popconfirm
-            title="Sure to delete?"
-            onConfirm={() => handleDelete(record.key, record.id)}
-          >
-            <a>Delete</a>
-          </Popconfirm>
-        ) : null,
+      render: (_, record) => {
+        const editable = isEditing(record);
+        return editable ? (
+          <span>
+            <Typography.Link
+              onClick={() => save(record.key, record.id)}
+              style={{
+                marginRight: 8,
+              }}
+            >
+              Lưu
+            </Typography.Link>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Hủy</a>
+            </Popconfirm>
+          </span>
+        ) : (
+          <>
+            <Typography.Link
+              disabled={editingKey !== ""}
+              onClick={() => edit(record)}
+              style={{ marginRight: 12 }}
+            >
+              Sửa
+            </Typography.Link>
+            <Typography.Link
+              disabled={editingKey !== ""}
+              onClick={() => handleDelete(record.key, record.id)}
+            >
+              Xóa
+            </Typography.Link>
+          </>
+        );
+      },
     },
   ];
-  const handleAdd = () => {
-    const newData = {
-      key: count,
-      id: "new Id",
-      name: "Sản phẩm mới",
-      description: "Mô tả sản phầm mới",
-      quantityInStock: "Hàng tồn kho",
-      price: "Giá sản phẩm mới",
-    };
-    setDataSource([...dataSource, newData]);
-    notification.open({
-      message: "Thông báo",
-      description: "Thêm sản phẩm vào cuối bảng thành công",
-    });
-  };
-  const handleSave = (row) => {
-    const newData = [...dataSource];
-    const index = newData.findIndex((item) => row.key === item.key);
-    const item = newData[index];
-    newData.splice(index, 1, {
-      ...item,
-      ...row,
-    });
-    setDataSource(newData);
-  };
+  
   const components = {
     body: {
-      row: EditableRow,
+      // row: EditableRow,
       cell: EditableCell,
     },
   };
@@ -215,17 +252,19 @@ const App = () => {
       ...col,
       onCell: (record) => ({
         record,
-        editable: col.editable,
+        // inputType: col.dataIndex === 'age' ? 'number' : 'text',
         dataIndex: col.dataIndex,
         title: col.title,
-        handleSave,
+        editing: isEditing(record),
       }),
     };
   });
   return (
     <div>
       <Button
-        onClick={handleAdd}
+        onClick={() => {
+          setIsAddProduct(true);
+        }}
         type="primary"
         style={{
           marginBottom: 16,
@@ -233,13 +272,60 @@ const App = () => {
       >
         Thêm sản phẩm
       </Button>
-      <Table
-        components={components}
-        rowClassName={() => "editable-row"}
-        bordered
-        dataSource={dataSource}
-        columns={columns}
-      />
+      {isAddProduct ? (
+        <Modal
+          title="Chỉnh sửa đơn hàng"
+          visible={isAddProduct}
+          // okText="Thêm sản phẩm"
+          // width={1200}
+          onCancel={() => {
+            setIsAddProduct(false);
+          }}
+          // onOk={() => {
+          //   // console.
+          //   handleAdd();
+          // }}
+          footer={[]} //this to hide the default inputs of the modal
+        >
+          <Form form={addProductForm} onFinish={handleAdd}>
+            <Form.Item label="Tên sản phẩm" name="name">
+              <Input placeholder="Tên sản phẩm" />
+            </Form.Item>
+            <Form.Item label="Mô tả" name="description">
+              <Input placeholder="mô tả" />
+            </Form.Item>
+            <Form.Item label="Giá" name="price">
+              <Input />
+            </Form.Item>
+            <Form.Item label="Số lượng" name="quantityInStock">
+              <Input placeholder="mô tả" />
+            </Form.Item>
+            <Form.Item name="image">
+              <Upload {...checkPNG} maxCount={1}>
+                <Button icon={<UploadOutlined />}>Ảnh Sản phẩm</Button>
+              </Upload>
+            </Form.Item>
+            <Form.Item>
+              <Button key="submit" type="primary" htmlType="submit">
+                Thêm sản phẩm
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+      ) : (
+        ""
+      )}
+      <Form form={form} component={false}>
+        <Table
+          components={components}
+          // columns={mergedColumns}
+
+          rowClassName={() => "editable-row"}
+          bordered
+          dataSource={dataSource}
+          columns={columns}
+        />
+      </Form>
     </div>
   );
 };

@@ -51,7 +51,7 @@ const Nav = () => {
         KỸ THUẬT MÁY
       </NavLink>
       {
-        context.user.userInfo && context.user.userInfo.isAdmin === true? 
+        context.user.userInfo && context.user.userInfo.isAdmin === false? 
           <NavLink
             to="admin/orders"
             style={({ isActive }) => (isActive ? activeStyle : undefined)}

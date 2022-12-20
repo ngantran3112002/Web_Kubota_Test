@@ -7,6 +7,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 import * as queryString from "query-string";
 import EditModal from "./orderDetail/EditModal";
+import { BASE_URL } from "../../../../apiConfig";
 const AdminOrder = ({
   // loading,
   // displayedOrders,
@@ -94,7 +95,7 @@ const AdminOrder = ({
   const currentSearchParams = useLocation();
 
   useEffect(() => {
-    axios.get("http://localhost:3001/api/orders/alltest/test").then(async (res) => {
+    axios.get(`${BASE_URL}/api/orders/alltest/test`).then(async (res) => {
       setOrders(
         res.data.rows.map((row) => ({
           id: row.id,
@@ -113,7 +114,7 @@ const AdminOrder = ({
   const fetchOrderDetails = async (id, record) => {
     setLoading(true);
     await axios
-      .get(`http://localhost:3001/api/orders/${id}`)
+      .get(`${BASE_URL}/api/orders/${id}`)
       .then((res) => {
         setOrderDetail(
           res.data.flatMap((items) => ({
@@ -147,10 +148,10 @@ const AdminOrder = ({
     setIsEdit(false);
     setLoading(true);
     await axios
-      .post(`http://localhost:3001/api/orders/${orderId}?status=${status}`)
+      .post(`${BASE_URL}/api/orders/${orderId}?status=${status}`)
       .then((res) => console.log("post OK"));
     await axios
-      .get("http://localhost:3001/api/orders/alltest/test")
+      .get(`${BASE_URL}/api/orders/alltest/test`)
       .then(async (res) => {
         setOrders(
           res.data.rows.map((row) => ({
@@ -181,7 +182,7 @@ const AdminOrder = ({
           setIsEdit={setIsEdit}
           orderDetail={orderDetail}
         />
-      ) : (
+      ) : ( 
         ""
       )}
     </>
