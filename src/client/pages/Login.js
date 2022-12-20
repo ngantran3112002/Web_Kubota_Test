@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { makeStyles } from "@mui/styles";
 // import { Form, Button } from "react-bootstrap";
 import "../css/login.css";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
@@ -165,12 +166,12 @@ const Login = () => {
           <div className="forgot">
             <p>
               Bạn cần đổi mật khẩu?{" "}
-              <a href="/forgotPassword">Thay đổi mật khẩu</a>
+              <Link to="/forgotPassword">Thay đổi mật khẩu</Link>
             </p>
           </div>
           <div className="register">
             <p style={{ marginRight: "5px" }}>Bạn chưa có tài khoản?</p>
-            <a href="/register">Đăng kí tài khoản</a>
+            <Link to="/register">Đăng kí tài khoản</Link>
           </div>
         </form>
       </div>

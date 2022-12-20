@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import "../css/login.css";
 
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import axios from "axios";
+import { BASE_URL } from "../../apiConfig";
 
 export const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -19,36 +21,50 @@ export const ForgotPassword = () => {
   const handleChangeValue = (event, setValueFunction) => {
     setValueFunction(event.target.value);
   };
+
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   const submitForm = async (e) => {
-    const key = `open${Date.now()}`;
-    const btn = (
-      <Space>
-        <Button
-          type="primary"
-          size="small"
-          onClick={() => {
-            navigate("/login", { replace: true });
-            api.destroy(key);
-          }}
-        >
-          Đi tới đăng nhập
-        </Button>
-      </Space>
-    );
-    !warmingPassword &&
-      api.open({
-        message: "Thông báo",
-        description: "Thay đổi mật khẩu thành công",
-        btn,
-        key,
-        icon: (
-          <SmileOutlined
-            style={{
-              color: "#108ee9",
+    await axios.post(`${BASE_URL}/api/users/changePassword`, {
+      email: email,
+      password: newPassword
+    }, config).then((res) => {
+      const key = `open${Date.now()}`;
+      const btn = (
+        <Space>
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => {
+              navigate("/login", { replace: true });
+              api.destroy(key);
             }}
-          />
-        ),
-      });
+          >
+            Đi tới đăng nhập
+          </Button>
+        </Space>
+      );
+      !warmingPassword &&
+        api.open({
+          message: "Thông báo",
+          description: "Thay đổi mật khẩu thành công",
+          btn,
+          key,
+          icon: (
+            <SmileOutlined
+              style={{
+                color: "#108ee9",
+              }}
+            />
+          ),
+        });
+    })
+
+   
   };
 
   useEffect(() => {
