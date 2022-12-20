@@ -11,9 +11,10 @@ import * as _ from 'lodash'
 import { BASE_URL } from "../../apiConfig";
 
 const CheckOut = () => {
-  const context = useContext(Context);
+  let context = useContext(Context);
   const userContext = context.user;
   const cartContex = context.cartList;
+  const [note, setNote] = useState('')
   const [dataRow, setDataRow] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const token = userContext.token ? userContext.token : "";
@@ -27,6 +28,12 @@ const CheckOut = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleMessageChange = event => {
+    // 👇️ access textarea value
+    setNote(event.target.value);
+    // console.log(event.target.value);
+  };
+
   const handleOk = () => {
     setIsModalOpen(!isModalOpen);
     navigate("/login", { replace: true });
@@ -37,9 +44,11 @@ const CheckOut = () => {
   };
 
   const handleClickOrder = async (_body, _config) => {
+   
+    // console.log(_body)
     setIsLoading(true);
     await axios
-      .post("http://localhost:3001/api/orders/add/create", _body, _config)
+      .post(`${BASE_URL}/api/orders/add/create`,{ _body, note: note}, _config)
       .then((res) =>
         {
           alert("Order Placed Successfully", res.data.message, "success")
@@ -175,7 +184,9 @@ const CheckOut = () => {
                     <label> Ghi chú</label>
                     <textarea
                       rows="3"
-                      name="address"
+                      name="message"
+                      value={note}
+                      onChange={handleMessageChange}
                       className="form-control"
                     ></textarea>
                   </div>

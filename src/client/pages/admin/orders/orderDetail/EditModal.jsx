@@ -84,7 +84,7 @@ const EditModal = ({
   changeStatus,
 }) => {
   const [editedStatus, setEditedStatus] = useState(record.status);
-
+  console.log(orderDetail)
   // console.log(record)
   const handleChange = (value) => {
     if (value != editedStatus) {

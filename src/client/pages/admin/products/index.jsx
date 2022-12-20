@@ -109,12 +109,12 @@ const App = () => {
     formData.append("description", val.description);
     formData.append("price", val.price);
     formData.append("quantityInStock", val.quantityInStock);
-    formData.append('image', val.image.file)
-    const test = {a: '1' , b: '2'}
+    formData.append("image", val.image.file);
+    const test = { a: "1", b: "2" };
 
     const config = {
       headers: {
-        'Content-Type': 'multipart/form-data',
+        "Content-Type": "multipart/form-data",
       },
     };
 
@@ -122,10 +122,9 @@ const App = () => {
       console.log(value);
     }
 
-
     await axios
       .post(`${BASE_URL}/api/products/addProduct/add`, formData, config)
-      .then(res => {
+      .then((res) => {
         console.log(res);
       })
       .catch((err) => {
@@ -138,25 +137,24 @@ const App = () => {
 
   const edit = (record) => {
     form.setFieldsValue({
-      name: '',
-      description: '',
-      price: '',
-      quantityInStock: '',
+      name: "",
+      description: "",
+      price: "",
+      quantityInStock: "",
       ...record,
     });
     setEditingKey(record.key);
   };
   const cancel = () => {
-    setEditingKey('');
+    setEditingKey("");
   };
-
 
   const save = async (key, id) => {
     try {
       let row = await form.validateFields();
-      row = {id: id, ...row}
-      handleProductChange(row)
-      console.log(id)
+      row = { id: id, ...row };
+      handleProductChange(row);
+      console.log(id);
       const newData = [...dataSource];
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
@@ -166,17 +164,16 @@ const App = () => {
           ...row,
         });
         setDataSource(newData);
-        setEditingKey('');
+        setEditingKey("");
       } else {
         newData.push(row);
         setDataSource(newData);
-        setEditingKey('');
+        setEditingKey("");
       }
     } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
+      console.log("Validate Failed:", errInfo);
     }
   };
-
 
   useEffect(() => {
     axios
@@ -279,7 +276,7 @@ const App = () => {
       },
     },
   ];
-  
+
   const components = {
     body: {
       // row: EditableRow,
@@ -330,19 +327,65 @@ const App = () => {
           footer={[]} //this to hide the default inputs of the modal
         >
           <Form form={addProductForm} onFinish={handleAdd}>
-            <Form.Item label="Tên sản phẩm" name="name">
+            <Form.Item
+              label="Tên sản phẩm"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Đây là dữ liệu bắt buộc",
+                },
+              ]}
+            >
               <Input placeholder="Tên sản phẩm" />
             </Form.Item>
-            <Form.Item label="Mô tả" name="description">
+            <Form.Item
+              label="Mô tả"
+              name="description"
+              rules={[
+                {
+                  required: true,
+                  message: "Đây là dữ liệu bắt buộc",
+                },
+              ]}
+            >
               <Input placeholder="mô tả" />
             </Form.Item>
-            <Form.Item label="Giá" name="price">
+            <Form.Item
+              label="Giá"
+              name="price"
+              rules={[
+                { 
+                  pattern: new RegExp(/^\d*[1-9]+\d*$/),
+                  required: true,
+                  message: "Đây là dữ liệu bắt buộc",
+                },
+              ]}
+            >
               <Input />
             </Form.Item>
-            <Form.Item label="Số lượng" name="quantityInStock">
+            <Form.Item
+              label="Số lượng"
+              name="quantityInStock"
+              rules={[
+                {
+                  required: true,
+                  pattern: new RegExp(/^\d*[1-9]+\d*$/),
+                  message: "Đây là dữ liệu bắt buộc",
+                },
+              ]}
+            >
               <Input placeholder="mô tả" />
             </Form.Item>
-            <Form.Item name="image">
+            <Form.Item
+              name="image"
+              rules={[
+                {
+                  required: true,
+                  message: "Đây là dữ liệu bắt buộc",
+                },
+              ]}
+            >
               <Upload {...checkPNG} maxCount={1}>
                 <Button icon={<UploadOutlined />}>Ảnh Sản phẩm</Button>
               </Upload>

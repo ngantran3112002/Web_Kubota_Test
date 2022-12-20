@@ -244,11 +244,12 @@ const Cart = () => {
     const data = {
       user_id: cartContex.user?.userInfo?.id,
       total: cartContex.cartList.totalProduct,
+      note: '',
     };
     data.orderDetails = orderDetail;
 
-    setOrderDetailDataJson(JSON.stringify(data));
-    cartContex.order = orderDetailDataJson;
+    // setOrderDetailDataJson(JSON.stringify(data));
+    cartContex.order = data;
   }, [rowData]);
 
   return (
