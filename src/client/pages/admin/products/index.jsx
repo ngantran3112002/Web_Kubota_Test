@@ -98,7 +98,7 @@ const App = () => {
       .finally(() => {
         setLoadingStatus(false);
       });
-  }
+  };
 
   const handleDelete = async (key, productId) => {
     const newData = dataSource.filter((item) => item.key !== key);
@@ -120,7 +120,7 @@ const App = () => {
 
   const handleAdd = async (val) => {
     console.log(val);
-    setLoadingStatus(true)
+    setLoadingStatus(true);
     const formData = new FormData();
     formData.append("name", val.name);
     formData.append("description", val.description);
@@ -141,11 +141,11 @@ const App = () => {
     await axios
       .post(`${BASE_URL}/api/products/addProduct/add`, formData, config)
       .then((res) => {
-        setIsAddProduct(false)
-        getAllProds()
+        setIsAddProduct(false);
+        getAllProds();
         setTimeout(() => {
-          setLoadingStatus(false)
-        }, 1000)
+          setLoadingStatus(false);
+        }, 1000);
       })
       .catch((err) => {
         console.warn(err.response.data);
@@ -196,7 +196,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    getAllProds()
+    getAllProds();
   }, []);
 
   useEffect(() => {
@@ -227,23 +227,62 @@ const App = () => {
       title: "Tên sản phẩm",
       dataIndex: "name",
       width: "30%",
+      filters: [
+        {
+          text: "Mặt bích",
+          value: "Mặt bích",
+        },
+        {
+          text: "Bộ Van",
+          value: "Bộ Van",
+        },
+        {
+          text: "Dây đai",
+          value: "DÂY ĐAI",
+        },
+        {
+          text: "Bộ cầu chì",
+          value: "Bộ cầu chì",
+        },
+        {
+          text: "Dây curoa",
+          value: "Dây curoa",
+        },
+        {
+          text: "Nhớt",
+          value: "Nhớt",
+        },
+      ],
+      filterMode: "tree",
+      filterSearch: true,
+      onFilter: (value, record) => record.name.startsWith(value),
       editable: true,
     },
     {
       title: "Mô tả",
       dataIndex: "description",
-      width: "30%",
+      width: "20%",
       editable: true,
     },
     {
       title: "Số lượng trong kho",
       dataIndex: "quantityInStock",
       editable: true,
+      sorter: {
+        compare: (a, b) => a.id - b.id,
+        multiple: 3,
+      },
     },
     {
       title: "Giá",
       dataIndex: "price",
       editable: true,
+      sorter: {
+        compare: (a, b) =>
+          a.price.length - b.price.length &&
+          a.price.toLowerCase().localeCompare(b.price.toLowerCase()),
+        multiple: 3,
+      },
     },
     {
       title: "Hành động",
@@ -364,7 +403,7 @@ const App = () => {
               label="Giá"
               name="price"
               rules={[
-                { 
+                {
                   pattern: new RegExp(/^\d*[1-9]+\d*$/),
                   required: true,
                   message: "Đây là dữ liệu bắt buộc",
