@@ -1,9 +1,4 @@
-import {
-  Table,
-  Modal,
-  Typography,
-  Select,
-} from "antd";
+import { Table, Modal, Typography, Select, Space } from "antd";
 import { useState } from "react";
 import "./admin.css";
 
@@ -84,8 +79,8 @@ const EditModal = ({
   changeStatus,
 }) => {
   const [editedStatus, setEditedStatus] = useState(record.status);
-  console.log(orderDetail)
-  // console.log(record)
+  // console.log(orderDetail)
+  console.log(record);
   const handleChange = (value) => {
     if (value != editedStatus) {
       setEditedStatus(value);
@@ -104,18 +99,28 @@ const EditModal = ({
         changeStatus(editedStatus, record.id);
       }}
     >
-      <Typography>ngày tạo đơn: {record.createdAt}</Typography>
-      <Title level={4}>Ghi chú</Title>
-      <Typography>{record.note}</Typography>
-      <Title level={4}>Trạng thái đơn hàng</Title>
-      <Select
-        defaultValue={record.status}
-        style={{
-          width: "180px",
-        }}
-        onChange={handleChange}
-        options={statusOption}
-      />
+      <Space size={40} style={{width: "100%"}}>
+        <Space.Compact direction="vertical" size="large">
+          <Typography >ngày tạo đơn: {record.createdAt}</Typography>
+          <Typography>Tên Khách hàng: {record.User.userName}</Typography>
+          <Typography>Số Điện Thoại: {record.User.phone}</Typography>
+          <Typography>Địa chỉ: {record.User.address}</Typography>
+          <Typography>email: {record.User.email}</Typography>
+        </Space.Compact>
+        <Space.Compact direction="vertical" block="true" size="large">
+          <Title level={5}>Ghi chú</Title>
+          <Typography>{record.note}</Typography>
+          <Title level={5}>Trạng thái đơn hàng</Title>
+          <Select
+            defaultValue={record.status}
+            style={{
+              width: "180px",
+            }}
+            onChange={handleChange}
+            options={statusOption}
+          />
+        </Space.Compact>
+      </Space>
       <Table
         bordered
         title={() => (

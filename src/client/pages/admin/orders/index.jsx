@@ -93,13 +93,13 @@ const AdminOrder = ({
 
   const [loading, setLoading] = useState(true);
 
-  //fetch khởi tạo
-  useEffect(() => {
-    axios.get(`${BASE_URL}/api/orders/alltest/test`).then(async (res) => {
+  const getAllOrders = async () => {
+    await axios.get(`${BASE_URL}/api/orders/alltest/test`).then(async (res) => {
       setOrders(
         res.data.rows.map((row) => ({
           id: row.id,
           user_id: row.user_id,
+          User: {...row.User},
           status: row.status.toString(),
           createdAt: row.createdAt,
           note: row.note,
@@ -108,8 +108,13 @@ const AdminOrder = ({
 
       setDisplayedOrders(orders);
       setLoading(false);
-      console.log(res.data.rows);
+      console.log(res.data);
     });
+  }
+
+  //fetch khởi tạo
+  useEffect(() => {
+    getAllOrders()
   }, []);
 
   //fetch chi tiết
@@ -152,21 +157,8 @@ const AdminOrder = ({
     setLoading(true);
     await axios
       .post(`${BASE_URL}/api/orders/${orderId}?status=${status}`)
-      .then((res) => console.log("post OK"));
-    await axios
-      .get(`${BASE_URL}/api/orders/alltest/test`)
-      .then(async (res) => {
-        setOrders(
-          res.data.rows.map((row) => ({
-            id: row.id,
-            user_id: row.user_id,
-            status: row.status.toString(),
-            createdAt: row.createdAt,
-          }))
-        );
-        setLoading(false);
-        console.log(res.data.rows);
-      });
+      .then((res) => {getAllOrders()});
+    
   };
   return (
     <>
