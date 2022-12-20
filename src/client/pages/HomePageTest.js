@@ -147,6 +147,7 @@ const HomePageTest = () => {
           />
           <Route exact path="/introduction" element={<HomePage />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<RegisterAccount />} />
           <Route exact path="/cart" element={<Cart />} />
           <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route exact path="/machine" element={<MachineEngineering />} />
@@ -154,7 +155,6 @@ const HomePageTest = () => {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/CheckOut" element={<CheckOut />} />
           <Route exact path="/admin/*" element={<AdminPage />} />
-          <Route exact path="/registerAccount" element={<RegisterAccount />} />
         </Routes>
       </div>
     </div>

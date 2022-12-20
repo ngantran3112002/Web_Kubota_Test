@@ -135,7 +135,7 @@ const Login = () => {
 					</div>
 					<div className="register">
 						<p style={{ marginRight: '5px' }}>Bạn chưa có tài khoản?</p>
-						<a href="/registerAccount">Đăng kí tài khoản</a>
+						<a href="/register">Đăng kí tài khoản</a>
 					</div>
 				</form>
 			</div>
