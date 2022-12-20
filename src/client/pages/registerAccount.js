@@ -3,6 +3,8 @@ import { makeStyles } from "@mui/styles";
 import "../css/register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Button, notification, Space } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -21,6 +23,7 @@ const RegisterAccount = () => {
   const [confirmPwd, setConfirmPwd] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const [api, contextHolder] = notification.useNotification();
 
   const config = {
     headers: {
@@ -36,12 +39,38 @@ const RegisterAccount = () => {
   params.append("address", address);
 
   const submitForm = async (e) => {
+    const key = `open${Date.now()}`;
+    const btn = (
+      <Space>
+        <Button
+          type="primary"
+          size="small"
+          onClick={() => {
+            navigate("/login", { replace: true });
+            api.destroy(key);
+          }}
+        >
+          Đi tới đăng nhập
+        </Button>
+      </Space>
+    );
     e.preventDefault();
     await axios
       .post("http://localhost:3001/api/users/register", params, config)
       .then((res) => console.log(res));
-    navigate("/login");
-    alert("register account successfully");
+    api.open({
+      message: "Thông báo",
+      description: "Đăng ký tài khoản thành công",
+      btn,
+      key,
+      icon: (
+        <SmileOutlined
+          style={{
+            color: "#108ee9",
+          }}
+        />
+      ),
+    });
   };
 
   const handleChangeName = (event) => {
@@ -136,6 +165,7 @@ const RegisterAccount = () => {
         />
       </form>
       <div className="buttons">
+        {contextHolder}
         <button
           type="submit"
           onClick={(e) => {

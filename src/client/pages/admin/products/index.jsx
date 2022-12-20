@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button, Form, Input, Popconfirm, Table } from "antd";
+import { Button, Form, Input, Popconfirm, Table, notification } from "antd";
 import axios from "axios";
 import { LoadingContext } from "react-router-loading";
 const EditableContext = React.createContext(null);
@@ -84,14 +84,22 @@ const App = () => {
   const loadingContext = useContext(LoadingContext);
   const [autoComplete, setAutoComplete] = useState([{}]);
   const [loadingStatus, setLoadingStatus] = useState(true);
+  const openNotification = (message) => {};
 
   const [count, setCount] = useState(2);
   const handleDelete = async (key, productId) => {
     const newData = dataSource.filter((item) => item.key !== key);
     setDataSource(newData);
-    await axios
-      .delete(`http://localhost:3001/api/products/detail/${productId}`)
-      .then((response) => console.log("Delete successful"));
+    // await axios
+    //   .delete(`http://localhost:3001/api/products/detail/${productId}`)
+    //   .then((response) => console.log("Delete successful"));
+    notification.open({
+      message: "Thông báo",
+      description: "Xóa sản phẩm thành công",
+      onClick: () => {
+        console.log("Notification Clicked!");
+      },
+    });
   };
   useEffect(() => {
     axios
@@ -171,12 +179,17 @@ const App = () => {
   const handleAdd = () => {
     const newData = {
       key: count,
-      name: `Edward King ${count}`,
-      age: "32",
-      address: `London, Park Lane no. ${count}`,
+      id: "new Id",
+      name: "Sản phẩm mới",
+      description: "Mô tả sản phầm mới",
+      quantityInStock: "Hàng tồn kho",
+      price: "Giá sản phẩm mới",
     };
     setDataSource([...dataSource, newData]);
-    setCount(count + 1);
+    notification.open({
+      message: "Thông báo",
+      description: "Thêm sản phẩm vào cuối bảng thành công",
+    });
   };
   const handleSave = (row) => {
     const newData = [...dataSource];
@@ -218,7 +231,7 @@ const App = () => {
           marginBottom: 16,
         }}
       >
-        Add a row
+        Thêm sản phẩm
       </Button>
       <Table
         components={components}

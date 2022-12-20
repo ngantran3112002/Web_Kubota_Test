@@ -50,7 +50,7 @@ const ProductDetail = () => {
   const fetchProductData = async () => {
     console.log(productId);
     return await axios.get(
-      `http://localhost:3001/api/products/detail/${productId}`
+      `http://localhost:3001/api/products/detail/:id/${productId}`
     );
   };
 
