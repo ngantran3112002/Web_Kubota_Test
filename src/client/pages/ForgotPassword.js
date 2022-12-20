@@ -127,9 +127,13 @@ export const ForgotPassword = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        width: 450,
+        marginTop: 30,
       }}
     >
-      <h2>Thay đổi mật khẩu</h2>
+      <h2 style={{ display: "flex", justifyContent: "center" }}>
+        Thay đổi mật khẩu
+      </h2>
       <form onSubmit={(e) => submitForm}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <label for="email">
