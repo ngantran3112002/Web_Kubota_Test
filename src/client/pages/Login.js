@@ -110,7 +110,7 @@ const Login = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      <div className="card">
+      <div className="card" style={{ height: 500 }}>
         <div className="text">
           <h2>Đăng nhập tài khoản</h2>{" "}
           <p>
