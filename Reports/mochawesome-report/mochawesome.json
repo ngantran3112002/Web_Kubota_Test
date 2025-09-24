@@ -1,0 +1,469 @@
+{
+  "stats": {
+    "suites": 5,
+    "tests": 6,
+    "passes": 5,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-09-22T08:38:17.799Z",
+    "end": "2025-09-22T08:38:47.517Z",
+    "duration": 29718,
+    "testsRegistered": 6,
+    "passPercent": 83.33333333333334,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fed75e70-8243-4956-9b64-ddde912e4eb5",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "3f49bc09-f844-48f0-9e0f-9a766e6d4ff6",
+          "title": "Test Suite for User",
+          "fullFile": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\register.test.js",
+          "file": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\register.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Test Suite for User\"",
+              "fullTitle": "Test Suite for User \"before all\" hook in \"Test Suite for User\"",
+              "timedOut": null,
+              "duration": 8774,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();\nawait driver.get(\"http://localhost:3000/register\");",
+              "err": {},
+              "uuid": "9d172013-9b07-49ba-88f9-8a3a113c2681",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Test Suite for User\"",
+              "fullTitle": "Test Suite for User \"after all\" hook in \"Test Suite for User\"",
+              "timedOut": null,
+              "duration": 5317,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "await driver.sleep(5000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "abf92894-4981-41e1-9ed7-60cc94c9a349",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "register for user",
+              "fullTitle": "Test Suite for User register for user",
+              "timedOut": null,
+              "duration": 4616,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const registerPage = new RegisterPage(driver);\nawait registerPage.register('ngan', 'ngan03311@gmail.com', '123456', '123456', 'nam dinh', '098632');\nlet element = await driver.wait(\n    until.elementLocated(By.className(\"ant-notification-notice-description\")),\n    5000\n)\nawait driver.wait(until.elementIsVisible(element),5000);\nlet text = await element.getText();\nassert.ok(text === 'Thay đổi mật khẩu thành công', \"register failed\");",
+              "err": {},
+              "uuid": "50a5f171-d7d6-49c1-b8ca-9e0425a916f7",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "50a5f171-d7d6-49c1-b8ca-9e0425a916f7"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4616,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "eb4f46ff-0c76-4cd4-8bb5-88cf488f7597",
+          "title": "Admin test Suite",
+          "fullFile": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\AddProduct.test.js",
+          "file": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\AddProduct.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Admin test Suite\"",
+              "fullTitle": "Admin test Suite \"before all\" hook in \"Admin test Suite\"",
+              "timedOut": null,
+              "duration": 12381,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();\nawait driver.get(\"http://localhost:3000/login\");\nconst loginPage = new LoginPage(driver);\nawait loginPage.login(\"admin1@gmail.com\", \"admin1\");\nawait driver.wait(async () => {\n    let text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\n    return text === \"Administration1\"\n}, 3000)",
+              "err": {},
+              "uuid": "7c0a6d60-2af2-4879-be46-7c6b618dd99e",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Admin test Suite\"",
+              "fullTitle": "Admin test Suite \"after all\" hook in \"Admin test Suite\"",
+              "timedOut": null,
+              "duration": 6048,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "await driver.sleep(6000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "56a213d0-95ba-4acf-93ce-31de2635d3b6",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Administrator adds more product",
+              "fullTitle": "Admin test Suite Administrator adds more product",
+              "timedOut": null,
+              "duration": 7275,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "let addProduct = new AddMoreProductPage(driver);\n\nawait addProduct.Navigation();\nawait addProduct.fillTheForm(\n    \"Product 7\",\n    \"This is an added product\",\n    \"123456\",\n    \"6\",\n    \"D:/Mã 1.png\"\n)\n\nawait addProduct.checkProduct(\"Product 7\")\nlet currentURL = await driver.getCurrentUrl();\nassert.ok(currentURL.includes(\"details\"), \"Adding products is failed\")",
+              "err": {},
+              "uuid": "b5601ee9-326f-48d9-ad55-9f05a29e6634",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "b5601ee9-326f-48d9-ad55-9f05a29e6634"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7275,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "90838154-8efd-4429-a83f-16283d606157",
+          "title": "Cart Test Suite",
+          "fullFile": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\addtoCart.test.js",
+          "file": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\addtoCart.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Cart Test Suite\"",
+              "fullTitle": "Cart Test Suite \"before all\" hook in \"Cart Test Suite\"",
+              "timedOut": null,
+              "duration": 12025,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();\nawait driver.get(\"http://localhost:3000/login\");\nconst loginPage = new LoginPage(driver);\nawait loginPage.login(\"tranngan03112002@gmail.com\", \"123\");\nawait driver.wait(async () => {\n    let text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\n    return text === \"user1\"\n}, 2000);",
+              "err": {},
+              "uuid": "5c2bbce6-47c6-481c-b137-b5ad44299ab4",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Cart Test Suite\"",
+              "fullTitle": "Cart Test Suite \"after all\" hook in \"Cart Test Suite\"",
+              "timedOut": null,
+              "duration": 5087,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "await driver.sleep(5000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "cc2c3e4a-0972-4dc8-a6a9-128232cb64dc",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "Add to cart test",
+              "fullTitle": "Cart Test Suite Add to cart test",
+              "timedOut": null,
+              "duration": 8723,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "await driver.findElement(By.xpath(\"(//a[@class='makeStyles-link-14'])[1]\")).click();\n        // wait until products appear to click\n        let element = await driver.wait(\n            until.elementLocated(By.xpath(\"(//a[@class='name'])[2]\")),\n            2000\n        );\n        await element.click();\n        const addCart = new AddtoCartPage(driver);\n        // Add quanity\n        await driver.wait(\n            until.elementLocated(By.className(\"ant-input-number-input\")), 2000\n        );\n        const quantity = 7;\n        await addCart.addtoCart(quantity);\n        let check = await addCart.ComparePrice(quantity);\n        assert(check, \"Quanity of products is wrong \")",
+              "err": {
+                "message": "AssertionError: Quanity of products is wrong ",
+                "estack": "AssertionError [ERR_ASSERTION]: Quanity of products is wrong \n    at Context.<anonymous> (C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\addtoCart.test.js:51:9)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)",
+                "diff": "- false\n+ true\n"
+              },
+              "uuid": "72b787b0-f9b8-4fc6-b892-39804227c0f4",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "72b787b0-f9b8-4fc6-b892-39804227c0f4"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 8723,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "38a4e506-1025-4744-b2a8-175af246a64c",
+          "title": "Check if payment is successfull or not",
+          "fullFile": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\Payment.test.js",
+          "file": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\Payment.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Check if payment is successfull or not\"",
+              "fullTitle": "Check if payment is successfull or not \"before all\" hook in \"Check if payment is successfull or not\"",
+              "timedOut": null,
+              "duration": 12457,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();\nawait driver.get(\"http://localhost:3000/login\");\nconst loginPage = new LoginPage(driver);\nawait loginPage.login(\"tranngan03112002@gmail.com\", \"123\");\nawait driver.wait(async () => {\n    let text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\n    return text === \"user1\"\n}, 2000);",
+              "err": {},
+              "uuid": "89bebd14-fd0b-4cbf-bae9-ab1887ece610",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after all\" hook in \"Check if payment is successfull or not\"",
+              "fullTitle": "Check if payment is successfull or not \"after all\" hook in \"Check if payment is successfull or not\"",
+              "timedOut": null,
+              "duration": 5077,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "await driver.sleep(5000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "1bc9e7a0-3f41-4463-b822-a9d1e5a4cc15",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "check payment",
+              "fullTitle": "Check if payment is successfull or not check payment",
+              "timedOut": null,
+              "duration": 9737,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.findElement(By.xpath(\"(//a[@class='makeStyles-link-14'])[1]\")).click();\n        await driver.sleep(3000);\n        let element = await driver.findElement(By.xpath(\"(//button[@class='ant-btn ant-btn-primary ant-btn-lg'])[1]\"));\n        // ?\n        await driver.executeScript(\"arguments[0].click();\", element);\n        let product = await driver.findElement(By.xpath(\"(//a[@href='/products/details/3'])\")).getText();\n        // click \"GIỎ HÀNG\" button\n        let btn2 = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[1]\"));\n        await driver.executeScript(\"arguments[0].scrollIntoView(true);\", btn2);\n        await driver.sleep(5000);\n        await driver.executeScript(\"arguments[0].click();\", btn2);\n        // check product in cart or not\n        let ad = new AddtoCartPage(driver);\n        let bool = await ad.checkProductinCart(product);\n        //payment\n        await driver.findElement(By.xpath(\"//button[contains(text(), 'Xác thực thanh toán')]\")).click();\n        let payment = new Payment(driver);\n        let check = await payment.checkPayment();\n        if (check) {\n            await driver.findElement(By.className(\"btn btn-primary mx-1\")).click();\n            let element1 = await driver.wait(\n                until.elementLocated(By.className(\"ant-notification-notice-description\")),\n                5000\n            )\n            let text = await driver.findElement(By.className(\"ant-notification-notice-description\")).getText();\n            assert.ok(bool && text == \"Đặt hàng thành công\", \"Payment is not successful\")\n        }",
+              "err": {},
+              "uuid": "4cef8919-3ea1-4723-a871-d5e881640361",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "4cef8919-3ea1-4723-a871-d5e881640361"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9737,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        },
+        {
+          "uuid": "e04765de-16e6-448a-9928-d32d3c36d3bd",
+          "title": "Test Login for User and Administrator",
+          "fullFile": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\login.test.js",
+          "file": "C:\\Users\\Admin\\OneDrive\\Documents\\Web-Kubota\\Web-Kubota\\backend\\Test\\TestPage\\login.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Test Login for User and Administrator\"",
+              "fullTitle": "Test Login for User and Administrator \"before each\" hook in \"Test Login for User and Administrator\"",
+              "timedOut": null,
+              "duration": 4762,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser(\"chrome\").build();\nawait driver.get(\"http://localhost:3000/login\");",
+              "err": {},
+              "uuid": "815eaa12-1119-4a99-ae3b-d2bf0608d45c",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Test Login for User and Administrator\"",
+              "fullTitle": "Test Login for User and Administrator \"after each\" hook in \"Test Login for User and Administrator\"",
+              "timedOut": null,
+              "duration": 5060,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": null,
+              "context": null,
+              "code": "await driver.sleep(5000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "850981d1-3cd2-431a-9082-f08abc793558",
+              "parentUUID": null,
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "tests": [
+            {
+              "title": "login Admininstrator",
+              "fullTitle": "Test Login for User and Administrator login Admininstrator",
+              "timedOut": null,
+              "duration": 3972,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginPage = new LoginPage(driver);\nawait loginPage.login(\"admin1@gmail.com\", \"admin1\");\n await driver.wait(async () => {\n  let text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\n  return text === \"Administration1\"\n        }, 2000);\nlet text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\nassert.ok(text === \"Administration1\", \"Login failed\")",
+              "err": {},
+              "uuid": "049dcb7c-0b9b-41fa-812f-b99a4b02174e",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "login User",
+              "fullTitle": "Test Login for User and Administrator login User",
+              "timedOut": null,
+              "duration": 1182,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const loginPage = new LoginPage(driver);\nawait loginPage.login(\"tranngan03112002@gmail.com\", \"123\");\nawait driver.wait(async () => {\n     let text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\n     return text === 'user1'\n}, 2000);\nlet text = await driver.findElement(By.xpath(\"(//button[@class='makeStyles-btn-13'])[2]\")).getText();\nassert.ok(text === 'user1', \"login failed\");",
+              "err": {},
+              "uuid": "6adc6d90-4686-485d-b151-5b93b6005323",
+              "parentUUID": null,
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "049dcb7c-0b9b-41fa-812f-b99a4b02174e",
+            "6adc6d90-4686-485d-b151-5b93b6005323"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5154,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": null
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 0
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "11.7.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.3.0"
+    }
+  }
+}

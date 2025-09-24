@@ -55,7 +55,7 @@ export const ForgotPassword = () => {
               size="small"
               onClick={() => {
                 navigate("/login", { replace: true });
-                api.destroy(key);
+                notification.destroy(key);
               }}
             >
               Đi tới đăng nhập

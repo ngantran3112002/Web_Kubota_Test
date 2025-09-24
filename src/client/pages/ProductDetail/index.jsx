@@ -148,10 +148,10 @@ const ProductDetail = () => {
                 // min={1}
                 // max={10}
                 size="default"
-                defaultValue={quantity}
-                value={quantity}
+                // defaultValue={quantity}
+                // value={quantity}
                 disabled={
-                  quantity - 1 === 0 || quantity + 1 > product.quantityInStock
+                  quantity + 1 > product.quantityInStock
                 }
                 // style={{ width: 80 }}
               />
