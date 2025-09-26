@@ -70,4 +70,33 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
+# Automation Test with Selenium & Mocha
 
+### Project description
+This project is an automation testing project using Selenium and Mocha for the website selling products http://localhost:3000. This project tries to following to use Page Object Model (POM)
+
+## Testing project structure
+### Reports/mochawesome-report: Folder contains reports of testcases(mochawesome.html, mochawesome.json)
+backend/Test: This folder contains files about test script
+### Pages/: Implementing Page Object Model(POM)
+- AddMoreProductPage.js
+- AddtoCartPage.js
+- LoginPage.js
+- PaymentPage.js
+- RegisterPage.js
+### Test/: Contains all test script
+- AddProduct.test.js:Test add new product function of administrator
+- Payment.test.js: Check payment is successfull or not
+- addtoCart.test.js: Test add a large number of products to cart
+- login.test.js: Test "login user" function
+- register.test.js: Test "register user" function
+## Running test
+- Execute single test:
+npx mocha {file}.test.js --timeout 20000
+
+- Execute tests parallel:
+npx mocha "../TestPage/*.test.js" --no-timeouts --parallel 
+
+## Generate report:
+npx mocha "../TestPage/*.test.js" --no-timeouts --parallel --reporter mochawesome --require mochawesome/register
+After run, a HTML reports will be generated as "mochawesome.html". Open it in browser to view the details of the test
